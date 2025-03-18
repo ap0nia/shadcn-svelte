@@ -1,0 +1,16 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__name": "Español",
+  "__code": "es",
+  "selectTheme": "Seleccionar tema",
+  "selectLanguage": "Seleccione idioma",
+  "toggleTheme": "Cambiar tema",
+  "hello": "Hola",
+  "messenger": "Mensajero",
+  "theme": "Tema",
+  "findThePerfectEmoji": "Encuentra el emoji perfecto",
+  "selectEmoji": "Seleccionar emoji",
+  "uploadFile": "Subir un archivo",
+  "createPoll": "Crear encuesta",
+  "pleaseTypeMessage": "Por favor escribe un mensaje"
+}

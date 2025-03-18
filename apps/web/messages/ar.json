@@ -1,0 +1,16 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__name": "عربي",
+  "__code": "ar",
+  "selectTheme": "حدد الموضوع",
+  "selectLanguage": "اختر اللغة",
+  "toggleTheme": "تبديل الموضوع",
+  "hello": "مرحبًا",
+  "messenger": "رسول",
+  "theme": "سمة",
+  "findThePerfectEmoji": "ابحث عن الرمز التعبيري المثالي",
+  "selectEmoji": "حدد الرمز التعبيري",
+  "uploadFile": "تحميل ملف",
+  "createPoll": "إنشاء استطلاع رأي",
+  "pleaseTypeMessage": "الرجاء كتابة الرسالة"
+}

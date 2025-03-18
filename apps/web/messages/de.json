@@ -1,0 +1,16 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__name": "Deutsch",
+  "__code": "de",
+  "selectTheme": "Thema auswählen",
+  "selectLanguage": "Sprache auswählen",
+  "toggleTheme": "Design umschalten",
+  "hello": "Hallo",
+  "messenger": "Bote",
+  "theme": "Thema",
+  "findThePerfectEmoji": "Finde das perfekte Emoji",
+  "selectEmoji": "Emoji auswählen",
+  "uploadFile": "Hochladen einer Datei",
+  "createPoll": "Umfrage erstellen",
+  "pleaseTypeMessage": "Bitte geben Sie eine Nachricht ein"
+}

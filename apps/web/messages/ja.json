@@ -1,0 +1,16 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__name": "英語",
+  "__code": "jp",
+  "selectTheme": "テーマを選択",
+  "selectLanguage": "言語を選択",
+  "toggleTheme": "テーマを切り替える",
+  "hello": "こんにちは",
+  "messenger": "メッセンジャー",
+  "theme": "テーマ",
+  "findThePerfectEmoji": "ぴったりの絵文字を見つける",
+  "selectEmoji": "絵文字を選択",
+  "uploadFile": "ファイルをアップロードする",
+  "createPoll": "アンケートを作成",
+  "pleaseTypeMessage": "メッセージを入力してください"
+}
