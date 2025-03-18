@@ -19,7 +19,8 @@
     "mode-watcher": "^0.5.1",
     "prism-themes": "^1.9.0",
     "prosemirror-view": "^1.38.1",
-    "refractor": "^5.0.0"
+    "refractor": "^5.0.0",
+    "tailwind-variants": "^1.0.0"
   },
   "devDependencies": {
     "@ap0nia/mdsx": "workspace:^",
