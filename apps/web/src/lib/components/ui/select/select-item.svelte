@@ -2,13 +2,6 @@
   import { Select as SelectPrimitive, type WithoutChild } from 'bits-ui'
   import { cn } from '$lib/utils/cn'
 
-  type SelectItemExtendedProps = {
-    /**
-     * Disable adding a checkbox next to the item.
-     */
-    noCheck?: boolean
-  }
-
   let {
     ref = $bindable(null),
     class: className,
@@ -17,7 +10,7 @@
     children: childrenProp,
     noCheck,
     ...restProps
-  }: WithoutChild<SelectPrimitive.ItemProps> & SelectItemExtendedProps = $props()
+  }: WithoutChild<SelectPrimitive.ItemProps & { noCheck?: boolean }> = $props()
 </script>
 
 {#snippet child({ props, selected, highlighted }: any)}
@@ -31,7 +24,11 @@
 <SelectPrimitive.Item
   bind:ref
   {value}
-  class={cn('data-[disabled]:menu-disabled data-[highlighted]:menu-focus', className)}
+  class={cn(
+    'flex h-auto w-full justify-start border-none p-2 text-left font-normal',
+    'btn btn-ghost data-[disabled]:btn-disabled data-[selected]:btn-active',
+    className,
+  )}
   {child}
   {...restProps}
 >

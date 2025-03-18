@@ -21,7 +21,6 @@
     {sideOffset}
     class={cn(
       'bg-base-100 text-base-content',
-
       'relative z-50 overflow-hidden rounded-md border shadow-md outline-none',
 
       'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
@@ -31,7 +30,6 @@
       'data-[side=right]:slide-in-from-left-2 data-[side=right]:translate-x-1',
       'data-[side=top]:slide-in-from-bottom-2 data-[side=top]:-translate-y-1',
 
-      // base shadcn classes...
       // 'bg-popover text-popover-foreground relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md',
       className,
     )}

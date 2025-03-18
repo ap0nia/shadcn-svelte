@@ -1,8 +1,11 @@
 <script lang="ts">
   import LanguageSelect from '$lib/components/language-select.svelte'
+  import ThemeSelect from '$lib/components/theme-select.svelte'
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
+  import { getMessages } from '$lib/i18n'
 
-  import messages from '$lib/i18n'
+  const messages = getMessages()
+
   import packageJson from '../../../../../package.json'
 </script>
 
@@ -42,7 +45,7 @@
 
   <div class="flex items-center gap-2">
     <LanguageSelect />
-
+    <ThemeSelect />
     <ThemeToggle />
   </div>
 </footer>

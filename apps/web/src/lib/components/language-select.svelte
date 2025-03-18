@@ -1,8 +1,12 @@
 <script lang="ts">
   import * as Select from '$lib/components/ui/select'
-  import { locale, messages } from '$lib/i18n'
+  import { getMessages, getLocale } from '$lib/i18n'
   import { locales, type Locale } from '$lib/paraglide/runtime'
   import { cn } from '$lib/utils/cn'
+
+  const locale = getLocale()
+
+  const messages = getMessages()
 
   let { class: className = '' } = $props()
 

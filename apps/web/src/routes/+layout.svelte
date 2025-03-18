@@ -3,6 +3,7 @@
 
   import { useProsemirrorAdapterProvider } from '@prosemirror-adapter/svelte'
 
+  import I18nWatcher from '$lib/components/i18n-watcher.svelte'
   import ThemeModeWatcher from '$lib/components/theme-mode-watcher.svelte'
   // import { Toaster } from '$lib/components/ui/sonner'
 
@@ -14,6 +15,7 @@
 </script>
 
 <ThemeModeWatcher />
+<I18nWatcher />
 <!-- <Toaster /> -->
 
 <div class="flex min-h-dvh flex-col">

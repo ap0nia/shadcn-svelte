@@ -1,8 +1,10 @@
 <script lang="ts">
   import { mode, setTheme, toggleMode } from 'mode-watcher'
 
-  import { messages } from '$lib/i18n'
+  import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
+
+  const messages = getMessages()
 
   function toggleTheme() {
     toggleMode()
