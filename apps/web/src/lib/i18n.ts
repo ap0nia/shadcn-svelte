@@ -25,6 +25,13 @@ export function createObservableLocale() {
 
       goto(newLocation, { keepFocus: true, noScroll: true })
     }
+
+    if (typeof document === 'undefined') return
+
+    const dir = m.__direction(undefined, { locale: newLocale })
+
+    document.documentElement.setAttribute('lang', newLocale)
+    document.documentElement.setAttribute('dir', dir)
   }
 
   return {
