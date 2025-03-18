@@ -2,6 +2,10 @@
   "name": "messenger",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "postinstall": "lefthook install"
   },
