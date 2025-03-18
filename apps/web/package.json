@@ -1,0 +1,47 @@
+{
+  "name": "@apps/web",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "postinstall": "paraglide-js compile --project project.inlang --outdir src/lib/paraglide && svelte-kit sync",
+    "check": "svelte-check",
+    "dev": "vite",
+    "format": "prettier --write .",
+    "lint": "eslint --fix",
+    "translate": "inlang machine translate --project project.inlang && paraglide-js compile --outdir src/lib/paraglide"
+  },
+  "dependencies": {
+    "@emoji-mart/data": "^1.2.1",
+    "@milkdown/kit": "^7.6.4",
+    "@milkdown/plugin-prism": "^7.6.4",
+    "@prosemirror-adapter/svelte": "^0.4.1",
+    "bits-ui": "^1.3.13",
+    "mode-watcher": "^0.5.1",
+    "prism-themes": "^1.9.0",
+    "prosemirror-view": "^1.38.1",
+    "refractor": "^5.0.0"
+  },
+  "devDependencies": {
+    "@ap0nia/mdsx": "workspace:^",
+    "@iconify/json": "^2.2.318",
+    "@iconify/tailwind4": "^1.0.6",
+    "@inlang/cli": "^3.0.5",
+    "@inlang/paraglide-js": "^2.0.0-beta.30",
+    "@shikijs/rehype": "^3.2.1",
+    "@shikijs/twoslash": "^3.2.1",
+    "@sveltejs/kit": "^2.20.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.0.14",
+    "daisyui": "^5.0.6",
+    "svelte": "^5.23.1",
+    "svelte-check": "^4.1.5",
+    "svelte-sonner": "^0.3.28",
+    "svelte2tsx": "^0.7.35",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss": "^4.0.14",
+    "tailwindcss-animate": "^1.0.7",
+    "tw-animate-css": "^1.2.2",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.2"
+  }
+}
