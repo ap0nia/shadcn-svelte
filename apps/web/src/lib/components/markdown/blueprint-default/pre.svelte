@@ -44,25 +44,28 @@
     'bg-base-300 text-base-content rounded-box',
   )}
 >
-  {#if restProps.lang}
-    <span class={cn('absolute top-2 right-4', 'text-sm transition-opacity group-hover:opacity-0')}>
-      {restProps.lang}
-    </span>
-  {/if}
+  <div class="absolute top-0 left-0 flex w-full justify-end p-4">
+    {#if restProps.lang}
+      <span class={cn('text-sm transition-opacity group-hover:opacity-0')}>
+        {restProps.lang}
+      </span>
+    {/if}
+  </div>
 
-  <button
-    onclick={copyCode}
-    class={cn(
-      copied && 'swap-active',
-      'btn btn-outline btn-sm swap',
-      'absolute top-2 right-4',
-      'opacity-0 transition-opacity group-hover:opacity-100',
-    )}
-    aria-label="Copy Code"
-  >
-    <span class="icon-[mdi--content-copy] swap-off"></span>
-    <span class="icon-[mdi--success-bold] swap-on"></span>
-  </button>
+  <div class="absolute top-0 left-0 flex w-full justify-end p-4">
+    <button
+      onclick={copyCode}
+      class={cn(
+        copied && 'swap-active',
+        'btn btn-outline btn-sm swap',
+        'opacity-0 transition-opacity group-hover:opacity-100',
+      )}
+      aria-label="Copy Code"
+    >
+      <span class="icon-[mdi--content-copy] swap-off"></span>
+      <span class="icon-[mdi--success-bold] swap-on"></span>
+    </button>
+  </div>
 
   <pre {...restProps} bind:this={ref}>{@render children?.()}</pre>
 </div>
