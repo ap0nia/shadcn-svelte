@@ -66,6 +66,7 @@ const config = {
                   jsx: ts.JsxEmit.Preserve,
                 },
               },
+              explicitTrigger: true,
               renderer: rendererFloatingSvelte(),
             }),
           ],
