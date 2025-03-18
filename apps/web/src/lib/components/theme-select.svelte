@@ -5,8 +5,10 @@
 
   import { ScrollArea } from '$lib/components/ui/scroll-area'
   import * as Select from '$lib/components/ui/select'
-  import * as messages from '$lib/paraglide/messages'
+  import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
+
+  const messages = getMessages()
 
   function handleSelectedChange(newTheme: string) {
     const newMode = themes[newTheme]?.['color-scheme']
@@ -34,12 +36,10 @@ Selecting a specific theme will persist it to localstorage under the "light" or 
 -->
 
 <Select.Root type="single" onValueChange={handleSelectedChange} value={$theme || $mode}>
-  <div data-tip={messages.selectTheme()} class="tooltip tooltip-bottom">
+  <div data-tip={$messages.selectTheme()} class="tooltip tooltip-bottom">
     <Select.Trigger class="min-w-32">
-      <span
-        class="theme-select-label"
-        style="--theme-select-placeholder: '{messages.selectTheme()}'"
-      >
+      <span class="theme-select-label" data-placeholder={$messages.selectTheme()}>
+        {$theme}
       </span>
     </Select.Trigger>
   </div>
@@ -81,7 +81,7 @@ Selecting a specific theme will persist it to localstorage under the "light" or 
 
 <style>
   /** If label is empty, use the data-theme variable on the HTML tag as the content. */
-  .theme-select-label::before {
-    content: var(--data-theme, var(--theme-select-placeholder));
+  .theme-select-label:empty::before {
+    content: var(--data-theme, attr(data-placeholder));
   }
 </style>
