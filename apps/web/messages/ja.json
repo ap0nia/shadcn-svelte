@@ -1,7 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "__name": "英語",
-  "__code": "jp",
+  "__code": "JA",
+  "__direction": "ltr",
+  "__name": "日本語",
   "selectTheme": "テーマを選択",
   "selectLanguage": "言語を選択",
   "toggleTheme": "テーマを切り替える",

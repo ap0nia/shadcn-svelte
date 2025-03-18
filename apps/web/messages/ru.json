@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "RU",
+  "__direction": "ltr",
+  "__name": "Русский",
+  "selectTheme": "Выберите тему",
+  "selectLanguage": "Выберите язык",
+  "toggleTheme": "Переключить тему",
+  "hello": "Привет",
+  "messenger": "Посланник",
+  "theme": "Тема",
+  "findThePerfectEmoji": "Найдите идеальный эмодзи",
+  "selectEmoji": "Выберите эмодзи",
+  "uploadFile": "Загрузить файл",
+  "createPoll": "Создать опрос",
+  "pleaseTypeMessage": "Пожалуйста, введите сообщение",
+  "builtBy": "Построено",
+  "hostedOn": "Размещено на",
+  "illustrationsBy": "Иллюстрации от",
+  "theSourceCodeIsAvailable": "Исходный код доступен на"
+}

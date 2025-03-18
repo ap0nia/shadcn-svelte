@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "FA",
+  "__direction": "rtl",
+  "__name": "فارسی",
+  "selectTheme": "موضوع را انتخاب کنید",
+  "selectLanguage": "زبان را انتخاب کنید",
+  "toggleTheme": "تغییر موضوع",
+  "hello": "سلام",
+  "messenger": "پیام رسان",
+  "theme": "تم",
+  "findThePerfectEmoji": "ایموجی کامل را پیدا کنید",
+  "selectEmoji": "ایموجی را انتخاب کنید",
+  "uploadFile": "یک فایل آپلود کنید",
+  "createPoll": "ایجاد نظرسنجی",
+  "pleaseTypeMessage": "لطفا یک پیام تایپ کنید",
+  "builtBy": "ساخته شده توسط",
+  "hostedOn": "میزبانی شده است",
+  "illustrationsBy": "تصاویر توسط",
+  "theSourceCodeIsAvailable": "کد منبع در دسترس است"
+}

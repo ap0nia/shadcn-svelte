@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "KO",
+  "__direction": "ltr",
+  "__name": "한국어",
+  "selectTheme": "테마 선택",
+  "selectLanguage": "언어 선택",
+  "toggleTheme": "테마 전환",
+  "hello": "안녕하세요",
+  "messenger": "전령",
+  "theme": "주제",
+  "findThePerfectEmoji": "완벽한 이모티콘을 찾아보세요",
+  "selectEmoji": "이모티콘 선택",
+  "uploadFile": "파일 업로드",
+  "createPoll": "여론조사 만들기",
+  "pleaseTypeMessage": "메시지를 입력해주세요",
+  "builtBy": "에 의해 구축",
+  "hostedOn": "호스팅됨",
+  "illustrationsBy": "일러스트 by",
+  "theSourceCodeIsAvailable": "소스 코드는 다음에서 사용할 수 있습니다."
+}

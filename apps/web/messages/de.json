@@ -1,10 +1,11 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "DE",
+  "__direction": "ltr",
   "__name": "Deutsch",
-  "__code": "de",
   "selectTheme": "Thema auswählen",
   "selectLanguage": "Sprache auswählen",
-  "toggleTheme": "Design umschalten",
+  "toggleTheme": "Thema umschalten",
   "hello": "Hallo",
   "messenger": "Bote",
   "theme": "Thema",

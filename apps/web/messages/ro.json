@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__name": "Română",
+  "__code": "RO",
+  "__direction": "ltr",
+  "selectTheme": "Selectați tema",
+  "selectLanguage": "Selectați limba",
+  "toggleTheme": "Comutați tema",
+  "hello": "Buna ziua",
+  "messenger": "Mesager",
+  "theme": "Temă",
+  "findThePerfectEmoji": "Găsiți emoji-ul perfect",
+  "selectEmoji": "Selectați emoji",
+  "uploadFile": "Încărcați un fișier",
+  "createPoll": "Creați sondaj",
+  "pleaseTypeMessage": "Vă rugăm să introduceți un mesaj",
+  "builtBy": "Construit de",
+  "hostedOn": "Găzduit pe",
+  "illustrationsBy": "Ilustrații de",
+  "theSourceCodeIsAvailable": "Codul sursă este disponibil pe"
+}

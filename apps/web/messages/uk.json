@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "UK",
+  "__direction": "ltr",
+  "__name": "Українська",
+  "selectTheme": "Виберіть тему",
+  "selectLanguage": "Виберіть мову",
+  "toggleTheme": "Перемкнути тему",
+  "hello": "Привіт",
+  "messenger": "Messenger",
+  "theme": "Тема",
+  "findThePerfectEmoji": "Знайдіть ідеальні емодзі",
+  "selectEmoji": "Виберіть емодзі",
+  "uploadFile": "Завантажте файл",
+  "createPoll": "Створити опитування",
+  "pleaseTypeMessage": "Введіть повідомлення",
+  "builtBy": "Побудовано",
+  "hostedOn": "Розміщено на",
+  "illustrationsBy": "Ілюстрації за",
+  "theSourceCodeIsAvailable": "Вихідний код доступний на"
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "EN",
+  "__direction": "升",
+  "__name": "英语",
+  "selectTheme": "选择主题",
+  "selectLanguage": "选择语言",
+  "toggleTheme": "切换主题",
+  "hello": "你好",
+  "messenger": "信使",
+  "theme": "主题",
+  "findThePerfectEmoji": "找到完美的表情符号",
+  "selectEmoji": "选择表情符号",
+  "uploadFile": "上传文件",
+  "createPoll": "创建投票",
+  "pleaseTypeMessage": "请输入信息",
+  "builtBy": "由建造",
+  "hostedOn": "主办方",
+  "illustrationsBy": "插图",
+  "theSourceCodeIsAvailable": "源代码可在"
+}

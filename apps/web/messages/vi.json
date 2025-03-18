@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "VI",
+  "__direction": "ltr",
+  "__name": "Vietnamese",
+  "selectTheme": "Chọn chủ đề",
+  "selectLanguage": "Chọn ngôn ngữ",
+  "toggleTheme": "Chuyển đổi chủ đề",
+  "hello": "Xin chào",
+  "messenger": "Tin nhắn",
+  "theme": "Chủ đề",
+  "findThePerfectEmoji": "Tìm biểu tượng cảm xúc hoàn hảo",
+  "selectEmoji": "Chọn biểu tượng cảm xúc",
+  "uploadFile": "Tải lên một tập tin",
+  "createPoll": "Tạo cuộc thăm dò",
+  "pleaseTypeMessage": "Vui lòng nhập tin nhắn",
+  "builtBy": "Được xây dựng bởi",
+  "hostedOn": "Được lưu trữ trên",
+  "illustrationsBy": "Minh họa bởi",
+  "theSourceCodeIsAvailable": "Mã nguồn có sẵn trên"
+}

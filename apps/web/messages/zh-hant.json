@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "EN",
+  "__direction": "公升",
+  "__name": "英語",
+  "selectTheme": "選擇主題",
+  "selectLanguage": "選擇語言",
+  "toggleTheme": "切換主題",
+  "hello": "你好",
+  "messenger": "信差",
+  "theme": "主題",
+  "findThePerfectEmoji": "找到完美的表情符號",
+  "selectEmoji": "選擇表情符號",
+  "uploadFile": "上傳文件",
+  "createPoll": "創建投票",
+  "pleaseTypeMessage": "請輸入訊息",
+  "builtBy": "建造者",
+  "hostedOn": "主辦單位",
+  "illustrationsBy": "插畫",
+  "theSourceCodeIsAvailable": "原始碼可在"
+}

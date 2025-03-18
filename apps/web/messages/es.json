@@ -1,9 +1,10 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "ES",
+  "__direction": "ltr",
   "__name": "Español",
-  "__code": "es",
   "selectTheme": "Seleccionar tema",
-  "selectLanguage": "Seleccione idioma",
+  "selectLanguage": "Seleccionar idioma",
   "toggleTheme": "Cambiar tema",
   "hello": "Hola",
   "messenger": "Mensajero",

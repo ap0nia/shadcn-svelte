@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "bn",
+  "__direction": "ltr",
+  "__name": "বাংলা",
+  "selectTheme": "থিম নির্বাচন করুন",
+  "selectLanguage": "ভাষা নির্বাচন করুন",
+  "toggleTheme": "থিম টগল করুন",
+  "hello": "হ্যালো",
+  "messenger": "বার্তাবহ",
+  "theme": "থিম",
+  "findThePerfectEmoji": "নিখুঁত ইমোজি খুঁজে বের করুন",
+  "selectEmoji": "ইমোজি বেছে নিন",
+  "uploadFile": "একটি ফাইল আপলোড করুন",
+  "createPoll": "পোল তৈরি করুন",
+  "pleaseTypeMessage": "দয়া করে একটি বার্তা টাইপ করুন।",
+  "builtBy": "দ্বারা নির্মিত",
+  "hostedOn": "হোস্ট করা হয়েছে",
+  "illustrationsBy": "চিত্রণ করেছেন",
+  "theSourceCodeIsAvailable": "সোর্স কোডটি এখানে পাওয়া যাচ্ছে"
+}

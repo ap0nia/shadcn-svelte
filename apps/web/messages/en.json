@@ -1,7 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "EN",
+  "__direction": "ltr",
   "__name": "English",
-  "__code": "en",
   "selectTheme": "Select theme",
   "selectLanguage": "Select language",
   "toggleTheme": "Toggle theme",

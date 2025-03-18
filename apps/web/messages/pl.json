@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "PL",
+  "__direction": "ltr",
+  "__name": "Polski",
+  "selectTheme": "Wybierz motyw",
+  "selectLanguage": "Wybierz język",
+  "toggleTheme": "Przełącz motyw",
+  "hello": "Cześć",
+  "messenger": "Posłaniec",
+  "theme": "Temat",
+  "findThePerfectEmoji": "Znajdź idealną emoji",
+  "selectEmoji": "Wybierz emoji",
+  "uploadFile": "Prześlij plik",
+  "createPoll": "Utwórz ankietę",
+  "pleaseTypeMessage": "Proszę wpisać wiadomość",
+  "builtBy": "Zbudowany przez",
+  "hostedOn": "Hostowane na",
+  "illustrationsBy": "Ilustracje:",
+  "theSourceCodeIsAvailable": "Kod źródłowy jest dostępny na"
+}

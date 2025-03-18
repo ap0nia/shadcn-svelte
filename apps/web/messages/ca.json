@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "CA",
+  "__direction": "ltr",
+  "__name": "Català",
+  "selectTheme": "Seleccioneu el tema",
+  "selectLanguage": "Seleccioneu l'idioma",
+  "toggleTheme": "Canvia el tema",
+  "hello": "hola",
+  "messenger": "Missatger",
+  "theme": "Tema",
+  "findThePerfectEmoji": "Troba l'emoji perfecte",
+  "selectEmoji": "Seleccioneu emoji",
+  "uploadFile": "Carregueu un fitxer",
+  "createPoll": "Crear enquesta",
+  "pleaseTypeMessage": "Escriviu un missatge",
+  "builtBy": "Construït per",
+  "hostedOn": "Allotjat a",
+  "illustrationsBy": "Il·lustracions de",
+  "theSourceCodeIsAvailable": "El codi font està disponible a"
+}

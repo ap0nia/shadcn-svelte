@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "__code": "ID",
+  "__direction": "ltr",
+  "__name": "Indonesia",
+  "selectTheme": "Pilih tema",
+  "selectLanguage": "Pilih bahasa",
+  "toggleTheme": "Beralih tema",
+  "hello": "Halo",
+  "messenger": "Kurir",
+  "theme": "Tema",
+  "findThePerfectEmoji": "Temukan emoji yang sempurna",
+  "selectEmoji": "Pilih emoji",
+  "uploadFile": "Unggah file",
+  "createPoll": "Buat jajak pendapat",
+  "pleaseTypeMessage": "Silakan ketik pesan",
+  "builtBy": "Dibangun oleh",
+  "hostedOn": "Diselenggarakan pada",
+  "illustrationsBy": "Ilustrasi oleh",
+  "theSourceCodeIsAvailable": "Kode sumber tersedia di"
+}
