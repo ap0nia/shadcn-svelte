@@ -12,5 +12,8 @@
   "selectEmoji": "Emoji auswählen",
   "uploadFile": "Hochladen einer Datei",
   "createPoll": "Umfrage erstellen",
-  "pleaseTypeMessage": "Bitte geben Sie eine Nachricht ein"
+  "pleaseTypeMessage": "Bitte geben Sie eine Nachricht ein",
+  "hostedOn": "Gehostet auf",
+  "illustrationsBy": "Illustrationen von",
+  "theSourceCodeIsAvailable": "Der Quellcode ist verfügbar auf"
 }

@@ -12,5 +12,8 @@
   "selectEmoji": "Select emoji",
   "uploadFile": "Upload a file",
   "createPoll": "Create poll",
-  "pleaseTypeMessage": "Please type a message"
+  "pleaseTypeMessage": "Please type a message",
+  "hostedOn": "Hosted on",
+  "illustrationsBy": "Illustrations by",
+  "theSourceCodeIsAvailable": "The source code is available on"
 }

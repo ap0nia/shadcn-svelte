@@ -12,5 +12,8 @@
   "selectEmoji": "حدد الرمز التعبيري",
   "uploadFile": "تحميل ملف",
   "createPoll": "إنشاء استطلاع رأي",
-  "pleaseTypeMessage": "الرجاء كتابة الرسالة"
+  "pleaseTypeMessage": "الرجاء كتابة الرسالة",
+  "hostedOn": "مستضاف على",
+  "illustrationsBy": "الرسوم التوضيحية بواسطة",
+  "theSourceCodeIsAvailable": "الكود المصدر متاح على"
 }
