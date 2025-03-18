@@ -2,8 +2,8 @@
   import '../app.css'
 
   import { useProsemirrorAdapterProvider } from '@prosemirror-adapter/svelte'
-  import { ModeWatcher } from 'mode-watcher'
 
+  import ThemeModeWatcher from '$lib/components/theme-mode-watcher.svelte'
   // import { Toaster } from '$lib/components/ui/sonner'
 
   // import Header from './header.svelte'
@@ -13,7 +13,7 @@
   useProsemirrorAdapterProvider()
 </script>
 
-<ModeWatcher />
+<ThemeModeWatcher />
 <!-- <Toaster /> -->
 
 <div class="flex min-h-dvh flex-col">
