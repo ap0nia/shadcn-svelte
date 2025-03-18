@@ -2,31 +2,25 @@
   import LanguageSelect from '$lib/components/language-select.svelte'
   import ThemeSelect from '$lib/components/theme-select.svelte'
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
+  import * as Avatar from '$lib/components/ui/avatar'
 </script>
 
-<div class="navbar bg-base-100 z-100 shadow-sm">
+<div class="navbar bg-base-100 shadow-sm">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h8m-8 6h16"
-          />
-        </svg>
+        <span class="icon-[mdi--hamburger-menu] size-6"></span>
       </div>
     </div>
 
-    <a href="/" class="btn btn-ghost text-xl">
-      <img src="/images/elysia.gif" alt="Logo" class="h-full w-full" />
+    <a href="/" class="btn btn-ghost h-auto min-h-0">
+      <Avatar.Root class="size-16">
+        <Avatar.Image src="https://media.tenor.com/CnvquZ_FojAAAAAi/elysia-honkai.gif" alt="Logo" />
+
+        <Avatar.Fallback>
+          <span class="icon-[mdi--chevron-down] size-full"></span>
+        </Avatar.Fallback>
+      </Avatar.Root>
     </a>
   </div>
 
