@@ -7,7 +7,8 @@
   import ThemeModeWatcher from '$lib/components/theme-mode-watcher.svelte'
   // import { Toaster } from '$lib/components/ui/sonner'
 
-  // import Header from './header.svelte'
+  import Footer from './footer.svelte'
+  import Header from './header.svelte'
 
   let { children } = $props()
 
@@ -24,9 +25,13 @@
 <!-- <Toaster /> -->
 
 <div class="flex min-h-dvh flex-col">
-  <!-- <Header /> -->
+  <Header />
 
-  <div class="contents grow">
+  <div class="contents">
     {@render children()}
   </div>
 </div>
+
+<div class="divider"></div>
+
+<Footer />
