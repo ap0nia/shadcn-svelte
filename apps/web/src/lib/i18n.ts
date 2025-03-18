@@ -24,6 +24,8 @@ export function createObservableLocale() {
       })
 
       goto(newLocation, { keepFocus: true, noScroll: true })
+
+      return
     }
 
     if (typeof document === 'undefined') return
