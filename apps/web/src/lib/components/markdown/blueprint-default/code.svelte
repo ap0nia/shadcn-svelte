@@ -1,9 +1,20 @@
 <script lang="ts">
   import type { HTMLAttributes } from 'svelte/elements'
 
-  import { cn } from '$lib/utils/cn'
-
-  let { class: className, children, ...restProps }: HTMLAttributes<HTMLElement> = $props()
+  let { children, ...restProps }: HTMLAttributes<HTMLElement> = $props()
 </script>
 
-<code class={cn('block px-4', className)} {...restProps}>{@render children?.()}</code>
+<code {...restProps}>{@render children?.()}</code>
+
+<style>
+  :global {
+    /** The custom `pre` element does not wrap code blocks in twoslash docs. */
+    .twoslash-popup-docs {
+      code {
+        background: var(--color-base-300);
+        border-radius: var(--radius-sm);
+        padding: calc(var(--spacing) * 1);
+      }
+    }
+  }
+</style>

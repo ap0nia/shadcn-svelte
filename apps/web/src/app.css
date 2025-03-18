@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+@import '@shikijs/vitepress-twoslash/style.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -20,10 +22,6 @@
 @plugin "daisyui/theme" {
   name: light;
 }
-
-@import '@shikijs/twoslash/style-rich.css';
-@import '@shikijs/vitepress-twoslash/style-core.css';
-@import '@shikijs/vitepress-twoslash/style.css';
 
 :root {
   --twoslash-border-color: var(--color-base-content);

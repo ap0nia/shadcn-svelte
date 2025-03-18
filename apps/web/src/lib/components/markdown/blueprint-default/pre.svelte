@@ -38,11 +38,10 @@
 
 <div
   class={cn(
-    `language-${restProps.lang}`,
+    `restProps.lang && language-${restProps.lang}`,
     'vp-adaptive-theme',
-    'group relative overflow-x-auto py-4',
+    'group relative overflow-x-auto p-4',
     'bg-base-300 text-base-content rounded-box',
-    '[&>pre:before]:hidden',
   )}
 >
   {#if restProps.lang}
