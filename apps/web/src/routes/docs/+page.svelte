@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { ScrollArea } from '$lib/components/ui/scroll-area'
+  import messages from '$lib/i18n'
 </script>
 
 <main class="w-full bg-pink-400 h-[200vh]">
-  <h1>Hello, Docs</h1>
+  <h1>{$messages.hello()}</h1>
 </main>
