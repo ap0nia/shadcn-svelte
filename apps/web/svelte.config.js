@@ -2,11 +2,13 @@
 import path from 'node:path'
 import url from 'node:url'
 
+import ts from 'typescript'
+
 import { createTwoslasher } from '@ap0nia/mdsx/twoslash-svelte'
 import { createMdsxPreprocessor } from '@ap0nia/mdsx/preprocessor'
 import { rendererFloatingSvelte } from '@ap0nia/mdsx/floating-renderer-svelte'
-import { transformerTwoslash } from '@shikijs/twoslash'
 import shikiRehype from '@shikijs/rehype'
+import { transformerTwoslash } from '@shikijs/twoslash'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -59,6 +61,11 @@ const config = {
               twoslasher: createTwoslasher({
                 nodeModules: rootNodeModules,
               }),
+              twoslashOptions: {
+                compilerOptions: {
+                  jsx: ts.JsxEmit.Preserve,
+                },
+              },
               renderer: rendererFloatingSvelte(),
             }),
           ],
