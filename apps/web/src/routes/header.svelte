@@ -100,7 +100,7 @@
       </Sheet.Trigger>
 
       <a href="/" class="btn btn-ghost hidden h-auto min-h-0 md:flex">
-        <img src="/images/elysia.gif" alt="Logo" width="96" height="96" />
+        <img src="/images/elysia.gif" alt="Logo" width="64" height="64" />
       </a>
     </div>
 
