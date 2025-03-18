@@ -2,25 +2,28 @@
   import { Toaster as Sonner, type ToasterProps as SonnerProps } from 'svelte-sonner'
   import { mode } from 'mode-watcher'
   import { cn } from '$lib/utils/cn'
+  import { getMessages } from '$lib/i18n'
 
   let { richColors, ...props }: SonnerProps = $props()
+
+  const messages = getMessages()
 </script>
 
 <Sonner
-  dir="ltr"
+  dir={$messages.__direction() as any}
   theme={$mode}
   class="toaster group"
   visibleToasts={4}
   toastOptions={{
     classes: {
-      success: '!alert-success text-success-content',
-      error: '!alert-error text-error-content',
-      warning: '!alert-warning text-warning-content',
-      info: '!alert-info text-info-content',
       toast: cn(
         richColors ? '!alert' : '!text-base-content',
         'group toast group-[.toaster]:shadow-lg',
       ),
+      success: '!alert-success text-success-content',
+      error: '!alert-error text-error-content',
+      warning: '!alert-warning text-warning-content',
+      info: '!alert-info text-info-content',
       description: 'group-[.toast]:text-muted-foreground',
       actionButton: 'group-[.toast]:!btn group-[.toast]:!btn-xs',
       cancelButton: 'group-[.toast]:!btn group-[.toast]:!btn-xs',
