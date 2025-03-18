@@ -1,5 +1,7 @@
 <script lang="ts">
   import LanguageSelect from '$lib/components/language-select.svelte'
+  import ThemeToggle from '$lib/components/theme-toggle.svelte'
+
   import messages from '$lib/i18n'
   import packageJson from '../../../../../package.json'
 </script>
@@ -41,13 +43,6 @@
   <div class="flex items-center gap-2">
     <LanguageSelect />
 
-    <button class="btn btn-sm btn-square ring-base-content ring-1" aria-label="Color scheme toggle">
-      <span class="swap swap-rotate">
-        <span class="icon-[mdi--moon-waxing-crescent] swap-on size-5"></span>
-        <span class="icon-[mdi--weather-sunny] swap-off size-5"></span>
-      </span>
-    </button>
+    <ThemeToggle />
   </div>
-
-  <!-- <ModeToggle /> -->
 </footer>
