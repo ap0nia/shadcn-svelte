@@ -24,6 +24,6 @@
 >
   {@render children?.()}
   <ScrollAreaPrimitive.Thumb
-    class={cn('bg-border relative rounded-full', orientation === 'vertical' && 'flex-1')}
+    class={cn('bg-base-300 relative rounded-full', orientation === 'vertical' && 'flex-1')}
   />
 </ScrollAreaPrimitive.Scrollbar>
