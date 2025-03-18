@@ -1,16 +1,15 @@
 <script lang="ts">
   import * as Select from '$lib/components/ui/select'
+  import { locale } from '$lib/i18n'
   import * as messages from '$lib/paraglide/messages'
-  import { getLocale, locales, setLocale, type Locale } from '$lib/paraglide/runtime'
+  import { locales, type Locale } from '$lib/paraglide/runtime'
   import { cn } from '$lib/utils/cn'
 
   let { class: className = '' } = $props()
 
-  const locale = getLocale()
-
   async function handleSelectedChange(selected?: string) {
     if (selected == null) return
-    setLocale(selected as Locale, { reload: false })
+    locale.set(selected as Locale, { reload: false })
   }
 </script>
 
@@ -21,7 +20,7 @@ A select menu that navigates to different language settings.
 -->
 
 <div data-tip={messages.selectLanguage()} class="tooltip tooltip-bottom">
-  <Select.Root type="single" value={locale} onValueChange={handleSelectedChange}>
+  <Select.Root type="single" value={$locale} onValueChange={handleSelectedChange}>
     <Select.Trigger class={cn(className, 'min-w-28')}>
       {messages.__name() || messages.selectLanguage()}
     </Select.Trigger>

@@ -1,12 +1,34 @@
 import { derived, writable } from 'svelte/store'
 
+import { goto } from '$app/navigation'
 import { m } from '$lib/paraglide/messages'
+import { getLocale, localizeUrl, setLocale } from '$lib/paraglide/runtime'
 
-import { getLocale, overwriteSetLocale, setLocale } from './paraglide/runtime'
+function createObservableLocale() {
+  const locale = writable(getLocale())
 
-const originalSetLocale = setLocale
+  const originalSetLocale = locale.set
 
-export const locale = writable(getLocale())
+  const extendedSetLocale: typeof setLocale = async (newLocale, ...args) => {
+    setLocale(newLocale, ...args)
+    originalSetLocale(newLocale)
+
+    if (args[0]?.reload === false) {
+      const newLocation = localizeUrl(window.location.href, {
+        locale: newLocale,
+      })
+
+      goto(newLocation, { keepFocus: true, noScroll: true })
+    }
+  }
+
+  return {
+    ...locale,
+    set: extendedSetLocale,
+  }
+}
+
+export const locale = createObservableLocale()
 
 export const messages = derived(locale, ($locale) => {
   const resolvedMessages = Object.fromEntries(
@@ -24,11 +46,6 @@ export const messages = derived(locale, ($locale) => {
   )
 
   return resolvedMessages as typeof m
-})
-
-overwriteSetLocale((newLocale, ...args) => {
-  originalSetLocale(newLocale, ...args)
-  locale.set(newLocale)
 })
 
 export default messages
