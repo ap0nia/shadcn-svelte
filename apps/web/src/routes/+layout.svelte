@@ -3,7 +3,7 @@
 
   import { useProsemirrorAdapterProvider } from '@prosemirror-adapter/svelte'
 
-  import I18nWatcher from '$lib/components/i18n-watcher.svelte'
+  import { createObservableLocale, setLocale, setMessages } from '$lib/i18n'
   import ThemeModeWatcher from '$lib/components/theme-mode-watcher.svelte'
   // import { Toaster } from '$lib/components/ui/sonner'
 
@@ -12,10 +12,15 @@
   let { children } = $props()
 
   useProsemirrorAdapterProvider()
+
+  const locale = createObservableLocale()
+
+  setLocale(locale)
+
+  setMessages(locale)
 </script>
 
 <ThemeModeWatcher />
-<I18nWatcher />
 <!-- <Toaster /> -->
 
 <div class="flex min-h-dvh flex-col">
