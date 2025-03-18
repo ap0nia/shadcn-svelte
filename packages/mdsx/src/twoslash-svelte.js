@@ -92,7 +92,7 @@ export function createTwoslasher(createOptions = {}) {
           break
         }
         case 'handbookOptions': {
-          handbookOptions[flag.name] = flag.value
+          handbookOptions[/** @type {never} */ (flag.name)] = /** @type {never} */ (flag.value)
           break
         }
       }
