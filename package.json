@@ -1,0 +1,30 @@
+{
+  "name": "messenger",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "postinstall": "lefthook install"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.28.1",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/types": "^19.8.0",
+    "@eslint/js": "^9.22.0",
+    "@types/bun": "^1.2.5",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/eslint__js": "^9.14.0",
+    "commitlint": "^19.8.0",
+    "devmoji": "^2.3.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-svelte": "^3.3.1",
+    "globals": "^16.0.0",
+    "lefthook": "^1.11.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-svelte": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1"
+  }
+}
