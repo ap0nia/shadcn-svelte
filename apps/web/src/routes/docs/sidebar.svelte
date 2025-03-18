@@ -18,7 +18,7 @@
           <a
             href={item.href}
             class={cn(page.url.pathname === item.href && 'menu-focus')}
-            target={item.external ? '_blank' : ''}
+            target={item.external ? '_blank' : '_self'}
             rel={item.external ? 'noreferrer' : ''}
           >
             <span class="whitespace-nowrap">{item.title}</span>
