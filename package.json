@@ -6,6 +6,13 @@
     "apps/*",
     "packages/*"
   ],
+  "author": {
+    "name": "ap0nia",
+    "url": "https://github.com/ap0nia"
+  },
+  "repository": {
+    "url": "https://github.com/ap0nia/messenger"
+  },
   "scripts": {
     "postinstall": "lefthook install"
   },
