@@ -4,6 +4,6 @@
   const messages = getMessages()
 </script>
 
-<main class="bg-base-content h-[200vh] w-full">
-  <h1 class="text-base-100">{$messages.hello()}</h1>
+<main class="h-[200vh] w-full">
+  <h1>{$messages.hello()}</h1>
 </main>
