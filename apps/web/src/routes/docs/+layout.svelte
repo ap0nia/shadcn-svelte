@@ -1,16 +1,59 @@
 <script lang="ts">
+  import { page } from '$app/state'
   import { ScrollArea } from '$lib/components/ui/scroll-area'
-  import config from '$lib/config/docs'
-
-  import Sidebar from './sidebar.svelte'
+  import config, { type SidebarNavItem } from '$lib/config/docs'
+  import { cn } from '$lib/utils/cn'
 
   let { children } = $props()
 </script>
 
+{#snippet SidebarItem({ items }: { items: SidebarNavItem[] })}
+  <ul class="menu w-full">
+    {#each items as item, index (index)}
+      <li class={cn(item.disabled && 'menu-disabled')}>
+        {#if item.href}
+          <a
+            href={item.href}
+            class={cn(page.url.pathname === item.href && 'menu-focus')}
+            target={item.external ? '_blank' : ''}
+            rel={item.external ? 'noreferrer' : ''}
+          >
+            <span class="whitespace-nowrap">{item.title}</span>
+
+            {#if item.label}
+              <span class="badge badge-primary badge-xs">
+                {item.label}
+              </span>
+            {/if}
+          </a>
+        {:else}
+          <span class="whitespace-nowrap">{item.title}</span>
+        {/if}
+      </li>
+    {/each}
+  </ul>
+{/snippet}
+
 <div class="flex h-0 grow flex-col">
   <div class="flex h-full">
-    <ScrollArea class="h-full min-w-3xs hidden md:flex">
-      <Sidebar items={config.sidebar} />
+    <ScrollArea class="hidden h-full min-w-3xs md:flex">
+      {#if config.sidebar.length}
+        <ul class="w-full">
+          {#each config.sidebar as item, index (index)}
+            <li class={cn('pb-4')}>
+              <h4 class="px-4 py-1 text-sm font-semibold">
+                {item.title}
+              </h4>
+
+              {#if item?.items}
+                {#if item?.items?.length}
+                  {@render SidebarItem({ items: item.items })}
+                {/if}
+              {/if}
+            </li>
+          {/each}
+        </ul>
+      {/if}
     </ScrollArea>
 
     <div class="contents">
