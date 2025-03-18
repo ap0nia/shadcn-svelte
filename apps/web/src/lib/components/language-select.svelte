@@ -28,7 +28,9 @@ A select menu that navigates to different language settings.
       {$messages.__name() || $messages.selectLanguage()}
     </Select.Trigger>
 
-    <Select.Content class="!w-auto">
+    <Select.Content class="max-h-96" sideOffset={10}>
+      <Select.ScrollUpButton />
+
       <Select.Group class="menu w-full p-0">
         {#each locales as locale}
           <Select.Item value={locale}>
@@ -37,6 +39,8 @@ A select menu that navigates to different language settings.
           </Select.Item>
         {/each}
       </Select.Group>
+
+      <Select.ScrollDownButton />
     </Select.Content>
   </Select.Root>
 </div>
