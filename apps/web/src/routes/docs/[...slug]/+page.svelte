@@ -4,7 +4,7 @@
   let { data }: PageProps = $props()
 </script>
 
-<main>
+<main class="h-full w-full overflow-y-auto p-8">
   {#if data.component}
     <data.component />
   {:else}
