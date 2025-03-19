@@ -19,8 +19,6 @@
   setLocale(locale)
 
   const messages = setMessages(locale)
-
-  $inspect($messages)
 </script>
 
 <ThemeModeWatcher />

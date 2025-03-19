@@ -3,6 +3,8 @@ declare global {
     export interface Tabs {
       type: 'Tabs'
       children: TabContent[]
+      sync?: boolean
+      groupId?: string
     }
 
     export interface TabContent extends Literal, Parent {

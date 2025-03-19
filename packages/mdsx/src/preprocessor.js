@@ -197,6 +197,8 @@ export async function compile(options, config) {
           tagName: 'Tabs',
           properties: {
             triggers,
+            sync: tabs.sync,
+            groupId: tabs.groupId,
           },
           children,
         },

@@ -88,7 +88,7 @@ export function remarkCleanSvelte() {
 export function remarkNpmToYarn(options = {}) {
   const converters = options.converters ?? ['yarn', 'pnpm', 'bun']
 
-  // const sync = options.sync ?? false
+  const sync = options.sync ?? true
 
   const conversionResolvers = converters.map((converter) => {
     if (typeof converter === 'string') {
@@ -147,6 +147,8 @@ export function remarkNpmToYarn(options = {}) {
 
       ancestor.children[index] = {
         type: 'Tabs',
+        sync,
+        groupId: 'npm2yarn',
         children,
       }
     })

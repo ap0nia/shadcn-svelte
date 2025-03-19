@@ -13,11 +13,14 @@
 <TabsPrimitive.Trigger
   bind:ref
   class={cn(
-    'btn no-animation',
-    'ring-offset-base-100 h-full min-h-0 rounded-sm shadow-none',
-    'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
-    'disabled:btn-disabled',
-    'data-[state=active]:btn-active',
+    'tab',
+    // 'btn btn-sm no-animation',
+    // 'ring-offset-base-100 h-full min-h-0 rounded-sm shadow-none',
+    // 'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+
+    'focus-visible:outline-none',
+    'disabled:tab-disabled',
+    'data-[state=active]:tab-active',
     className,
   )}
   {value}

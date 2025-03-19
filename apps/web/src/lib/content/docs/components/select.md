@@ -25,3 +25,6 @@ npm install elysia
 
 </div>
 
+```bash npm2yarn
+npm install hello
+```
