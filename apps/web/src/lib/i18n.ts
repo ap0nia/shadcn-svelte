@@ -16,23 +16,23 @@ export function createObservableLocale() {
 
   const extendedSetLocale: typeof __setLocale = async (newLocale, ...args) => {
     __setLocale(newLocale, ...args)
+
     originalSetLocale(newLocale)
 
-    if (args[0]?.reload === false) {
-      const newLocation = localizeUrl(window.location.href, {
-        locale: newLocale,
-      })
+    if (args[0]?.reload !== false) return
 
-      goto(newLocation, { keepFocus: true, noScroll: true })
+    const newLocation = localizeUrl(window.location.href, {
+      locale: newLocale,
+    })
 
-      return
-    }
+    goto(newLocation, { keepFocus: true, noScroll: true })
 
     if (typeof document === 'undefined') return
 
+    document.documentElement.setAttribute('lang', newLocale)
+
     const dir = m.__direction(undefined, { locale: newLocale })
 
-    document.documentElement.setAttribute('lang', newLocale)
     document.documentElement.setAttribute('dir', dir)
   }
 
