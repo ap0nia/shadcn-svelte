@@ -4,6 +4,12 @@
   import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
 
+  type Props = {
+    class?: string
+  }
+
+  let props: Props = $props()
+
   const messages = getMessages()
 
   function toggleTheme() {
@@ -30,7 +36,7 @@ Button that toggles between light and dark mode.
 It can also use specific themes specified by the 'light' and 'dark' keys from localstorage.
 -->
 
-<div data-tip={$messages.toggleTheme()} class="tooltip tooltip-bottom">
+<div data-tip={$messages.toggleTheme()} class={cn('tooltip tooltip-bottom', props.class)}>
   <button
     onclick={toggleTheme}
     class="btn btn-sm btn-square ring-base-content ring-1"
