@@ -43,7 +43,7 @@ Selecting a specific theme will persist it to localstorage under the "light" or 
 
 <Select.Root type="single" onValueChange={handleSelectedChange} value={$theme || $mode}>
   <div data-tip={$messages.selectTheme()} class={cn('tooltip tooltip-bottom', props.class)}>
-    <Select.Trigger class="min-w-32">
+    <Select.Trigger >
       <span class="theme-select-label" data-placeholder={$messages.selectTheme()}>
         {$theme}
       </span>
