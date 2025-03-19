@@ -71,41 +71,41 @@
               <span class="badge badge-primary badge-xs">
                 {item.label}
               </span>
-            {/if}
-          </a>
-        {:else}
-          <span class="whitespace-nowrap">{item.title}</span>
-        {/if}
-      </li>
-    {/each}
-  </ul>
-{/snippet}
+              {/if}
+            </a>
+          {:else}
+            <span class="whitespace-nowrap">{item.title}</span>
+          {/if}
+        </li>
+      {/each}
+    </ul>
+  {/snippet}
 
-{#snippet ListItem({ className, title, content, href }: ListItemProps)}
-  <li>
-    <NavigationMenu.Link class={cn('flex flex-col items-start', className)} {href}>
-      <div class="text-sm leading-none font-medium">{title}</div>
-      <p class="text-muted-foreground line-clamp-2 text-sm leading-snug">
-        {content}
-      </p>
-    </NavigationMenu.Link>
-  </li>
-{/snippet}
+  {#snippet ListItem({ className, title, content, href }: ListItemProps)}
+    <li>
+      <NavigationMenu.Link class={cn('flex flex-col items-start', className)} {href}>
+        <div class="text-sm leading-none font-medium">{title}</div>
+        <p class="text-muted-foreground line-clamp-2 text-sm leading-snug">
+          {content}
+        </p>
+      </NavigationMenu.Link>
+    </li>
+  {/snippet}
 
-<Sheet.Root>
-  <div class="navbar bg-base-100 shadow-sm">
-    <div class="navbar-start">
-      <Sheet.Trigger class="btn btn-ghost flex md:hidden p-1">
-        <span class="icon-[mdi--hamburger-menu] size-6"></span>
-      </Sheet.Trigger>
+  <Sheet.Root>
+    <div class="navbar bg-base-100 shadow-sm">
+      <div class="navbar-start">
+        <Sheet.Trigger class="btn btn-ghost btn-square flex lg:hidden">
+          <span class="icon-[mdi--hamburger-menu] size-6"></span>
+        </Sheet.Trigger>
 
-      <a href="/" class="btn btn-ghost hidden h-auto min-h-0 md:flex">
-        <img src="/images/elysia.gif" alt="Logo" width="64" height="64" />
-      </a>
-    </div>
+        <a href="/" class="btn btn-ghost hidden h-auto min-h-0 lg:flex">
+          <img src="/images/elysia.gif" alt="Logo" width="64" height="64" />
+        </a>
+      </div>
 
-    <div class="navbar-center hidden lg:flex">
-      <NavigationMenu.Root class="relative z-10 w-fit">
+      <div class="navbar-center hidden lg:flex">
+        <NavigationMenu.Root class="relative z-10 w-fit">
         <NavigationMenu.List class={cn('menu menu-horizontal menu-sm')}>
           <NavigationMenu.Item value="getting-started">
             <NavigationMenu.Trigger>Getting started</NavigationMenu.Trigger>
