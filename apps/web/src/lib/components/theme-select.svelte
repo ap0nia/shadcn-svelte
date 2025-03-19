@@ -51,8 +51,8 @@ Selecting a specific theme will persist it to localstorage under the "light" or 
   </div>
 
   <Select.Content>
-    <ScrollArea class="h-64">
-      <Select.Group class="w-full p-0">
+    <ScrollArea class="h-64 pr-3">
+      <Select.Group class="w-full">
         {#each themeOrder as theme}
           {@const themeDetails = themes[theme]}
 
