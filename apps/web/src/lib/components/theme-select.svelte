@@ -10,6 +10,7 @@
 
   type Props = {
     class?: string
+    onThemeChange?: (newTheme: string, newMode?: string) => unknown
   }
 
   let props: Props = $props()
@@ -19,15 +20,19 @@
   function handleSelectedChange(newTheme: string) {
     const newMode = themes[newTheme]?.['color-scheme']
 
-    if (!newMode) return
+    const handled = props.onThemeChange?.(newTheme, newMode)
 
-    /**
-     * e.g. If the current mode is "light" and the theme is "cupcake", set light=cupcake.
-     *
-     * When toggling between dark/light mode, switch to cupcake instead of the
-     * default light theme for light mode.
-     */
-    localStorage.setItem(newMode, newTheme)
+    if (handled) return
+
+    if (newMode) {
+      /**
+       * e.g. If the current mode is "light" and the theme is "cupcake", set light=cupcake.
+       *
+       * When toggling between dark/light mode, switch to cupcake instead of the
+       * default light theme for light mode.
+       */
+      localStorage.setItem(newMode, newTheme)
+    }
 
     setTheme(newTheme)
     setMode(newMode as any)
@@ -43,7 +48,7 @@ Selecting a specific theme will persist it to localstorage under the "light" or 
 
 <Select.Root type="single" onValueChange={handleSelectedChange} value={$theme || $mode}>
   <div data-tip={$messages.selectTheme()} class={cn('tooltip tooltip-bottom', props.class)}>
-    <Select.Trigger >
+    <Select.Trigger>
       <span class="theme-select-label" data-placeholder={$messages.selectTheme()}>
         {$theme}
       </span>
