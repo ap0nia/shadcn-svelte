@@ -95,7 +95,7 @@
 <Sheet.Root>
   <div class="navbar bg-base-100 shadow-sm">
     <div class="navbar-start">
-      <Sheet.Trigger class="btn btn-ghost flex md:hidden">
+      <Sheet.Trigger class="btn btn-ghost flex md:hidden p-1">
         <span class="icon-[mdi--hamburger-menu] size-6"></span>
       </Sheet.Trigger>
 
