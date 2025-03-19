@@ -2,6 +2,7 @@
 
 import { toMarkdown } from 'mdast-util-to-markdown'
 import { CONTINUE, SKIP, visit } from 'unist-util-visit'
+import npmToYarn from 'npm-to-yarn'
 
 /**
  * Svelte logic blocks are enclosed by braces and usually start with # or @ .
@@ -76,6 +77,78 @@ export function remarkCleanSvelte() {
       convertParagraphToHtml(node)
 
       return SKIP
+    })
+  }
+}
+
+/**
+ * @type import('unified').Plugin
+ * @param {import('./remark-to-yarn').RemarkNpmToYarnOptions} [options={}]
+ */
+export function remarkNpmToYarn(options = {}) {
+  const converters = options.converters ?? ['yarn', 'pnpm', 'bun']
+
+  // const sync = options.sync ?? false
+
+  const conversionResolvers = converters.map((converter) => {
+    if (typeof converter === 'string') {
+      /**
+       * @param {string} code
+       */
+      const resolver = (code) => npmToYarn(code, converter)
+
+      /**
+       * @type import('./remark-to-yarn').CustomConverter
+       */
+      const customConverter = [converter, resolver]
+
+      return customConverter
+    }
+
+    return converter
+  })
+
+  return (root) => {
+    visit(root, 'code', (node, index, parent) => {
+      const code = /** @type import('mdast').Code */ (node)
+
+      if (code.meta !== 'npm2yarn') return
+
+      const ancestor = /** @type import('mdast').Parent */ (parent)
+
+      const children = conversionResolvers.map((conversion) => {
+        /**
+         * @type import('mdast').TabContent
+         */
+        const tabContent = {
+          type: 'TabContent',
+          value: conversion[0],
+          children: [
+            {
+              ...code,
+              value: conversion[1](code.value),
+            },
+          ],
+        }
+
+        return tabContent
+      })
+
+      children.unshift({
+        type: 'TabContent',
+        value: 'npm',
+        children: [
+          {
+            ...code,
+            value: npmToYarn(code.value, 'npm'),
+          },
+        ],
+      })
+
+      ancestor.children[index] = {
+        type: 'Tabs',
+        children,
+      }
     })
   }
 }
