@@ -18,11 +18,13 @@
 
   setLocale(locale)
 
-  setMessages(locale)
+  const messages = setMessages(locale)
+
+  $inspect($messages)
 </script>
 
 <ThemeModeWatcher />
-<Toaster />
+<Toaster dir={$messages.__direction() as any}/>
 
 <div class="flex min-h-dvh flex-col">
   <Header />
