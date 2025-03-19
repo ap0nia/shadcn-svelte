@@ -18,9 +18,18 @@ import {
   MDSX_FLOATING_COMPONENT_NAME,
 } from './constants.js'
 import { rehypeBlueprint, rehypeGetFloating, rehypeRenderCode } from './unified/rehype.js'
-import { remarkCleanSvelte } from './unified/remark.js'
+import { remarkCleanSvelte, remarkNpmToYarn } from './unified/remark.js'
 import { parseFrontmatter } from './utils/parse-frontmatter.js'
 import { getRelativeFilePath } from './utils/path.js'
+
+/**
+ * @template T
+ * @param {T} value
+ * @returns value is NonNullable<T>
+ */
+function notNull(value) {
+  return value != null
+}
 
 /**
  * Generate a string representing the `<script context="module">` part of a Svelte component.
@@ -113,6 +122,8 @@ function getBlueprintData(file, config) {
   return blueprint
 }
 
+import { defaultHandlers } from 'mdast-util-to-hast'
+
 /**
  * @param {Parameters<import('./preprocessor.js').MarkupPreprocessor>[0]} options
  * @param {import('./preprocessor.js').MdsxPreprocessorConfig} config
@@ -147,13 +158,61 @@ export async function compile(options, config) {
   const blueprint = getBlueprintData(file, config)
 
   /**
+   * @type import('mdast-util-to-hast').Handlers
+   */
+  const handlers = {
+    Tabs: (state, node, parent) => {
+      const tabs = /** @type import('mdast').Tabs */ (node)
+
+      const children = tabs.children.map((tab) => {
+        const children = tab.children
+          .flatMap((child) => {
+            if (child.type == 'Tabs' || child.type === 'TabContent') return
+
+            const handler = defaultHandlers[child.type]
+
+            return handler(state, /** @type any */ (child), parent)
+          })
+          .filter(notNull)
+
+        /**
+         * @type import ('hast').ElementContent
+         */
+        const element = {
+          type: 'element',
+          tagName: 'TabContent',
+          properties: {
+            value: tab.value,
+          },
+          children,
+        }
+        return element
+      })
+
+      const triggers = tabs.children.map((tab) => tab.value)
+
+      return [
+        {
+          type: 'element',
+          tagName: 'Tabs',
+          properties: {
+            triggers,
+          },
+          children,
+        },
+      ]
+    },
+  }
+
+  /**
    * @type import('./preprocessor.js').AnyProcessor
    */
   // First, use all the core remark plugins.
   let processor = unified()
     .use(remarkParse)
     .use(remarkCleanSvelte)
-    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkNpmToYarn)
+    .use(remarkRehype, { allowDangerousHtml: true, handlers })
 
   // User can add or override the processor as desired.
 
