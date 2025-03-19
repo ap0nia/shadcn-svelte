@@ -28,5 +28,6 @@
   {...restProps}
 >
   {@render children?.()}
-  <span class="icon-[mdi--chevron-down] ml-auto size-4 opacity-50"></span>
+  <span class="grow"></span>
+  <span class="icon-[mdi--chevron-down] size-4 opacity-50"></span>
 </SelectPrimitive.Trigger>
