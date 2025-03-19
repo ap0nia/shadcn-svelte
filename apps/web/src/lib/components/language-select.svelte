@@ -22,9 +22,9 @@
 A select menu that navigates to different language settings.
 -->
 
-<div data-tip={$messages.selectLanguage()} class="tooltip tooltip-bottom">
+<div data-tip={$messages.selectLanguage()} class={cn('tooltip tooltip-bottom', className)}>
   <Select.Root type="single" value={$locale} onValueChange={handleSelectedChange}>
-    <Select.Trigger class={cn(className, 'min-w-28')}>
+    <Select.Trigger class="min-w-28">
       {$messages.__name() || $messages.selectLanguage()}
     </Select.Trigger>
 
