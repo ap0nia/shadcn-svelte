@@ -11,6 +11,8 @@
 
 <footer class="flex flex-col items-center justify-between gap-4 px-4 pb-4 md:flex-row">
   <div class="flex flex-col items-center gap-4 md:flex-row">
+    <span class="icon-[mdi--apple-keyboard-command] shrink-0 size-6"></span>
+
     <p class="text-center text-sm leading-loose md:text-left">
       {$messages.builtBy()}
       <a
