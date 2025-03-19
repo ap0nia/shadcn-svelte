@@ -50,9 +50,11 @@ const config = {
               name: 'vitepress:add-class',
               pre(node) {
                 node.properties['lang'] = this.options.lang
+                node.properties['meta'] = this.options.meta?.__raw
                 this.addClassToHast(node, 'vp-code')
               },
               code(node) {
+                node.properties['meta'] = this.options.meta?.__raw
                 node.properties['lang'] = this.options.lang
               },
             },
