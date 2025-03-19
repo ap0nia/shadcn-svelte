@@ -2,15 +2,11 @@
   import { Toaster as Sonner, type ToasterProps as SonnerProps } from 'svelte-sonner'
   import { mode } from 'mode-watcher'
   import { cn } from '$lib/utils/cn'
-  import { getMessages } from '$lib/i18n'
 
   let { richColors, ...props }: SonnerProps = $props()
-
-  const messages = getMessages()
 </script>
 
 <Sonner
-  dir={$messages.__direction() as any}
   theme={$mode}
   class="toaster group"
   visibleToasts={4}
