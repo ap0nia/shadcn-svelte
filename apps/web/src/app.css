@@ -53,12 +53,16 @@ html {
   --data-theme: attr(data-theme);
 }
 
-html:not(.dark) .vp-code span {
+:not(.dark) .vp-code span {
   color: var(--shiki-light, inherit);
 }
 
 .dark .vp-code span {
   color: var(--shiki-dark, inherit);
+}
+
+.light .vp-code span {
+  color: var(--shiki-light, inherit);
 }
 
 @utility btn-active {

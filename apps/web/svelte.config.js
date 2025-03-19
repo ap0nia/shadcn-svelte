@@ -229,16 +229,16 @@ const config = {
                 pre(node) {
                   node.properties['lang'] = this.options.lang
                   node.properties['meta'] = this.options.meta?.__raw
-                  node.properties['__src__'] = this.options.meta?.__src__
-                  node.properties['__style__'] = this.options.meta?.__style__
+                  node.properties['__src__'] = this.options.meta?.['__src__']
+                  node.properties['__style__'] = this.options.meta?.['__style__']
 
                   this.addClassToHast(node, 'vp-code')
                 },
                 code(node) {
                   node.properties['lang'] = this.options.lang
                   node.properties['meta'] = this.options.meta?.__raw
-                  node.properties['__src__'] = this.options.meta?.__src__
-                  node.properties['__style__'] = this.options.meta?.__style__
+                  node.properties['__src__'] = this.options.meta?.['__src__']
+                  node.properties['__style__'] = this.options.meta?.['__style__']
                 },
               },
               transformerTwoslash({

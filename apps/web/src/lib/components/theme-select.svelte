@@ -11,6 +11,7 @@
   type Props = {
     class?: string
     onThemeChange?: (newTheme: string, newMode?: string) => unknown
+    value?: string
   }
 
   let props: Props = $props()
@@ -46,11 +47,15 @@ Select input that can choose a specific theme.
 Selecting a specific theme will persist it to localstorage under the "light" or "dark" key.
 -->
 
-<Select.Root type="single" onValueChange={handleSelectedChange} value={$theme || $mode}>
+<Select.Root
+  type="single"
+  onValueChange={handleSelectedChange}
+  value={props.value || $theme || $mode}
+>
   <div data-tip={$messages.selectTheme()} class={cn('tooltip tooltip-bottom', props.class)}>
     <Select.Trigger>
       <span class="theme-select-label" data-placeholder={$messages.selectTheme()}>
-        {$theme}
+        {props.value || $theme}
       </span>
     </Select.Trigger>
   </div>

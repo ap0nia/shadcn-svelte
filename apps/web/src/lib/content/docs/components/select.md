@@ -49,7 +49,7 @@ npx shadcn-svelte@next add select
 <h4 class="[&_p]:inline">
 <span>Install</span>
 
-`bits-ui`  
+`bits-ui`
 </h4>
 
 ```bash npm2yarn

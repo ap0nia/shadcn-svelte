@@ -34,7 +34,7 @@ export { Root, Trigger, Content, Group, GroupHeading, Item }
     {triggerContent}
   </Select.Trigger>
 
-  <Select.Content>
+  <Select.Content portalProps={{ disabled: true }}>
     <Select.Group>
       <Select.GroupHeading>Fruits</Select.GroupHeading>
       {#each fruits as fruit (fruit.value)}

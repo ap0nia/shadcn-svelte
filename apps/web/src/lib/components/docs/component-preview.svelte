@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { WithElementRef } from 'bits-ui'
+  import { mode, theme } from 'mode-watcher'
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
 
@@ -8,12 +9,17 @@
   import { cn } from '$lib/utils/cn'
 
   import StyleSwitcher from './style-switcher.svelte'
+  import ThemeSelect from '../theme-select.svelte'
 
   type PrimitiveDivAttributes = WithElementRef<HTMLAttributes<HTMLDivElement>>
 
   const defaultExamples = import.meta.glob('/src/lib/registry/default/example/*.svelte')
 
   const newYorkExamples = import.meta.glob('/src/lib/registry/new-york/example/*.svelte')
+
+  let localTheme = $state($theme)
+
+  let localMode = $state($mode)
 
   const examples = {
     default: defaultExamples,
@@ -46,24 +52,32 @@
 
     return example
   })
+
+  function handleThemeChange(newTheme: string, newMode?: string) {
+    localTheme = newTheme
+    localMode = newMode as any
+    return true
+  }
 </script>
 
 {#snippet ExampleFallback()}
   {#if component}
     {#await component()}
-      <div class="text-muted-foreground flex items-center text-sm">
-        <!-- <Icon.Spinner class="mr-2 size-4 animate-spin" /> -->
-        Loading...
+      <div class="text-base-content/70 flex items-center text-sm">
+        <span class="loading loading-spinner"></span>
+        <span>&nbsp;Loading...</span>
       </div>
     {:then mod}
       {@render (mod as any).default()}
     {:catch}
-      <p class="text-muted-foreground text-sm">
-        Component
-        <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">
+      <p class="text-base-content/70 text-sm">
+        <span>Component</span>
+
+        <code class="badge badge-sm">
           {name}
         </code>
-        not found in registry.
+
+        <span>not found in registry.</span>
       </p>
     {/await}
   {/if}
@@ -75,44 +89,51 @@
       <Tabs.List class="w-full justify-start rounded-none border-b bg-transparent p-0">
         <Tabs.Trigger
           value="preview"
-          class="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+          class="data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
         >
           Preview
         </Tabs.Trigger>
+
         <Tabs.Trigger
           value="code"
-          class="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
+          class="data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
         >
           Code
         </Tabs.Trigger>
       </Tabs.List>
     </div>
 
-    <Tabs.Content value="preview" class="relative rounded-md border">
-      <div class="flex items-center justify-between p-4">
-        <StyleSwitcher />
-      </div>
+    <Tabs.Content value="preview">
+      <div class="relative space-y-2 p-2">
+        <div class="flex items-center gap-2">
+          <StyleSwitcher />
+          <ThemeSelect onThemeChange={handleThemeChange} value={localTheme} />
+        </div>
 
-      <div
-        class={cn(
-          'preview flex min-h-[350px] w-full justify-center p-10',
-          {
-            'items-center': align === 'center',
-            'items-start': align === 'start',
-            'items-end': align === 'end',
-          },
-          className,
-        )}
-        {style}
-      >
-        {#if example}
-          {@render example()}
-        {:else}
-          {@render ExampleFallback()}
-        {/if}
-      </div>
+        <div
+          data-style={$config.style}
+          data-theme={localTheme}
+          class={cn(
+            localMode === 'dark' ? 'dark' : 'light',
+            'rounded-md border',
+            'preview flex min-h-[350px] w-full justify-center p-10',
+            {
+              'items-center': align === 'center',
+              'items-start': align === 'start',
+              'items-end': align === 'end',
+            },
+            className,
+          )}
+          {style}
+        >
+          {#if example}
+            {@render example()}
+          {:else}
+            {@render ExampleFallback()}
+          {/if}
+        </div>
 
-      <!--
+        <!--
       <ThemeWrapper defaultTheme="zinc">
         <div
           class={cn(
@@ -134,13 +155,23 @@
         </div>
       </ThemeWrapper>
       -->
+      </div>
     </Tabs.Content>
 
     <Tabs.Content value="code">
-      <div data-style={$config.style} class="space-y-2 p-2">
-        <StyleSwitcher />
+      <div class="space-y-2 p-2">
+        <div class="flex items-center gap-2">
+          <StyleSwitcher />
+          <ThemeSelect onThemeChange={handleThemeChange} value={localTheme} />
+        </div>
 
-        {@render children?.()}
+        <div
+          data-style={$config.style}
+          data-theme={localTheme}
+          class={localMode === 'dark' ? 'dark' : 'light'}
+        >
+          {@render children?.()}
+        </div>
       </div>
 
       <!--
