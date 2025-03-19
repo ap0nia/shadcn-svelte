@@ -1,5 +1,7 @@
 <script lang="ts" module>
   export {
+    Tabs,
+    TabContent,
     a,
     blockquote,
     h1,

@@ -44,7 +44,7 @@
     'bg-base-300 text-base-content rounded-box',
   )}
 >
-  <div class="absolute top-0 left-0 flex w-full justify-end p-4">
+  <div class="absolute top-0 left-0 flex w-full justify-end px-4 py-1">
     {#if restProps.lang}
       <span class={cn('text-sm transition-opacity group-hover:opacity-0')}>
         {restProps.lang}
@@ -52,12 +52,12 @@
     {/if}
   </div>
 
-  <div class="absolute top-0 left-0 flex w-full justify-end p-4">
+  <div class="absolute top-0 left-0 flex w-full justify-end px-2 py-1">
     <button
       onclick={copyCode}
       class={cn(
         copied && 'swap-active',
-        'btn btn-outline btn-sm swap',
+        'btn btn-outline btn-square swap',
         'opacity-0 transition-opacity group-hover:opacity-100',
       )}
       aria-label="Copy Code"
