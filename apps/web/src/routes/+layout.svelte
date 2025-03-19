@@ -22,7 +22,7 @@
 </script>
 
 <ThemeModeWatcher />
-<Toaster dir={$messages.__direction() as any}/>
+<Toaster dir={$messages.__direction() as any} />
 
 <div class="flex min-h-dvh flex-col">
   <Header />

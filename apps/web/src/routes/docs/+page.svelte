@@ -4,7 +4,7 @@
   const messages = getMessages()
 </script>
 
-<main class="h-full w-full overflow-y-auto p-8">
+<main class="h-full w-full">
   <div class="h-[200vh] w-full">
     <h1>{$messages.hello()}</h1>
   </div>

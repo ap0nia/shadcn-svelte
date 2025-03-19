@@ -13,6 +13,9 @@ export const load: PageLoad = async (event) => {
   if (markdownModuleKey == null) {
     return {
       slug,
+      metadata: {
+        title: slug,
+      },
     }
   }
 
@@ -21,6 +24,9 @@ export const load: PageLoad = async (event) => {
   if (importModule == null) {
     return {
       slug,
+      metadata: {
+        title: slug,
+      },
     }
   }
 
@@ -28,9 +34,15 @@ export const load: PageLoad = async (event) => {
 
   const component = exports.default
 
+  const metadata = exports.metadata
+
+  const title = metadata.title
+
   return {
     component,
     slug,
+    metadata,
+    title,
   }
 }
 

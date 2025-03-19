@@ -44,7 +44,7 @@ npx shadcn-svelte@next add select
 
 <li class="step step-primary !text-left">
 
-<div>
+<div class="w-full">
 
 <h4 class="[&_p]:inline">
 <span>Install</span>

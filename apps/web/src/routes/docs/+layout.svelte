@@ -34,13 +34,15 @@
   </ul>
 {/snippet}
 
-<div class="flex h-0 grow flex-col">
-  <div class="flex h-full">
-    <ScrollArea class="hidden h-full min-w-3xs md:flex">
+<div
+  class="flex-1 items-start p-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)] gap-8"
+>
+  <aside class="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] md:sticky md:block">
+    <ScrollArea class="h-full">
       {#if config.sidebar.length}
-        <ul class="w-full">
+        <ul class="w-full space-y-4">
           {#each config.sidebar as item, index (index)}
-            <li class={cn('pb-4')}>
+            <li>
               <h4 class="px-4 py-1 text-sm font-semibold">
                 {item.title}
               </h4>
@@ -55,9 +57,7 @@
         </ul>
       {/if}
     </ScrollArea>
+  </aside>
 
-    <div class="contents">
-      {@render children?.()}
-    </div>
-  </div>
+  {@render children?.()}
 </div>
