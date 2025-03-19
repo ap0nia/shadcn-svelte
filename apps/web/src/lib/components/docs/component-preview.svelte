@@ -15,22 +15,9 @@
 
   const newYorkExamples = import.meta.glob('/src/lib/registry/new-york/example/*.svelte')
 
-  const defaultExamplesRaw = import.meta.glob('/src/lib/registry/default/example/*.svelte', {
-    query: '?raw',
-  })
-
-  const newYorkExamplesRaw = import.meta.glob('/src/lib/registry/new-york/example/*.svelte', {
-    query: '?raw',
-  })
-
   const examples = {
     default: defaultExamples,
     'new-york': newYorkExamples,
-  }
-
-  const examplesRaw = {
-    default: defaultExamplesRaw,
-    'new-york': newYorkExamplesRaw,
   }
 
   let {
@@ -59,16 +46,6 @@
 
     return example
   })
-
-  const componentRaw = $derived.by(() => {
-    const s = style || $config.style
-
-    const resolvedName = ['', 'src', 'lib', 'registry', s, 'example', `${name}.svelte`].join('/')
-
-    const example = examplesRaw[s][resolvedName]
-
-    return example
-  })
 </script>
 
 {#snippet ExampleFallback()}
@@ -79,7 +56,7 @@
         Loading...
       </div>
     {:then mod}
-      {@render mod.default()}
+      {@render (mod as any).default()}
     {:catch}
       <p class="text-muted-foreground text-sm">
         Component
