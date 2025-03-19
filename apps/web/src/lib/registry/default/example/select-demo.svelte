@@ -2,6 +2,7 @@
 <script lang="ts" module>
 // @paths: { "$lib/*": ["./src/lib/*"], "$server": ["./src/server"], "$server/*": ["./src/server/*"] }
 // @filename: src/lib/registry/default/ui/select/index.ts
+// @errors: 2353
 
 import { Select as SelectPrimitive } from 'bits-ui'
 
