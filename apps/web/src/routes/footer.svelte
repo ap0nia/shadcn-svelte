@@ -44,8 +44,8 @@
   </div>
 
   <div class="flex items-center gap-2">
-    <LanguageSelect />
-    <ThemeSelect />
-    <ThemeToggle />
+    <ThemeToggle class="tooltip-top" />
+    <ThemeSelect class="tooltip-top" />
+    <LanguageSelect class="tooltip-top" />
   </div>
 </footer>

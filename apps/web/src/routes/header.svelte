@@ -203,9 +203,9 @@
     </div>
 
     <div class="navbar-end space-x-2">
-      <LanguageSelect />
-      <ThemeSelect />
       <ThemeToggle />
+      <ThemeSelect />
+      <LanguageSelect />
     </div>
   </div>
 
