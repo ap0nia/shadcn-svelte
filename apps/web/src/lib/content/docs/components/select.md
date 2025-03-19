@@ -11,16 +11,21 @@ links:
   api: https://next.bits-ui.com/docs/components/select#api-reference
 ---
 
+<!-- prettier-ignore -->
 <script>
   import { Tabs, TabsList, TabsTrigger, TabsContent } from '$lib/components/ui/tabs'
-    // import { ComponentPreview, PMAddComp, PMInstall, Step, Steps, InstallTabs } from '$lib/components/docs'
+  import ComponentPreview from '$lib/components/docs/component-preview.svelte'
 </script>
+
+<ComponentPreview name="select-demo">
+
+</ComponentPreview>
 
 ## Installation
 
 <Tabs value="cli">
 
-<TabsList class="tabs-xl tabs-border border-b w-full mb-2">
+<TabsList class="tabs-border tabs-xl border-b w-full mb-4">
 <TabsTrigger value="cli">CLI</TabsTrigger>
 <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
@@ -35,24 +40,30 @@ npx shadcn-svelte@next add select
 
 <TabsContent value="manual">
 
-<ul class="steps steps-vertical w-full p-0 !my-0">
+<ul class="steps steps-vertical !m-0 !p-0">
 
-<li class="step !text-left !my-0">
+<li class="step step-primary !text-left">
 
 <div>
 
-<span>Install</span> `bits-ui`
+<h4 class="[&_p]:inline">
+<span>Install</span>
+
+`bits-ui`  
+</h4>
 
 ```bash npm2yarn
-npm i bits-ui -D
+npx shadcn-svelte@next add select
 ```
 
 </div>
+
 </li>
 
-  <li class="step !text-left !my-0">
-    Copy and paste the component source files linked at the top of this page into your project.
-  </li>
+<li class="step step-primary !text-left">
+Copy and paste the component source files linked at the top of this page into your project.
+</li>
+
 </ul>
 
 </TabsContent>
@@ -62,54 +73,30 @@ npm i bits-ui -D
 ## Usage
 
 ```svelte twoslash
-<script lang="ts" context="module">
-// @paths: { "$lib/*": ["./src/lib/*"] }
-// @filename: src/lib/components/ui/select/index.ts
-import { Select } from from 'bits-ui'
+<script lang="ts" module>
+// @paths: { "$lib/*": ["./src/lib/*"], "$server": ["./src/server"], "$server/*": ["./src/server/*"] }
+// @filename: src/lib/registry/default/ui/select/index.ts
 
-export {
-  Root: Select.Root,
-  Trigger: Select.Trigger,
-  Content: Select.Content,
-  Item: Select.Item,
-  Group: Select.Group,
-  GroupHeading: Select.GroupHeading,
-}
+import { Select as SelectPrimitive } from 'bits-ui'
+
+const { Root, Trigger, Content, Group, GroupHeading, Item } = SelectPrimitive
+
+export { Root, Trigger, Content, Group, GroupHeading, Item }
+
 // @filename: src/routes/+page.ts
 // ---cut---
 </script>
 
 <script lang="ts">
- import * as Select from "$lib/components/ui/select";
- 
- const fruits = [
-  { value: "apple", label: "Apple" },
-  { value: "banana", label: "Banana" },
-  { value: "blueberry", label: "Blueberry" },
-  { value: "grapes", label: "Grapes" },
-  { value: "pineapple", label: "Pineapple" }
- ];
- 
- let value = $state("");
- 
- const triggerContent = $derived(
-  fruits.find((f) => f.value === value)?.label ?? "Select a fruit"
- );
+  import * as Select from '$lib/components/ui/select/index.js'
 </script>
- 
-<Select.Root type="single" name="favoriteFruit" bind:value>
- <Select.Trigger class="w-[180px]">
-  {triggerContent}
- </Select.Trigger>
- <Select.Content>
-  <Select.Group>
-   <Select.GroupHeading>Fruits</Select.GroupHeading>
-   {#each fruits as fruit (fruit.value)}
-    <Select.Item value={fruit.value} label={fruit.label}
-     >{fruit.label}</Select.Item
-    >
-   {/each}
-  </Select.Group>
- </Select.Content>
+
+<Select.Root type="single">
+  <Select.Trigger class="w-[180px]"></Select.Trigger>
+  <Select.Content>
+    <Select.Item value="light">Light</Select.Item>
+    <Select.Item value="dark">Dark</Select.Item>
+    <Select.Item value="system">System</Select.Item>
+  </Select.Content>
 </Select.Root>
 ```

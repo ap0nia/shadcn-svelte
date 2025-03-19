@@ -5,20 +5,18 @@
   import { getMessages } from '$lib/i18n'
   import SvelteCounter from '$lib/markdown/svelte-counter.md'
   import ReactCounter from '$lib/markdown/react-counter.md'
-    import { PersistedState } from 'runed'
 
   const messages = getMessages()
-  const count = new PersistedState("count", 0);
+
+  import ComponentPreview from '$lib/components/docs/component-preview.svelte'
 </script>
 
-<div>
-	<button onclick={() => count.current++}>Increment</button>
-	<button onclick={() => count.current--}>Decrement</button>
-	<button onclick={() => (count.current = 0)}>Reset</button>
-	<p>Count: {count.current}</p>
-</div>
 <main class="space-y-4 p-4">
   <h1>{$messages.hello()}</h1>
+
+  <ComponentPreview name="select-demo">
+    <div></div>
+  </ComponentPreview>
 
   <div class="flex justify-center">
     <Tabs.Root value="account" class="min-w-md">

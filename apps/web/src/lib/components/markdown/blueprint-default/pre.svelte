@@ -2,7 +2,18 @@
   import { cn } from '$lib/utils/cn'
   import type { HTMLAttributes } from 'svelte/elements'
 
-  let { children, ...restProps }: HTMLAttributes<HTMLPreElement> & { code?: string } = $props()
+  type PreExtendedProps = {
+    code?: string
+    __src__?: string
+    __style__?: string
+  }
+
+  let {
+    children,
+    __src__,
+    __style__,
+    ...restProps
+  }: HTMLAttributes<HTMLPreElement> & PreExtendedProps = $props()
 
   let ref = $state<HTMLElement>()
 
@@ -36,6 +47,8 @@
   }
 </script>
 
+<!-- The code inside may be subject to special white-space rules when rendering code blocks. -->
+<!-- prettier-ignore-start -->
 <div
   class={cn(
     restProps.lang && `language-${restProps.lang}`,
@@ -43,6 +56,8 @@
     'group relative overflow-x-auto p-4',
     'bg-base-300 text-base-content rounded-box',
   )}
+  data-src={__src__}
+  data-style={__style__}
 >
   <div class="absolute top-0 left-0 flex w-full justify-end px-4 py-1">
     {#if restProps.lang}
@@ -50,9 +65,7 @@
         {restProps.lang}
       </span>
     {/if}
-  </div>
-
-  <div class="absolute top-0 left-0 flex w-full justify-end px-2 py-1">
+  </div><div class="absolute top-0 left-0 flex w-full justify-end px-2 py-1">
     <button
       onclick={copyCode}
       class={cn(
@@ -65,7 +78,19 @@
       <span class="icon-[mdi--content-copy] swap-off"></span>
       <span class="icon-[mdi--success-bold] swap-on"></span>
     </button>
-  </div>
-
-  <pre {...restProps} bind:this={ref}>{@render children?.()}</pre>
+  </div><pre {...restProps} bind:this={ref}>{@render children?.()}</pre>
 </div>
+
+<!-- prettier-ignore-end -->
+
+<style>
+  :global {
+    [data-style='new-york'] [data-style='default'] {
+      display: none;
+    }
+
+    [data-style='default'] [data-style='new-york'] {
+      display: none;
+    }
+  }
+</style>
