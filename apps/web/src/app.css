@@ -14,6 +14,7 @@
 
 @plugin 'daisyui' {
   themes: all;
+  /* exclude: steps; */
 }
 
 @plugin "daisyui/theme" {
@@ -169,4 +170,20 @@ html:not(.dark) .vp-code span {
 
 .toast {
   @apply flex-row;
+}
+
+@layer utilities {
+  /*
+  .step {
+    counter-increment: step;
+  }
+
+  .step:before {
+    @apply border-base-300 bg-base-300 absolute inline-flex;
+    @apply h-9 w-9 items-center justify-center rounded-full border-4;
+    @apply text-center -indent-px font-mono text-base font-medium;
+    @apply ml-[-50px] mt-[-4px];
+    content: counter(step);
+  }
+  */
 }

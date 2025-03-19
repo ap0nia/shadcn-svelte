@@ -38,7 +38,7 @@
 
 <div
   class={cn(
-    `restProps.lang && language-${restProps.lang}`,
+    restProps.lang && `language-${restProps.lang}`,
     'vp-adaptive-theme',
     'group relative overflow-x-auto p-4',
     'bg-base-300 text-base-content rounded-box',
