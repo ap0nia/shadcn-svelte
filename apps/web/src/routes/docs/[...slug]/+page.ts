@@ -10,8 +10,6 @@ export const load: PageLoad = async (event) => {
     return moduleSlug == slug
   })
 
-  console.log('LOAD', { slug, markdownModuleKey })
-
   if (markdownModuleKey == null) {
     return {
       slug,
