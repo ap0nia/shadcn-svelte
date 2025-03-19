@@ -1,9 +1,14 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte'
+
   import * as Tabs from '$lib/components/ui/tabs'
 
-  let props = $props()
+  type Props = {
+    value: string
+    children?: Snippet
+  }
 
-  $inspect('TAB CONTENT PROPS', props)
+  let props: Props = $props()
 </script>
 
 <Tabs.Content value={props.value}>

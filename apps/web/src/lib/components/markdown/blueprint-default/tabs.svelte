@@ -1,40 +1,68 @@
 <script lang="ts">
   import * as Tabs from '$lib/components/ui/tabs'
-  import { PersistedState } from 'runed'
+  import type { Snippet } from 'svelte'
 
-  let props = $props()
+  type Props = {
+    triggers: string
+    sync?: boolean
+    groupId?: string
+    children?: Snippet
+  }
 
-  const triggers: string[] = $derived(props.triggers.split(' '))
+  let props: Props = $props()
 
-  const value = new PersistedState(props.groupId, 'yarn', {
-    serializer: {
-      serialize: (value) => value || '',
-      deserialize: (value) => value,
-    },
+  const triggers: string[] = props.triggers.split(' ')
+
+  let value = $state(triggers[0])
+
+  function handleChange(newValue: string) {
+    if (typeof window === 'undefined' || !props.sync || !props.groupId) {
+      value = newValue
+      return
+    }
+
+    sessionStorage.setItem(props.groupId, newValue)
+
+    const event = new StorageEvent('storage', { newValue })
+
+    window.dispatchEvent(event)
+  }
+
+  $effect(() => {
+    if (typeof window === 'undefined' || !props.sync || !props.groupId) return
+    const storedValue = sessionStorage.getItem(props.groupId)
+
+    if (storedValue) {
+      value = storedValue
+    }
   })
 
-  const count = new PersistedState("count", 0);
+  $effect(() => {
+    if (typeof window === 'undefined' || !props.sync || !props.groupId) return
 
-  $inspect('TAB PROPS', value.current)
+    const listener = (
+      ev: WindowEventMap['storage'],
+      _options?: boolean | AddEventListenerOptions,
+    ) => {
+      if (ev.newValue) {
+        value = ev.newValue
+      }
+    }
+
+    window.addEventListener('storage', listener)
+
+    return () => {
+      window.removeEventListener('storage', listener)
+    }
+  })
 </script>
-<div>
-	<button onclick={() => count.current++}>Increment</button>
-	<button onclick={() => count.current--}>Decrement</button>
-	<button onclick={() => (count.current = 0)}>Reset</button>
-	<p>Count: {count.current}</p>
-</div>
-  <Tabs.Root
-    value={value.current}
-    onValueChange={(a) => {
-      value.current = a
-    }}
-    class="min-w-md"
-  >
-    <Tabs.List>
-      {#each triggers as trigger (trigger)}
-        <Tabs.Trigger value={trigger}>{trigger}</Tabs.Trigger>
-      {/each}
-    </Tabs.List>
 
-    {@render props.children?.()}
-  </Tabs.Root>
+<Tabs.Root bind:value onValueChange={handleChange} class="min-w-md">
+  <Tabs.List>
+    {#each triggers as trigger (trigger)}
+      <Tabs.Trigger value={trigger}>{trigger}</Tabs.Trigger>
+    {/each}
+  </Tabs.List>
+
+  {@render props.children?.()}
+</Tabs.Root>
