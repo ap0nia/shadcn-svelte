@@ -71,7 +71,9 @@
   theme and keeps it defined as long as {@link mode} is defined.
 -->
 
-<!-- eslint-disable-next-line svelte/no-at-html-tags, prefer-template --><!-- svelte-ignore hydration_html_changed -->
-{@html `<script ${nonceProp}>${setInitialThemeInvocation}</script>`}
+<svelte:head>
+  <!-- eslint-disable-next-line svelte/no-at-html-tags, prefer-template --><!-- svelte-ignore hydration_html_changed -->
+  {@html `<script ${nonceProp}>${setInitialThemeInvocation}</script>`}
+</svelte:head>
 
 <ModeWatcher {...modeWatcherProps} />
