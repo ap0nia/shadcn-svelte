@@ -12,7 +12,7 @@ const config = defineConfig({
     paraglideVitePlugin({
       project: './project.inlang',
       outdir: './src/lib/paraglide',
-      strategy: ['url'],
+      strategy: ['url', 'baseLocale'],
     }),
 
     tailwindcss(),

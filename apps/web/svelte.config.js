@@ -9,10 +9,18 @@ import url from 'node:url'
 import ts from 'typescript'
 import { visit } from 'unist-util-visit'
 
+import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
+import { codeImport } from 'remark-code-import'
+import remarkGfm from 'remark-gfm'
+import { createHighlighter } from 'shiki'
+
+import { mdsx } from 'mdsx'
 import { createTwoslasher } from '@ap0nia/mdsx/twoslash-svelte'
 import { createMdsxPreprocessor } from '@ap0nia/mdsx/preprocessor'
 import { rendererFloatingSvelte } from '@ap0nia/mdsx/floating-renderer-svelte'
 import shikiRehype from '@shikijs/rehype'
+import { transformerNotationErrorLevel } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/twoslash'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
@@ -81,6 +89,31 @@ function getComponentSourceFileContent(src = '') {
   const contents = fs.readFileSync(filePath, 'utf8').replace('<!-- prettier-ignore -->\n', '')
 
   return contents
+}
+
+/**
+ * Removes `<!-- prettier-ignore -->` and `// prettier-ignore` from code blocks
+ * before they are converted to HTML for syntax highlighting.
+ *
+ * We do this because sometimes we want to force a line break in code blocks, but
+ * prettier removes them, however, we don't want to include the ignore statement
+ * in the final code block.
+ *
+ * One caveat is that if you did want to include the ignore statement in the final
+ * code block, you'd have to do some hacky stuff like including it in the comment
+ * itself and checking for it in the code block, but that's not something we need
+ * at the moment.
+ *
+ * @returns {MdastTransformer} - Unified Transformer
+ */
+function remarkRemovePrettierIgnore() {
+  return async (tree) => {
+    visit(tree, 'code', (node) => {
+      node.value = node.value
+        .replaceAll('<!-- prettier-ignore -->\n', '')
+        .replaceAll('// prettier-ignore\n', '')
+    })
+  }
 }
 
 /**
@@ -200,11 +233,137 @@ function rehypePreData() {
 }
 
 /**
+ * Adds `data-metadata` to `<figure>` elements that contain a `<figcaption>`.
+ * We use this to style elements within the `<figure>` differently if a `<figcaption>`
+ * is present.
+ *
+ * @returns {HastTransformer} - Unified Transformer
+ */
+function rehypeHandleMetadata() {
+  return async (tree) => {
+    visit(tree, (node) => {
+      if (node?.type === 'element' && node?.tagName === 'figure') {
+        if (!('data-rehype-pretty-code-figure' in node.properties)) {
+          return
+        }
+
+        const preElement = node.children.at(-1)
+        if (preElement && 'tagName' in preElement && preElement.tagName !== 'pre') {
+          return
+        }
+
+        const firstChild = node.children.at(0)
+
+        if (firstChild && 'tagName' in firstChild && firstChild.tagName === 'figcaption') {
+          node.properties['data-metadata'] = ''
+          const lastChild = node.children.at(-1)
+          if (lastChild && 'properties' in lastChild) {
+            lastChild.properties['data-metadata'] = ''
+          }
+        }
+      }
+    })
+  }
+}
+
+/**
+ * @type {import('rehype-pretty-code').Options}
+ */
+const prettyCodeOptions = {
+  theme: 'github-dark',
+  getHighlighter: (options) => {
+    return createHighlighter({
+      ...options,
+      langs: [
+        'plaintext',
+        import('shiki/langs/javascript.mjs'),
+        import('shiki/langs/typescript.mjs'),
+        import('shiki/langs/css.mjs'),
+        import('shiki/langs/svelte.mjs'),
+        import('shiki/langs/shellscript.mjs'),
+        import('shiki/langs/markdown.mjs'),
+      ],
+    })
+  },
+  keepBackground: false,
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and allow empty
+    // lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children = [{ type: 'text', value: ' ' }]
+    }
+  },
+  onVisitHighlightedLine(node) {
+    node.properties.className = ['line--highlighted']
+  },
+  onVisitHighlightedChars(node) {
+    node.properties.className = ['chars--highlighted']
+  },
+  transformers: [
+    transformerNotationErrorLevel(),
+    {
+      name: 'vitepress:add-class',
+      pre(node) {
+        node.properties['lang'] = this.options.lang
+        node.properties['meta'] = this.options.meta?.__raw
+        node.properties['__src__'] = this.options.meta?.['__src__']
+        node.properties['__style__'] = this.options.meta?.['__style__']
+
+        this.addClassToHast(node, 'vp-code')
+      },
+      code(node) {
+        node.properties['lang'] = this.options.lang
+        node.properties['meta'] = this.options.meta?.__raw
+        node.properties['__src__'] = this.options.meta?.['__src__']
+        node.properties['__style__'] = this.options.meta?.['__style__']
+      },
+    },
+    transformerTwoslash({
+      langs: ['ts', 'tsx', 'svelte'],
+      twoslasher: createTwoslasher({
+        nodeModules: rootNodeModules,
+      }),
+      twoslashOptions: {
+        compilerOptions: {
+          jsx: ts.JsxEmit.Preserve,
+          paths: {
+            $lib: ['./src/lib'],
+            '$lib/*': ['./src/lib/*'],
+          },
+          moduleResolution: ts.ModuleResolutionKind.Bundler,
+          module: ts.ModuleKind.ESNext,
+          target: ts.ScriptTarget.ESNext,
+        },
+      },
+      explicitTrigger: true,
+      renderer: rendererFloatingSvelte(),
+    }),
+  ],
+}
+
+/**
  * @type {import('@sveltejs/kit').Config}
  */
 const config = {
   extensions: ['.svelte', '.md'],
   preprocess: [
+    // mdsx({
+    //   extensions: ['.md'],
+    //   // remarkPlugins: [remarkGfm, codeImport, remarkRemovePrettierIgnore],
+    //   rehypePlugins: [
+    //     // rehypeSlug,
+    //     // rehypeComponentExample,
+    //     // rehypePreData,
+    //     [rehypePrettyCode, prettyCodeOptions],
+    //     // rehypeHandleMetadata,
+    //   ],
+    //   blueprints: {
+    //     default: {
+    //       path: path.resolve(__dirname, relativeBlueprintPath),
+    //     },
+    //   },
+    // }),
+
     createMdsxPreprocessor({
       blueprints: {
         default: {
@@ -212,57 +371,61 @@ const config = {
         },
       },
       unified: (processor) => {
-        return processor
-          .use(rehypeComponentExample)
-          .use(rehypePreData)
-          .use(shikiRehype, {
-            addLanguageClass: true,
-            themes: {
-              light: 'github-light',
-              dark: 'github-dark-high-contrast',
-            },
-            defaultColor: false,
-            parseMetaString,
-            transformers: [
-              {
-                name: 'vitepress:add-class',
-                pre(node) {
-                  node.properties['lang'] = this.options.lang
-                  node.properties['meta'] = this.options.meta?.__raw
-                  node.properties['__src__'] = this.options.meta?.['__src__']
-                  node.properties['__style__'] = this.options.meta?.['__style__']
-
-                  this.addClassToHast(node, 'vp-code')
-                },
-                code(node) {
-                  node.properties['lang'] = this.options.lang
-                  node.properties['meta'] = this.options.meta?.__raw
-                  node.properties['__src__'] = this.options.meta?.['__src__']
-                  node.properties['__style__'] = this.options.meta?.['__style__']
-                },
+        return (
+          processor
+            .use(rehypeComponentExample)
+            .use(rehypePreData)
+            // .use(rehypePrettyCode, prettyCodeOptions)
+            .use(shikiRehype, {
+              addLanguageClass: true,
+              themes: {
+                light: 'github-light',
+                dark: 'github-dark-high-contrast',
               },
-              transformerTwoslash({
-                langs: ['ts', 'tsx', 'svelte'],
-                twoslasher: createTwoslasher({
-                  nodeModules: rootNodeModules,
-                }),
-                twoslashOptions: {
-                  compilerOptions: {
-                    jsx: ts.JsxEmit.Preserve,
-                    paths: {
-                      $lib: ['./src/lib'],
-                      '$lib/*': ['./src/lib/*'],
-                    },
-                    moduleResolution: ts.ModuleResolutionKind.Bundler,
-                    module: ts.ModuleKind.ESNext,
-                    target: ts.ScriptTarget.ESNext,
+              defaultColor: false,
+              parseMetaString,
+              transformers: [
+                transformerNotationErrorLevel(),
+                {
+                  name: 'vitepress:add-class',
+                  pre(node) {
+                    node.properties['lang'] = this.options.lang
+                    node.properties['meta'] = this.options.meta?.__raw
+                    node.properties['__src__'] = this.options.meta?.['__src__']
+                    node.properties['__style__'] = this.options.meta?.['__style__']
+
+                    this.addClassToHast(node, 'vp-code')
+                  },
+                  code(node) {
+                    node.properties['lang'] = this.options.lang
+                    node.properties['meta'] = this.options.meta?.__raw
+                    node.properties['__src__'] = this.options.meta?.['__src__']
+                    node.properties['__style__'] = this.options.meta?.['__style__']
                   },
                 },
-                explicitTrigger: true,
-                renderer: rendererFloatingSvelte(),
-              }),
-            ],
-          })
+                transformerTwoslash({
+                  langs: ['ts', 'tsx', 'svelte'],
+                  twoslasher: createTwoslasher({
+                    nodeModules: rootNodeModules,
+                  }),
+                  twoslashOptions: {
+                    compilerOptions: {
+                      jsx: ts.JsxEmit.Preserve,
+                      paths: {
+                        $lib: ['./src/lib'],
+                        '$lib/*': ['./src/lib/*'],
+                      },
+                      moduleResolution: ts.ModuleResolutionKind.Bundler,
+                      module: ts.ModuleKind.ESNext,
+                      target: ts.ScriptTarget.ESNext,
+                    },
+                  },
+                  explicitTrigger: true,
+                  renderer: rendererFloatingSvelte(),
+                }),
+              ],
+            })
+        )
       },
     }),
   ],

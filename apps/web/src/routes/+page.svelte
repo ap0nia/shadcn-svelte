@@ -1,6 +1,7 @@
 <script lang="ts">
   import { toast } from 'svelte-sonner'
 
+  import * as Accordion from '$lib/registry/new-york/ui/accordion'
   import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { getMessages } from '$lib/i18n'
   import SvelteCounter from '$lib/markdown/svelte-counter.md'
@@ -14,8 +15,28 @@
 <main class="space-y-4 p-4">
   <h1>{$messages.hello()}</h1>
 
+  <Accordion.Root type="single" class="w-full sm:max-w-[70%]">
+    <Accordion.Item value="item-1">
+      <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+      <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>
+    </Accordion.Item>
+    <Accordion.Item value="item-2">
+      <Accordion.Trigger>Is it styled?</Accordion.Trigger>
+      <Accordion.Content>
+        Yes. It comes with default styles that matches the other components' aesthetic.
+      </Accordion.Content>
+    </Accordion.Item>
+    <Accordion.Item value="item-3">
+      <Accordion.Trigger>Is it animated?</Accordion.Trigger>
+      <Accordion.Content>
+        Yes. It's animated by default, but you can disable it if you prefer.
+      </Accordion.Content>
+    </Accordion.Item>
+  </Accordion.Root>
+
   <ComponentPreview name="select-demo">
-    <div></div>
+
+
   </ComponentPreview>
 
   <div class="flex justify-center">
