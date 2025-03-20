@@ -124,8 +124,6 @@
 
     return useActiveItem(allItemIds)
   })
-
-  $inspect(filteredHeadingsList)
 </script>
 
 {#snippet yes({ items }: { items: TableOfContentsItem[] })}

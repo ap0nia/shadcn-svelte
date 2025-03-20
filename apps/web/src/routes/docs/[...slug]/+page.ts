@@ -3,7 +3,7 @@ import type { EntryGenerator, PageLoad } from './$types'
 const modules = import.meta.glob('/src/lib/content/**/*.md')
 
 export const load: PageLoad = async (event) => {
-  const slug = event.params.slug
+  const slug = event.params.slug || 'index'
 
   const markdownModuleKey = Object.keys(modules).find((key) => {
     const moduleSlug = key.replace('/src/lib/content/docs/', '').replace('.md', '')
