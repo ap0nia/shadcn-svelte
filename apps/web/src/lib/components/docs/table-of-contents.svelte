@@ -126,7 +126,7 @@
   })
 </script>
 
-{#snippet yes({ items }: { items: TableOfContentsItem[] })}
+{#snippet TableOfContentsItem({ items }: { items: TableOfContentsItem[] })}
   <ul class="menu w-full">
     {#each items as item (item.url)}
       {@const href = localizeHref(page.url.pathname + item.url, { locale: $locale })}
@@ -139,7 +139,7 @@
               <span>{item.title}</span>
             </summary>
 
-            {@render yes({ items: item.items })}
+            {@render TableOfContentsItem({ items: item.items })}
           </details>
         {:else}
           <a {href}>
@@ -155,6 +155,6 @@
   <p class="inline-flex font-medium">On This Page</p>
 
   <div class="w-full">
-    {@render yes({ items: filteredHeadingsList?.items ?? [] })}
+    {@render TableOfContentsItem({ items: filteredHeadingsList?.items ?? [] })}
   </div>
 </div>

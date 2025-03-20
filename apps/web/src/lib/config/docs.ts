@@ -7,6 +7,8 @@ export type NavItem = {
   external?: boolean
   icon?: Component
   label?: string
+  items?: NavItem[]
+  description?: string
 }
 
 export type SidebarNavItem = NavItem & {
@@ -21,6 +23,42 @@ export const main: NavItem[] = [
   {
     title: 'Components',
     href: '/docs/components/accordion',
+    items: [
+      {
+        title: 'Alert Dialog',
+        href: '/docs/components/alert-dialog',
+        description:
+          'A modal dialog that interrupts the user with important content and expects a response.',
+      },
+      {
+        title: 'Link Preview',
+        href: '/docs/components/link-preview',
+        description: 'For sighted users to preview content available behind a link.',
+      },
+      {
+        title: 'Progress',
+        href: '/docs/components/progress',
+        description:
+          'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
+      },
+      {
+        title: 'Scroll Area',
+        href: '/docs/components/scroll-area',
+        description: 'Visually or semantically separates content.',
+      },
+      {
+        title: 'Tabs',
+        href: '/docs/components/tabs',
+        description:
+          'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
+      },
+      {
+        title: 'Tooltip',
+        href: '/docs/components/tooltip',
+        description:
+          'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
+      },
+    ],
   },
   {
     title: 'Themes',
@@ -29,6 +67,42 @@ export const main: NavItem[] = [
   {
     title: 'Examples',
     href: '/examples/dashboard',
+    items: [
+      {
+        title: 'Alert Dialog',
+        href: '/docs/components/alert-dialog',
+        description:
+          'A modal dialog that interrupts the user with important content and expects a response.',
+      },
+      {
+        title: 'Link Preview',
+        href: '/docs/components/link-preview',
+        description: 'For sighted users to preview content available behind a link.',
+      },
+      {
+        title: 'Progress',
+        href: '/docs/components/progress',
+        description:
+          'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
+      },
+      {
+        title: 'Scroll Area',
+        href: '/docs/components/scroll-area',
+        description: 'Visually or semantically separates content.',
+      },
+      {
+        title: 'Tabs',
+        href: '/docs/components/tabs',
+        description:
+          'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
+      },
+      {
+        title: 'Tooltip',
+        href: '/docs/components/tooltip',
+        description:
+          'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
+      },
+    ],
   },
   {
     title: 'Blocks',
@@ -38,11 +112,11 @@ export const main: NavItem[] = [
     title: 'Colors',
     href: '/colors',
   },
-  {
-    title: 'GitHub',
-    href: 'https://github.com/huntabyte/shadcn-svelte',
-    external: true,
-  },
+  // {
+  //   title: 'GitHub',
+  //   href: 'https://github.com/huntabyte/shadcn-svelte',
+  //   external: true,
+  // },
 ]
 
 export const sidebar: SidebarNavItem[] = [

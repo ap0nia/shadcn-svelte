@@ -4,54 +4,29 @@
   import LanguageSelect from '$lib/components/language-select.svelte'
   import ThemeSelect from '$lib/components/theme-select.svelte'
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
+  import { getLocale } from '$lib/i18n'
+  import { localizeHref } from '$lib/paraglide/runtime'
   import * as NavigationMenu from '$lib/registry/new-york/ui/navigation-menu'
   import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
   import * as Sheet from '$lib/registry/new-york/ui/sheet'
   import { cn } from '$lib/utils/cn'
 
-  const components: Array<{ title: string; href: string; description: string }> = [
-    {
-      title: 'Alert Dialog',
-      href: '/docs/components/alert-dialog',
-      description:
-        'A modal dialog that interrupts the user with important content and expects a response.',
-    },
-    {
-      title: 'Link Preview',
-      href: '/docs/components/link-preview',
-      description: 'For sighted users to preview content available behind a link.',
-    },
-    {
-      title: 'Progress',
-      href: '/docs/components/progress',
-      description:
-        'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
-    },
-    {
-      title: 'Scroll Area',
-      href: '/docs/components/scroll-area',
-      description: 'Visually or semantically separates content.',
-    },
-    {
-      title: 'Tabs',
-      href: '/docs/components/tabs',
-      description:
-        'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
-    },
-    {
-      title: 'Tooltip',
-      href: '/docs/components/tooltip',
-      description:
-        'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
-    },
-  ]
+  const locale = getLocale()
 
-  type ListItemProps = {
-    className?: string
-    title: string
-    href: string
-    content: string
-  }
+  const links = $derived.by(() => {
+    return config.main.map((item) => {
+      return {
+        ...item,
+        items: item.items?.map((item) => {
+          return {
+            ...item,
+            href: localizeHref(item.href || '', { locale: $locale }),
+          }
+        }),
+        href: localizeHref(item.href || '', { locale: $locale }),
+      }
+    })
+  })
 </script>
 
 {#snippet SidebarItem({ items }: { items: SidebarNavItem[] })}
@@ -71,42 +46,66 @@
               <span class="badge badge-primary badge-xs">
                 {item.label}
               </span>
-              {/if}
-            </a>
-          {:else}
-            <span class="whitespace-nowrap">{item.title}</span>
-          {/if}
-        </li>
-      {/each}
-    </ul>
-  {/snippet}
+            {/if}
+          </a>
+        {:else}
+          <span class="whitespace-nowrap">{item.title}</span>
+        {/if}
+      </li>
+    {/each}
+  </ul>
+{/snippet}
 
-  {#snippet ListItem({ className, title, content, href }: ListItemProps)}
-    <li>
-      <NavigationMenu.Link class={cn('flex flex-col items-start', className)} {href}>
-        <div class="text-sm leading-none font-medium">{title}</div>
-        <p class="text-muted-foreground line-clamp-2 text-sm leading-snug">
-          {content}
-        </p>
-      </NavigationMenu.Link>
-    </li>
-  {/snippet}
+<Sheet.Root>
+  <div class="navbar bg-base-100 sticky top-0 z-20 shadow-sm">
+    <div class="navbar-start">
+      <Sheet.Trigger class="btn btn-ghost btn-square flex md:hidden">
+        <span class="icon-[mdi--hamburger-menu] size-6"></span>
+      </Sheet.Trigger>
 
-  <Sheet.Root>
-    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-20">
-      <div class="navbar-start">
-        <Sheet.Trigger class="btn btn-ghost btn-square flex lg:hidden">
-          <span class="icon-[mdi--hamburger-menu] size-6"></span>
-        </Sheet.Trigger>
+      <a href="/" class="btn btn-ghost hidden h-auto min-h-0 md:flex">
+        <img src="/images/elysia.gif" alt="Logo" width="64" height="64" />
+      </a>
+    </div>
 
-        <a href="/" class="btn btn-ghost hidden h-auto min-h-0 lg:flex">
-          <img src="/images/elysia.gif" alt="Logo" width="64" height="64" />
-        </a>
-      </div>
-
-      <div class="navbar-center hidden lg:flex">
-        <NavigationMenu.Root class="relative z-10 w-fit">
+    <div class="navbar-center hidden md:flex">
+      <NavigationMenu.Root class="relative z-10 w-fit">
         <NavigationMenu.List class={cn('menu menu-horizontal menu-sm')}>
+          {#each links as link (link.title)}
+            <NavigationMenu.Item>
+              {#if link.items}
+                <NavigationMenu.Trigger>
+                  <a href={link.href}>{link.title} </a>
+                </NavigationMenu.Trigger>
+
+                <NavigationMenu.Content>
+                  <ul class="menu w-sm min-w-full">
+                    {#each link.items as item (item.href)}
+                      <li>
+                        <NavigationMenu.Link class="flex flex-col items-start" href={item.href}>
+                          <div class="text-sm leading-none font-medium">{item.title}</div>
+
+                          {#if item.description}
+                            <p class="text-base-content/70 line-clamp-2 text-sm leading-snug">
+                              {item.description}
+                            </p>
+                          {/if}
+                        </NavigationMenu.Link>
+                      </li>
+                    {/each}
+                  </ul>
+                </NavigationMenu.Content>
+              {:else}
+                <NavigationMenu.Link href={link.href}>
+                  <span class="hidden sm:inline">{link.title}</span>
+                </NavigationMenu.Link>
+              {/if}
+            </NavigationMenu.Item>
+          {/each}
+
+          <NavigationMenu.Indicator />
+
+          <!--
           <NavigationMenu.Item value="getting-started">
             <NavigationMenu.Trigger>Getting started</NavigationMenu.Trigger>
 
@@ -192,8 +191,7 @@
               <span class="inline sm:hidden">Docs</span>
             </NavigationMenu.Link>
           </NavigationMenu.Item>
-
-          <NavigationMenu.Indicator />
+        -->
         </NavigationMenu.List>
 
         <div class="absolute top-full left-0 flex min-w-full justify-center perspective-[2000px]">
