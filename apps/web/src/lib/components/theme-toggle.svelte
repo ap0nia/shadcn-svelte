@@ -9,15 +9,15 @@
 
   type Props = {
     class?: string
-    value?: ReadableValue<typeof globalMode>
+    mode?: ReadableValue<typeof globalMode> | null
     local?: boolean
-    theme?: string
+    theme?: string | null
     themes?: Record<string, string>
   }
 
   let {
-    value = $bindable($globalMode),
-    theme = $bindable($globalTheme),
+    mode = $bindable($globalMode || null),
+    theme = $bindable($globalTheme || null),
     themes,
     local = false,
     ...props
@@ -26,7 +26,7 @@
   const messages = getMessages()
 
   async function toggleTheme() {
-    const newMode = value === 'dark' ? 'light' : 'dark'
+    const newMode = mode === 'dark' ? 'light' : 'dark'
 
     /**
      * See if a more specific theme can be found by using the current mode.
@@ -34,7 +34,7 @@
     const newTheme = themes?.[newMode] || localStorage.getItem(newMode) || newMode
 
     if (local) {
-      value = newMode
+      mode = newMode
       theme = newTheme
     } else {
       setMode(newMode)
@@ -43,10 +43,14 @@
   }
 
   $effect(() => {
-    if (local) return
+    if (local) {
+      theme ||= $globalTheme || null
+      mode ||= $globalMode || null
+      return
+    }
 
-    theme = $globalTheme as any
-    value = $globalMode as any
+    theme = $globalTheme || null
+    mode = $globalMode || null
   })
 </script>
 
@@ -63,7 +67,7 @@ It can also use specific themes specified by the 'light' and 'dark' keys from lo
     class="btn btn-sm btn-square ring-base-content ring-1"
     aria-label="Color scheme toggle"
   >
-    <span class="swap swap-rotate" class:swap-active={value === 'dark'}>
+    <span class="swap swap-rotate" class:swap-active={mode === 'dark'}>
       <span
         class={cn(
           'icon-[mdi--moon-waxing-crescent] swap-on size-5',

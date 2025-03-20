@@ -2,16 +2,12 @@
   import type { WithElementRef, WithoutChildren } from 'bits-ui'
   import type { HTMLButtonAttributes } from 'svelte/elements'
 
-  import { config, isStyle, styles } from '$lib/stores/config'
+  import { config, styles } from '$lib/stores/config'
   import * as Select from '$lib/components/ui/select'
-  import { cn } from '$lib/utils/cn'
 
   type PrimitiveButtonAttributes = WithElementRef<HTMLButtonAttributes>
 
-  let {
-    class: className,
-    ...restProps
-  }: WithoutChildren<Omit<PrimitiveButtonAttributes, 'style' | 'id'>> = $props()
+  let props: WithoutChildren<Omit<PrimitiveButtonAttributes, 'style' | 'id'>> = $props()
 
   const styleLabel = $derived(styles.filter((s) => s.name === $config.style)[0]?.label)
 
@@ -22,19 +18,10 @@
   })
 </script>
 
-<Select.Root
-  type="single"
-  bind:value={
-    () => value,
-    (v) => {
-      if (!isStyle(v)) return
-      value = v
-    }
-  }
->
-  <Select.Trigger class={cn('h-7 w-[145px] text-xs [&_svg]:size-4', className)} {...restProps}>
-    <span class="text-muted-foreground">Style: </span>
-    {styleLabel}
+<Select.Root type="single" bind:value>
+  <Select.Trigger {...props}>
+    <span>Style:</span>
+    <span>{styleLabel}</span>
   </Select.Trigger>
 
   <Select.Content>

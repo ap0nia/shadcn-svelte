@@ -13,9 +13,9 @@
 
   type Props = {
     class?: string
-    theme?: string
+    theme?: string | null
     themes?: Record<string, string>
-    mode?: ReadableValue<typeof globalMode>
+    mode?: ReadableValue<typeof globalMode> | null
     local?: boolean
   }
 
@@ -56,10 +56,14 @@
   }
 
   $effect(() => {
-    if (local) return
+    if (local) {
+      theme ||= $globalTheme || null
+      mode ||= $globalMode || null
+      return
+    }
 
-    theme = $globalTheme as any
-    mode = $globalMode as any
+    theme = $globalTheme || null
+    mode = $globalMode || null
   })
 </script>
 
@@ -70,9 +74,9 @@ Select input that can choose a specific theme.
 Selecting a specific theme will persist it to localstorage under the "light" or "dark" key.
 -->
 
-<Select.Root type="single" onValueChange={handleSelectedChange} value={theme}>
+<Select.Root type="single" onValueChange={handleSelectedChange} value={theme || undefined}>
   <div data-tip={$messages.selectTheme()} class={cn('tooltip tooltip-bottom', props.class)}>
-    <Select.Trigger>
+    <Select.Trigger class="w-28">
       <span class="theme-select-label" data-placeholder={$messages.selectTheme()}>
         {theme}
       </span>

@@ -16,6 +16,12 @@
 {#snippet child({ props, selected, highlighted }: any)}
   <li class="contents">
     <button {...props}>
+      <span class="size-4">
+        {#if selected && !noCheck}
+          <span class="icon-[mdi--check] h-full w-full"></span>
+        {/if}
+      </span>
+
       {#if childrenProp}
         {@render childrenProp({ selected, highlighted })}
       {:else}
@@ -29,24 +35,10 @@
   bind:ref
   {value}
   class={cn(
-    'flex h-auto w-full justify-start border-none p-2 text-left font-normal',
+    'flex h-auto w-full justify-start border-none p-2 font-normal',
     'btn btn-ghost data-[disabled]:btn-disabled data-[selected]:btn-active',
     className,
   )}
   {child}
   {...restProps}
->
-  {#snippet children({ selected, highlighted })}
-    <span class="absolute right-2 flex size-3.5 items-center justify-center">
-      {#if selected && !noCheck}
-        <span class="icon-[mdi--check] size-4"></span>
-      {/if}
-    </span>
-
-    {#if childrenProp}
-      {@render childrenProp({ selected, highlighted })}
-    {:else}
-      {label || value}
-    {/if}
-  {/snippet}
-</SelectPrimitive.Item>
+/>

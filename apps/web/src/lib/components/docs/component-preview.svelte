@@ -18,9 +18,9 @@
 
   const newYorkExamples = import.meta.glob('/src/lib/registry/new-york/example/*.svelte')
 
-  let localTheme = $state($theme)
+  let localTheme = $state($theme || null)
 
-  let localMode = $state($mode)
+  let localMode = $state($mode || null)
 
   let themes = $state({ light: 'light', dark: 'dark' })
 
@@ -105,7 +105,7 @@
         <div class="flex items-center gap-2">
           <StyleSwitcher />
           <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
-          <ThemeToggle bind:value={localMode} bind:theme={localTheme} {themes} local />
+          <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
         </div>
 
         <div
@@ -161,7 +161,7 @@
         <div class="flex items-center gap-2">
           <StyleSwitcher />
           <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
-          <ThemeToggle bind:value={localMode} bind:theme={localTheme} {themes} local />
+          <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
         </div>
 
         <div
