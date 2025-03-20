@@ -1,19 +1,3 @@
-<!-- prettier-ignore -->
-<script lang="ts" module>
-// @paths: { "$lib/*": ["./src/lib/*"], "$server": ["./src/server"], "$server/*": ["./src/server/*"] }
-// @filename: src/lib/registry/default/ui/select/index.ts
-// @errors: 2353
-
-import { Select as SelectPrimitive } from 'bits-ui'
-
-const { Root, Trigger, Content, Group, GroupHeading, Item } = SelectPrimitive
-
-export { Root, Trigger, Content, Group, GroupHeading, Item }
-
-// @filename: src/routes/+page.ts
-// ---cut---
-</script>
-
 <script lang="ts">
   import * as Select from '$lib/registry/default/ui/select'
 

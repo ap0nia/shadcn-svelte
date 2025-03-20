@@ -3,14 +3,18 @@
   import { mode, theme } from 'mode-watcher'
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
+  import { writable } from 'svelte/store'
 
   import * as Tabs from '$lib/components/ui/tabs'
+  import { setLocale, setMessages } from '$lib/i18n'
+  import { getLocale } from '$lib/paraglide/runtime'
   import { config } from '$lib/stores/config'
   import { cn } from '$lib/utils/cn'
 
   import StyleSwitcher from './style-switcher.svelte'
   import ThemeSelect from '../theme-select.svelte'
   import ThemeToggle from '../theme-toggle.svelte'
+  import LanguageSelect from '../language-select.svelte'
 
   type PrimitiveDivAttributes = WithElementRef<HTMLAttributes<HTMLDivElement>>
 
@@ -46,6 +50,12 @@
     example?: Snippet
   } = $props()
 
+  const locale = writable(getLocale())
+
+  setLocale(locale)
+
+  const messages = setMessages(locale)
+
   const component = $derived.by(() => {
     const s = style || $config.style
 
@@ -65,7 +75,8 @@
         <span>&nbsp;Loading...</span>
       </div>
     {:then mod}
-      {@render (mod as any).default()}
+      {@const Component = (mod as any).default}
+      <Component {messages} />
     {:catch}
       <p class="text-base-content/70 text-sm">
         <span>Component</span>
@@ -104,6 +115,7 @@
       <div class="relative space-y-2 p-2">
         <div class="flex items-center gap-2">
           <StyleSwitcher />
+          <LanguageSelect {locale} />
           <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
           <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
         </div>
@@ -111,6 +123,8 @@
         <div
           data-style={$config.style}
           data-theme={localTheme}
+          lang={$locale}
+          dir={$messages.__direction() as any}
           class={cn(
             localMode === 'dark' ? 'dark' : 'light',
             'rounded-md border',
@@ -160,6 +174,7 @@
       <div class="space-y-2 p-2">
         <div class="flex items-center gap-2">
           <StyleSwitcher />
+          <LanguageSelect {locale} />
           <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
           <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
         </div>
@@ -167,6 +182,8 @@
         <div
           data-style={$config.style}
           data-theme={localTheme}
+          lang={$locale}
+          dir={$messages.__direction() as any}
           class={localMode === 'dark' ? 'dark' : 'light'}
         >
           {@render children?.()}

@@ -4,11 +4,11 @@
   import { locales, type Locale } from '$lib/paraglide/runtime'
   import { cn } from '$lib/utils/cn'
 
-  const locale = getLocale()
-
-  const messages = getMessages()
-
-  let { class: className = '' } = $props()
+  let {
+    class: className = '',
+    locale = getLocale(),
+    messages = getMessages(locale),
+  } = $props()
 
   async function handleSelectedChange(selected?: string) {
     if (selected == null) return

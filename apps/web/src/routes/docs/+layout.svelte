@@ -37,7 +37,7 @@
 <div
   class="flex-1 items-start p-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)] gap-8"
 >
-  <aside class="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] md:sticky md:block">
+  <aside class="fixed top-14 hidden h-[calc(100vh-3.5rem)] md:sticky md:block">
     <ScrollArea class="h-full">
       {#if config.sidebar.length}
         <ul class="w-full space-y-4">

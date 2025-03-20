@@ -1,33 +1,39 @@
-<!-- prettier-ignore -->
-<script lang="ts" module>
-// @paths: { "$lib/*": ["./src/lib/*"], "$server": ["./src/server"], "$server/*": ["./src/server/*"] }
-// @filename: src/lib/registry/default/ui/select/index.ts
-// @errors: 2353
-
-import { Select as SelectPrimitive } from 'bits-ui'
-
-const { Root, Trigger, Content, Group, GroupHeading, Item } = SelectPrimitive
-
-export { Root, Trigger, Content, Group, GroupHeading, Item }
-
-// @filename: src/routes/+page.ts
-// ---cut---
-</script>
-
 <script lang="ts">
   import * as Select from '$lib/registry/new-york/ui/select'
 
-  const fruits = [
-    { value: 'apple', label: 'Apple' },
-    { value: 'banana', label: 'Banana' },
-    { value: 'blueberry', label: 'Blueberry' },
-    { value: 'grapes', label: 'Grapes' },
-    { value: 'pineapple', label: 'Pineapple' },
-  ]
+  let { messages } = $props()
+
+  const fruits = $derived.by(() => {
+    if (!messages) {
+      return [
+        { value: 'apple', label: 'Apple' },
+        { value: 'banana', label: 'Banana' },
+        { value: 'blueberry', label: 'Blueberry' },
+        { value: 'grapes', label: 'Grapes' },
+        { value: 'pineapple', label: 'Pineapple' },
+      ]
+    }
+
+    return [
+      { value: 'apple', label: $messages.apple() },
+      { value: 'banana', label: $messages.banana() },
+      { value: 'blueberry', label: $messages.strawberry() },
+      { value: 'grapes', label: $messages.blueberry() },
+      { value: 'pineapple', label: $messages.Kiwi() },
+    ]
+  })
 
   let value = $state('')
 
-  const triggerContent = $derived(fruits.find((f) => f.value === value)?.label ?? 'Select a fruit')
+  const triggerContent = $derived.by(() => {
+    const fruit = fruits.find((f) => f.value === value)
+
+    if (fruit?.label) return fruit.label
+
+    if (messages) return $messages.selectFruit()
+
+    return 'Select a fruit'
+  })
 </script>
 
 <Select.Root type="single" name="favoriteFruit" bind:value>
