@@ -249,6 +249,13 @@ const config = {
                 twoslashOptions: {
                   compilerOptions: {
                     jsx: ts.JsxEmit.Preserve,
+                    paths: {
+                      $lib: ['./src/lib'],
+                      '$lib/*': ['./src/lib/*'],
+                    },
+                    moduleResolution: ts.ModuleResolutionKind.Bundler,
+                    module: ts.ModuleKind.ESNext,
+                    target: ts.ScriptTarget.ESNext,
                   },
                 },
                 explicitTrigger: true,
