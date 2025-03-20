@@ -1,6 +1,7 @@
 {
   "name": "@apps/web",
   "type": "module",
+  "version": "0.0.1",
   "scripts": {
     "postinstall": "paraglide-js compile --project project.inlang --outdir src/lib/paraglide && svelte-kit sync",
     "check": "svelte-check",

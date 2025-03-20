@@ -5,6 +5,22 @@ const modules = import.meta.glob('/src/lib/content/**/*.md')
 export const load: PageLoad = async (event) => {
   const slug = event.params.slug || 'index'
 
+  if (slug.startsWith('changelog')) {
+    const exports = await import('/CHANGELOG.md')
+    const component = exports.default
+
+    const metadata = exports.metadata
+
+    const title = metadata.title
+
+    return {
+      component,
+      slug,
+      metadata,
+      title,
+    }
+  }
+
   const markdownModuleKey = Object.keys(modules).find((key) => {
     const moduleSlug = key.replace('/src/lib/content/docs/', '').replace('.md', '')
     return moduleSlug == slug

@@ -17,6 +17,11 @@ const config = defineConfig({
 
     tailwindcss(),
   ],
+  server: {
+    fs: {
+      allow: ['CHANGELOG.md'],
+    },
+  },
 })
 
 export default config
