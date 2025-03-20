@@ -17,5 +17,13 @@
   "builtBy": "Dibina oleh",
   "hostedOn": "Dihoskan pada",
   "illustrationsBy": "Ilustrasi oleh",
-  "theSourceCodeIsAvailable": "Kod sumber tersedia pada"
+  "theSourceCodeIsAvailable": "Kod sumber tersedia pada",
+  "selectFruit": "Pilih buah",
+  "fruits": "buah-buahan",
+  "apple": "epal",
+  "banana": "pisang",
+  "strawberry": "Strawberi",
+  "blueberry": "Beri biru",
+  "kiwi": "buah kiwi",
+  "pineapple": "nanas"
 }

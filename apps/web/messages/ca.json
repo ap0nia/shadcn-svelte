@@ -17,5 +17,13 @@
   "builtBy": "Construït per",
   "hostedOn": "Allotjat a",
   "illustrationsBy": "Il·lustracions de",
-  "theSourceCodeIsAvailable": "El codi font està disponible a"
+  "theSourceCodeIsAvailable": "El codi font està disponible a",
+  "selectFruit": "Seleccioneu una fruita",
+  "fruits": "Fruites",
+  "apple": "Apple",
+  "banana": "plàtan",
+  "strawberry": "Maduixa",
+  "blueberry": "Nabiu",
+  "kiwi": "Kiwi",
+  "pineapple": "pinya"
 }

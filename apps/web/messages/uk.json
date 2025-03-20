@@ -17,5 +17,13 @@
   "builtBy": "Побудовано",
   "hostedOn": "Розміщено на",
   "illustrationsBy": "Ілюстрації за",
-  "theSourceCodeIsAvailable": "Вихідний код доступний на"
+  "theSourceCodeIsAvailable": "Вихідний код доступний на",
+  "selectFruit": "Виберіть фрукт",
+  "fruits": "Фрукти",
+  "apple": "Яблуко",
+  "banana": "Банан",
+  "strawberry": "Полуниця",
+  "blueberry": "Чорниця",
+  "kiwi": "Ківі",
+  "pineapple": "Ананас"
 }

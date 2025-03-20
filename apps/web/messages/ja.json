@@ -17,5 +17,13 @@
   "builtBy": "構築者",
   "hostedOn": "ホスト",
   "illustrationsBy": "イラスト：",
-  "theSourceCodeIsAvailable": "ソースコードは以下から入手可能です。"
+  "theSourceCodeIsAvailable": "ソースコードは以下から入手可能です。",
+  "selectFruit": "果物を選択",
+  "fruits": "果物",
+  "apple": "りんご",
+  "banana": "バナナ",
+  "strawberry": "いちご",
+  "blueberry": "ブルーベリー",
+  "kiwi": "キウイ",
+  "pineapple": "パイナップル"
 }

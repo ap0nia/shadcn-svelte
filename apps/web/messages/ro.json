@@ -17,5 +17,13 @@
   "builtBy": "Construit de",
   "hostedOn": "Găzduit pe",
   "illustrationsBy": "Ilustrații de",
-  "theSourceCodeIsAvailable": "Codul sursă este disponibil pe"
+  "theSourceCodeIsAvailable": "Codul sursă este disponibil pe",
+  "selectFruit": "Selectați un fruct",
+  "fruits": "Fructe",
+  "apple": "Măr",
+  "banana": "Banană",
+  "strawberry": "Căpșună",
+  "blueberry": "Coacăze",
+  "kiwi": "Kiwi",
+  "pineapple": "Ananas"
 }

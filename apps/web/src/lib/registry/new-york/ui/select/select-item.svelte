@@ -37,7 +37,7 @@
   bind:ref
   {value}
   class={cn(
-    'flex h-auto w-full justify-start border-none p-2 font-normal',
+    'flex h-auto w-full justify-start border-none p-2 text-left font-normal',
     'btn btn-ghost data-[disabled]:btn-disabled data-[selected]:btn-active',
     className,
   )}

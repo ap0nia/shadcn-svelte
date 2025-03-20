@@ -17,5 +17,13 @@
   "builtBy": "Được xây dựng bởi",
   "hostedOn": "Được lưu trữ trên",
   "illustrationsBy": "Minh họa bởi",
-  "theSourceCodeIsAvailable": "Mã nguồn có sẵn trên"
+  "theSourceCodeIsAvailable": "Mã nguồn có sẵn trên",
+  "selectFruit": "Chọn một loại trái cây",
+  "fruits": "Trái cây",
+  "apple": "Quả táo",
+  "banana": "Chuối",
+  "strawberry": "Quả dâu",
+  "blueberry": "Quả việt quất",
+  "kiwi": "Kiwi",
+  "pineapple": "Quả dứa"
 }

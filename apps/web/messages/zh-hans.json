@@ -1,8 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "__code": "EN",
-  "__direction": "升",
-  "__name": "英语",
+  "__code": "ZH",
+  "__direction": "ltr",
+  "__name": "中文",
   "selectTheme": "选择主题",
   "selectLanguage": "选择语言",
   "toggleTheme": "切换主题",
@@ -17,5 +17,13 @@
   "builtBy": "由建造",
   "hostedOn": "主办方",
   "illustrationsBy": "插图",
-  "theSourceCodeIsAvailable": "源代码可在"
+  "theSourceCodeIsAvailable": "源代码可在",
+  "selectFruit": "选择水果",
+  "fruits": "水果",
+  "apple": "苹果",
+  "banana": "香蕉",
+  "strawberry": "草莓",
+  "blueberry": "蓝莓",
+  "kiwi": "猕猴桃",
+  "pineapple": "菠萝"
 }

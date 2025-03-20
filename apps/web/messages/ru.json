@@ -17,5 +17,13 @@
   "builtBy": "Построено",
   "hostedOn": "Размещено на",
   "illustrationsBy": "Иллюстрации от",
-  "theSourceCodeIsAvailable": "Исходный код доступен на"
+  "theSourceCodeIsAvailable": "Исходный код доступен на",
+  "selectFruit": "Выберите фрукт",
+  "fruits": "Фрукты",
+  "apple": "Яблоко",
+  "banana": "Банан",
+  "strawberry": "Клубника",
+  "blueberry": "Черника",
+  "kiwi": "киви",
+  "pineapple": "Ананас"
 }

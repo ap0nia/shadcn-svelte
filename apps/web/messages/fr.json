@@ -17,5 +17,13 @@
   "builtBy": "Construit par",
   "hostedOn": "Hébergé sur",
   "illustrationsBy": "Illustrations de",
-  "theSourceCodeIsAvailable": "Le code source est disponible sur"
+  "theSourceCodeIsAvailable": "Le code source est disponible sur",
+  "selectFruit": "Sélectionnez un fruit",
+  "fruits": "Fruits",
+  "apple": "Pomme",
+  "banana": "Banane",
+  "strawberry": "Fraise",
+  "blueberry": "Myrtille",
+  "kiwi": "Kiwi",
+  "pineapple": "Ananas"
 }

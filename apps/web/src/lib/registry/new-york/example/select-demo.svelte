@@ -19,7 +19,7 @@
       { value: 'banana', label: $messages.banana() },
       { value: 'blueberry', label: $messages.strawberry() },
       { value: 'grapes', label: $messages.blueberry() },
-      { value: 'pineapple', label: $messages.kiwi() },
+      { value: 'pineapple', label: $messages.pineapple() },
     ]
   })
 

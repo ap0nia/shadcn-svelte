@@ -17,5 +17,13 @@
   "builtBy": "ساخته شده توسط",
   "hostedOn": "میزبانی شده است",
   "illustrationsBy": "تصاویر توسط",
-  "theSourceCodeIsAvailable": "کد منبع در دسترس است"
+  "theSourceCodeIsAvailable": "کد منبع در دسترس است",
+  "selectFruit": "یک میوه را انتخاب کنید",
+  "fruits": "میوه ها",
+  "apple": "اپل",
+  "banana": "موز",
+  "strawberry": "توت فرنگی",
+  "blueberry": "زغال اخته",
+  "kiwi": "کیوی",
+  "pineapple": "آناناس"
 }

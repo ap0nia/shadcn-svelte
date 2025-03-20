@@ -17,5 +17,13 @@
   "builtBy": "تم بناؤه بواسطة",
   "hostedOn": "مستضاف على",
   "illustrationsBy": "الرسوم التوضيحية بواسطة",
-  "theSourceCodeIsAvailable": "الكود المصدر متاح على"
+  "theSourceCodeIsAvailable": "الكود المصدر متاح على",
+  "selectFruit": "اختر فاكهة",
+  "fruits": "الفواكه",
+  "apple": "تفاحة",
+  "banana": "موز",
+  "strawberry": "الفراولة",
+  "blueberry": "توت",
+  "kiwi": "كيوي",
+  "pineapple": "أناناس"
 }
