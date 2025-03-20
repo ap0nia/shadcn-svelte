@@ -1,42 +1,58 @@
 <script lang="ts">
-  import themes from 'daisyui/theme/object'
+  import globalThemes from 'daisyui/theme/object'
   import themeOrder from 'daisyui/functions/themeOrder'
-  import { mode, setTheme, setMode, theme } from 'mode-watcher'
+  import { mode as globalMode, setTheme, setMode, theme as globalTheme } from 'mode-watcher'
+  import type { Readable } from 'svelte/store'
 
   import { ScrollArea } from '$lib/components/ui/scroll-area'
   import * as Select from '$lib/components/ui/select'
   import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
 
+  type ReadableValue<T> = T extends Readable<infer U> ? U : never
+
   type Props = {
     class?: string
-    onThemeChange?: (newTheme: string, newMode?: string) => unknown
-    value?: string
+    theme?: string
+    themes?: Record<string, string>
+    mode?: ReadableValue<typeof globalMode>
+    local?: boolean
   }
 
-  let props: Props = $props()
+  let {
+    theme = $bindable($globalTheme),
+    mode = $bindable($globalMode),
+    themes = $bindable({}),
+    local,
+    ...props
+  }: Props = $props()
 
   const messages = getMessages()
 
   function handleSelectedChange(newTheme: string) {
-    const newMode = themes[newTheme]?.['color-scheme']
+    const newMode = globalThemes[newTheme]?.['color-scheme']
 
-    const handled = props.onThemeChange?.(newTheme, newMode)
-
-    if (handled) return
-
+    /**
+     * e.g. If the current mode is "light" and the theme is "cupcake", set light=cupcake.
+     *
+     * When toggling between dark/light mode, switch to cupcake instead of the
+     * default light theme for light mode.
+     */
     if (newMode) {
-      /**
-       * e.g. If the current mode is "light" and the theme is "cupcake", set light=cupcake.
-       *
-       * When toggling between dark/light mode, switch to cupcake instead of the
-       * default light theme for light mode.
-       */
-      localStorage.setItem(newMode, newTheme)
+      if (local) {
+        themes[newMode] = newTheme
+      } else {
+        localStorage.setItem(newMode, newTheme)
+      }
     }
 
-    setTheme(newTheme)
-    setMode(newMode as any)
+    theme = newTheme
+    mode = newMode as any
+
+    if (local) return
+
+    setTheme(theme)
+    setMode(mode)
   }
 </script>
 
@@ -47,15 +63,11 @@ Select input that can choose a specific theme.
 Selecting a specific theme will persist it to localstorage under the "light" or "dark" key.
 -->
 
-<Select.Root
-  type="single"
-  onValueChange={handleSelectedChange}
-  value={props.value || $theme || $mode}
->
+<Select.Root type="single" onValueChange={handleSelectedChange} value={theme}>
   <div data-tip={$messages.selectTheme()} class={cn('tooltip tooltip-bottom', props.class)}>
     <Select.Trigger>
       <span class="theme-select-label" data-placeholder={$messages.selectTheme()}>
-        {props.value || $theme}
+        {theme}
       </span>
     </Select.Trigger>
   </div>
@@ -64,7 +76,7 @@ Selecting a specific theme will persist it to localstorage under the "light" or 
     <ScrollArea class="h-64 pr-3">
       <Select.Group class="w-full">
         {#each themeOrder as theme}
-          {@const themeDetails = themes[theme]}
+          {@const themeDetails = globalThemes[theme]}
 
           <Select.Item value={theme} label={theme}>
             <div

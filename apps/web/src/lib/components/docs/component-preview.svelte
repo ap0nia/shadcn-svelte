@@ -10,6 +10,7 @@
 
   import StyleSwitcher from './style-switcher.svelte'
   import ThemeSelect from '../theme-select.svelte'
+  import ThemeToggle from '../theme-toggle.svelte'
 
   type PrimitiveDivAttributes = WithElementRef<HTMLAttributes<HTMLDivElement>>
 
@@ -20,6 +21,8 @@
   let localTheme = $state($theme)
 
   let localMode = $state($mode)
+
+  let themes = $state({ light: 'light', dark: 'dark' })
 
   const examples = {
     default: defaultExamples,
@@ -52,12 +55,6 @@
 
     return example
   })
-
-  function handleThemeChange(newTheme: string, newMode?: string) {
-    localTheme = newTheme
-    localMode = newMode as any
-    return true
-  }
 </script>
 
 {#snippet ExampleFallback()}
@@ -107,7 +104,8 @@
       <div class="relative space-y-2 p-2">
         <div class="flex items-center gap-2">
           <StyleSwitcher />
-          <ThemeSelect onThemeChange={handleThemeChange} value={localTheme} />
+          <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
+          <ThemeToggle bind:value={localMode} bind:theme={localTheme} {themes} local />
         </div>
 
         <div
@@ -162,7 +160,8 @@
       <div class="space-y-2 p-2">
         <div class="flex items-center gap-2">
           <StyleSwitcher />
-          <ThemeSelect onThemeChange={handleThemeChange} value={localTheme} />
+          <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
+          <ThemeToggle bind:value={localMode} bind:theme={localTheme} {themes} local />
         </div>
 
         <div
