@@ -93,7 +93,7 @@
   {/snippet}
 
   <Sheet.Root>
-    <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-20">
       <div class="navbar-start">
         <Sheet.Trigger class="btn btn-ghost btn-square flex lg:hidden">
           <span class="icon-[mdi--hamburger-menu] size-6"></span>

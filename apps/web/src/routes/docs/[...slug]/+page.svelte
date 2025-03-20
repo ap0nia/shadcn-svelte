@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state'
+  import Pager from '$lib/components/docs/pager.svelte'
   import TableOfContents from '$lib/components/docs/table-of-contents.svelte'
   import { getLocale } from '$lib/i18n'
   import { locales, localizeHref } from '$lib/paraglide/runtime'
@@ -121,9 +122,11 @@
         <Markdown />
       {/if}
     </div>
+
+    <Pager />
   </div>
 
-  <div class="hidden w-3xs shrink-0 text-sm xl:block relative py-16">
+  <div class="relative hidden w-3xs shrink-0 py-16 text-sm xl:block">
     <div class="sticky top-12 h-[calc(100vh-3.5rem)]">
       <ScrollArea class="h-full">
         {#key page.url.pathname}

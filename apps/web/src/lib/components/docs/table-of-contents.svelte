@@ -11,21 +11,21 @@
 </script>
 
 <script lang="ts">
-  import { page } from '$app/state'
-
-  import { localizeHref } from '$lib/paraglide/runtime'
-  import Drawer from '$lib/registry/new-york/ui/drawer/drawer.svelte'
   import { onMount } from 'svelte'
   import { writable } from 'svelte/store'
+
+  import { page } from '$app/state'
+  import { getLocale } from '$lib/i18n'
+  import { localizeHref } from '$lib/paraglide/runtime'
+
+  const locale = getLocale()
 
   let filteredHeadingsList = $state<TableOfContents>()
 
   function getHeadingsWithHierarchy(divId: string) {
     const div = document.getElementById(divId)
 
-    if (!div) {
-      return { items: [] }
-    }
+    if (!div) return
 
     const headings: HTMLHeadingElement[] = Array.from(div.querySelectorAll('h2, h3'))
 
@@ -131,7 +131,7 @@
 {#snippet yes({ items }: { items: TableOfContentsItem[] })}
   <ul class="menu w-full">
     {#each items as item (item.url)}
-      {@const href = localizeHref(page.url.pathname + item.url)}
+      {@const href = localizeHref(page.url.pathname + item.url, { locale: $locale })}
 
       <li>
         {#if item.items?.length}
