@@ -19,7 +19,7 @@
       { value: 'banana', label: $messages.banana() },
       { value: 'blueberry', label: $messages.strawberry() },
       { value: 'grapes', label: $messages.blueberry() },
-      { value: 'pineapple', label: $messages.Kiwi() },
+      { value: 'pineapple', label: $messages.kiwi() },
     ]
   })
 
@@ -43,7 +43,10 @@
 
   <Select.Content portalProps={{ disabled: true }}>
     <Select.Group>
-      <Select.GroupHeading>Fruits</Select.GroupHeading>
+      <Select.GroupHeading>
+        {messages ? $messages.fruits() : 'Fruits'}
+      </Select.GroupHeading>
+
       {#each fruits as fruit (fruit.value)}
         <Select.Item value={fruit.value} label={fruit.label} />
       {/each}
