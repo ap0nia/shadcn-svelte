@@ -13,7 +13,7 @@ links:
 
 <!-- prettier-ignore -->
 <script>
-  import { Tabs, TabsList, TabsTrigger, TabsContent } from '$lib/components/ui/tabs'
+  import { Tabs, TabsList, TabsTrigger, TabsContent } from '$lib/registry/new-york/ui/tabs'
   import ComponentPreview from '$lib/components/docs/component-preview.svelte'
 </script>
 
@@ -74,7 +74,7 @@ Copy and paste the component source files linked at the top of this page into yo
 
 ```svelte twoslash
 <script lang="ts">
-  import * as Select from '$lib/components/ui/select'
+  import * as Select from '$lib/registry/new-york/ui/select'
 </script>
 
 <Select.Root type="single">

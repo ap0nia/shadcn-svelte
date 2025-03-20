@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
 
-  import * as Tabs from '$lib/components/ui/tabs'
+  import * as Tabs from '$lib/registry/new-york/ui/tabs'
 
   type Props = {
     value: string

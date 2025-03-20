@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state'
-  import { ScrollArea } from '$lib/components/ui/scroll-area'
+  import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
   import config, { type SidebarNavItem } from '$lib/config/docs'
   import { cn } from '$lib/utils/cn'
 

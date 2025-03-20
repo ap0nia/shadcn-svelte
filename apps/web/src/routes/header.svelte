@@ -4,9 +4,9 @@
   import LanguageSelect from '$lib/components/language-select.svelte'
   import ThemeSelect from '$lib/components/theme-select.svelte'
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
-  import * as NavigationMenu from '$lib/components/ui/navigation-menu'
-  import { ScrollArea } from '$lib/components/ui/scroll-area'
-  import * as Sheet from '$lib/components/ui/sheet'
+  import * as NavigationMenu from '$lib/registry/new-york/ui/navigation-menu'
+  import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
+  import * as Sheet from '$lib/registry/new-york/ui/sheet'
   import { cn } from '$lib/utils/cn'
 
   const components: Array<{ title: string; href: string; description: string }> = [

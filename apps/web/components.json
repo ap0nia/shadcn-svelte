@@ -7,10 +7,8 @@
     "baseColor": "slate"
   },
   "aliases": {
-    "components": "$lib/components",
-    "utils": "$lib/utils/cn",
-    "ui": "$lib/components/ui",
-    "hooks": "$lib/hooks"
+    "components": "$lib/registry/new-york",
+    "utils": "$lib/utils/cn"
   },
   "typescript": true,
   "registry": "https://next.shadcn-svelte.com/registry"

@@ -16,19 +16,17 @@
 {#snippet child({ props, selected, highlighted }: any)}
   <li class="contents">
     <button {...props}>
-      {#if childrenProp}
-        {@render childrenProp({ selected, highlighted })}
-      {:else}
-        {label || value}
-      {/if}
-
-      <span class="grow"></span>
-
       <span class="size-4">
         {#if selected && !noCheck}
           <span class="icon-[mdi--check] h-full w-full"></span>
         {/if}
       </span>
+
+      {#if childrenProp}
+        {@render childrenProp({ selected, highlighted })}
+      {:else}
+        {label || value}
+      {/if}
     </button>
   </li>
 {/snippet}

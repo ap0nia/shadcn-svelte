@@ -3,7 +3,7 @@
   import type { HTMLButtonAttributes } from 'svelte/elements'
 
   import { config, styles } from '$lib/stores/config'
-  import * as Select from '$lib/components/ui/select'
+  import * as Select from '$lib/registry/new-york/ui/select'
 
   type PrimitiveButtonAttributes = WithElementRef<HTMLButtonAttributes>
 

@@ -5,7 +5,7 @@
 
   import { createObservableLocale, setLocale, setMessages } from '$lib/i18n'
   import ThemeModeWatcher from '$lib/components/theme-mode-watcher.svelte'
-  import { Toaster } from '$lib/components/ui/sonner'
+  import { Toaster } from '$lib/registry/new-york/ui/sonner'
 
   import Footer from './footer.svelte'
   import Header from './header.svelte'

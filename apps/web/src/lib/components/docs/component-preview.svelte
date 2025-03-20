@@ -5,7 +5,7 @@
   import type { HTMLAttributes } from 'svelte/elements'
   import { writable } from 'svelte/store'
 
-  import * as Tabs from '$lib/components/ui/tabs'
+  import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { setLocale, setMessages } from '$lib/i18n'
   import { getLocale } from '$lib/paraglide/runtime'
   import { config } from '$lib/stores/config'

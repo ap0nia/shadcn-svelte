@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as Select from '$lib/components/ui/select'
+  import * as Select from '$lib/registry/new-york/ui/select'
   import { getMessages, getLocale } from '$lib/i18n'
   import { locales, type Locale } from '$lib/paraglide/runtime'
   import { cn } from '$lib/utils/cn'

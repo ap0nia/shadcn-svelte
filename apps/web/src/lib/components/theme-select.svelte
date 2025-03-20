@@ -4,8 +4,8 @@
   import { mode as globalMode, setTheme, setMode, theme as globalTheme } from 'mode-watcher'
   import type { Readable } from 'svelte/store'
 
-  import { ScrollArea } from '$lib/components/ui/scroll-area'
-  import * as Select from '$lib/components/ui/select'
+  import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
+  import * as Select from '$lib/registry/new-york/ui/select'
   import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
 

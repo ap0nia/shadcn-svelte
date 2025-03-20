@@ -1,7 +1,7 @@
 <script lang="ts">
   import { toast } from 'svelte-sonner'
 
-  import * as Tabs from '$lib/components/ui/tabs'
+  import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { getMessages } from '$lib/i18n'
   import SvelteCounter from '$lib/markdown/svelte-counter.md'
   import ReactCounter from '$lib/markdown/react-counter.md'
