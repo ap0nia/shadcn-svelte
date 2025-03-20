@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mode, setTheme, theme as globalTheme, toggleMode } from 'mode-watcher'
+  import { mode as globalMode, setTheme, theme as globalTheme, setMode } from 'mode-watcher'
 
   import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
@@ -9,41 +9,45 @@
 
   type Props = {
     class?: string
-    value?: ReadableValue<typeof mode>
+    value?: ReadableValue<typeof globalMode>
     local?: boolean
     theme?: string
     themes?: Record<string, string>
   }
 
   let {
-    value = $bindable($mode),
+    value = $bindable($globalMode),
     theme = $bindable($globalTheme),
     themes,
+    local = false,
     ...props
   }: Props = $props()
 
   const messages = getMessages()
 
   async function toggleTheme() {
-    toggleMode()
-
-    /**
-     * The current mode, with default being 'light'.
-     */
-    const currentMode = $mode ?? 'light'
+    const newMode = value === 'dark' ? 'light' : 'dark'
 
     /**
      * See if a more specific theme can be found by using the current mode.
      */
-    const newTheme = themes?.[currentMode] || localStorage.getItem(currentMode) || currentMode
+    const newTheme = themes?.[newMode] || localStorage.getItem(newMode) || newMode
 
-    value = currentMode
-    theme = newTheme
-
-    if (props.local) return
-
-    setTheme(theme)
+    if (local) {
+      value = newMode
+      theme = newTheme
+    } else {
+      setMode(newMode)
+      setTheme(newTheme)
+    }
   }
+
+  $effect(() => {
+    if (local) return
+
+    theme = $globalTheme as any
+    value = $globalMode as any
+  })
 </script>
 
 <!--
@@ -66,10 +70,12 @@ It can also use specific themes specified by the 'light' and 'dark' keys from lo
 
           // $mode is undefined on the server and thus on mount.
           // Before it's mounted for the first time, force the dark icon to be static.
-          !value && 'dark:!rotate-0 dark:!opacity-100',
+          !$globalMode && 'dark:!rotate-0 dark:!opacity-100',
         )}
       ></span>
-      <span class="icon-[mdi--weather-sunny] swap-off size-5 dark:opacity-0"></span>
+      <span
+        class={cn(!$globalMode && 'dark:opacity-0', 'icon-[mdi--weather-sunny] swap-off size-5')}
+      ></span>
     </span>
   </button>
 </div>

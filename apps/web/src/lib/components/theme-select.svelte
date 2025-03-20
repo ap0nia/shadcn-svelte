@@ -23,7 +23,7 @@
     theme = $bindable($globalTheme),
     mode = $bindable($globalMode),
     themes = $bindable({}),
-    local,
+    local = false,
     ...props
   }: Props = $props()
 
@@ -46,14 +46,21 @@
       }
     }
 
-    theme = newTheme
-    mode = newMode as any
+    if (local) {
+      theme = newTheme
+      mode = newMode as any
+    } else {
+      setTheme(newTheme)
+      setMode(newMode as any)
+    }
+  }
 
+  $effect(() => {
     if (local) return
 
-    setTheme(theme)
-    setMode(mode)
-  }
+    theme = $globalTheme as any
+    mode = $globalMode as any
+  })
 </script>
 
 <!--
