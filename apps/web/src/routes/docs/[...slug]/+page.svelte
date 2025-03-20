@@ -112,7 +112,9 @@
     {/if}
   </div>
 
-  <div class="prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0">
+  <div
+    class="vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none"
+  >
     {#if typeof Markdown === 'function'}
       <Markdown />
     {/if}

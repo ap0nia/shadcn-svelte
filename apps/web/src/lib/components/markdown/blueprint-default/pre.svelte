@@ -2,18 +2,7 @@
   import { cn } from '$lib/utils/cn'
   import type { HTMLAttributes } from 'svelte/elements'
 
-  type PreExtendedProps = {
-    code?: string
-    __src__?: string
-    __style__?: string
-  }
-
-  let {
-    children,
-    __src__,
-    __style__,
-    ...restProps
-  }: HTMLAttributes<HTMLPreElement> & PreExtendedProps = $props()
+  let { children, ...restProps }: HTMLAttributes<HTMLElement> = $props()
 
   let ref = $state<HTMLElement>()
 
@@ -45,6 +34,10 @@
   function resetCopyCode() {
     copied = false
   }
+
+  const dataProps = $derived(
+    Object.fromEntries(Object.entries(restProps).filter((entry) => entry[0].startsWith('data-'))),
+  )
 </script>
 
 <!-- The code inside may be subject to special white-space rules when rendering code blocks. -->
@@ -52,14 +45,12 @@
 <div
   class={cn(
     restProps.lang && `language-${restProps.lang}`,
-    'vp-adaptive-theme',
-    'group relative overflow-x-auto p-4',
+    'vp-adaptive-theme vp-code',
+    'group relative my-4 overflow-x-auto py-4',
     'bg-base-300 text-base-content rounded-box',
   )}
-  data-src={__src__}
-  data-style={__style__}
->
-  <div class="absolute top-0 left-0 flex w-full justify-end px-4 py-1">
+  {...dataProps}
+><div class="absolute top-0 left-0 flex w-full justify-end px-4 py-1">
     {#if restProps.lang}
       <span class={cn('text-sm transition-opacity group-hover:opacity-0')}>
         {restProps.lang}
@@ -80,7 +71,6 @@
     </button>
   </div><pre {...restProps} bind:this={ref}>{@render children?.()}</pre>
 </div>
-
 <!-- prettier-ignore-end -->
 
 <style>

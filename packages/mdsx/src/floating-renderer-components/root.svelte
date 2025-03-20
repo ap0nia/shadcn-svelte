@@ -68,7 +68,7 @@
   })
 
   const role = useRole(floating.context, { role: 'tooltip' })
-  const hover = useHover(floating.context, { move: false })
+  const hover = useHover(floating.context, { move: false, delay: { open: 0, close: 50 } })
   const dismiss = useDismiss(floating.context)
   const interactions = useInteractions([role, hover, dismiss])
   const shown = $derived(floating.open)
