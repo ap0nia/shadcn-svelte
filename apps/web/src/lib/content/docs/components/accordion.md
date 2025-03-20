@@ -1,14 +1,11 @@
 ---
-title: Select
-
-description: Displays a list of options for the user to pick from—triggered by a button.
-
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
 component: true
-
 links:
-  source: https://github.com/huntabyte/shadcn-svelte/tree/main/sites/docs/src/lib/registry/default/ui/select
-  doc: https://next.bits-ui.com/docs/components/select
-  api: https://next.bits-ui.com/docs/components/select#api-reference
+  source: https://github.com/huntabyte/shadcn-svelte/tree/main/sites/docs/src/lib/registry/default/ui/accordion
+  doc: https://next.bits-ui.com/docs/components/accordion
+  api: https://next.bits-ui.com/docs/components/accordion#api-reference
 ---
 
 <script>
@@ -16,7 +13,7 @@ links:
   import ComponentPreview from '$lib/components/docs/component-preview.svelte'
 </script>
 
-<ComponentPreview name="select-demo">
+<ComponentPreview name="accordion-demo" class="[&_[data-melt-accordion]]:sm:max-w-[70%]">
 
 </ComponentPreview>
 
@@ -32,7 +29,7 @@ links:
 <TabsContent value="cli">
 
 ```bash npm2yarn
-npx shadcn-svelte@next add select
+npx shadcn-svelte@next add accordion
 ```
 
 </TabsContent>
@@ -52,7 +49,7 @@ Install `bits-ui`
 </h4>
 
 ```bash npm2yarn
-npx shadcn-svelte@next add select
+npx shadcn-svelte@next add accordion
 ```
 
 </div>
@@ -71,17 +68,15 @@ Copy and paste the component source files linked at the top of this page into yo
 
 ## Usage
 
-```svelte twoslash
+```svelte
 <script lang="ts">
-  import * as Select from '$lib/registry/new-york/ui/select'
+  import * as Accordion from '$lib/registry/new-york/ui/accordion'
 </script>
 
-<Select.Root type="single">
-  <Select.Trigger class="w-[180px]"></Select.Trigger>
-  <Select.Content>
-    <Select.Item value="light">Light</Select.Item>
-    <Select.Item value="dark">Dark</Select.Item>
-    <Select.Item value="system">System</Select.Item>
-  </Select.Content>
-</Select.Root>
+<Accordion.Root type="single">
+  <Accordion.Item value="item-1">
+    <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+    <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>
+  </Accordion.Item>
+</Accordion.Root>
 ```
