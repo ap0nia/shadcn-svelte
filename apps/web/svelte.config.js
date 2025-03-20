@@ -21,7 +21,7 @@ import {
   transformerNotationErrorLevel,
   transformerRenderWhitespace,
   transformerMetaHighlight,
-  transformerMetaWordHighlight,
+  // transformerMetaWordHighlight,
 } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/twoslash'
 

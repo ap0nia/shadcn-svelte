@@ -4,7 +4,7 @@ description: How to install dependencies and structure your app.
 ---
 
 <script>
-	import LinkedCard from '$lib/components/docs/linked-card.svelte'
+  import LinkedCard from '$lib/components/docs/linked-card.svelte'
 </script>
 
 ## Guides
@@ -16,7 +16,7 @@ description: How to install dependencies and structure your app.
   </LinkedCard>
 
   <LinkedCard href="/docs/installation/astro">
-  <span class="icon-[devicon-plain--astro] size-10"></span>
+    <span class="icon-[devicon-plain--astro] size-10"></span>
     <p class="font-medium mt-2">Astro</p>
   </LinkedCard>
 

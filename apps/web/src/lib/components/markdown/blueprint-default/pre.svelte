@@ -47,7 +47,7 @@
     restProps.lang && `language-${restProps.lang}`,
     'vp-adaptive-theme vp-code',
     'group relative my-2 w-full overflow-x-auto py-4',
-    'bg-base-300 text-base-content rounded-box',
+    'bg-base-200 text-base-content rounded-box',
   )}
   {...dataProps}
 ><div class="absolute top-0 left-0 flex w-full justify-end px-4 py-1">

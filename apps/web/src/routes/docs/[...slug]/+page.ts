@@ -21,9 +21,11 @@ export const load: PageLoad = async (event) => {
     }
   }
 
+  const slugMatches = [slug, slug + '/index']
+
   const markdownModuleKey = Object.keys(modules).find((key) => {
     const moduleSlug = key.replace('/src/lib/content/docs/', '').replace('.md', '')
-    return moduleSlug == slug
+    return slugMatches.includes(moduleSlug)
   })
 
   if (markdownModuleKey == null) {

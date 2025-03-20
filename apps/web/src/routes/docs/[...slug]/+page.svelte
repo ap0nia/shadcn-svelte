@@ -128,7 +128,7 @@
 
     <div
       id="markdown"
-      class="vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none max-w-none grow"
+      class="vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none max-w-none"
     >
       {#if typeof Markdown === 'function'}
         <Markdown />
