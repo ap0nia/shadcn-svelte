@@ -17,5 +17,12 @@
   "builtBy": "Built by",
   "hostedOn": "Hosted on",
   "illustrationsBy": "Illustrations by",
-  "theSourceCodeIsAvailable": "The source code is available on"
+  "theSourceCodeIsAvailable": "The source code is available on",
+  "selectFruit": "Select a fruit",
+  "fruit": "Fruits",
+  "apple": "Apple",
+  "banana": "Banana",
+  "strawberry": "Strawberry",
+  "blueberry": "Blueberry",
+  "kiwi": "Kiwi"
 }
