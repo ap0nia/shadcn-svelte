@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { page } from '$app/state'
   import { getLocale } from '$lib/i18n'
-  import { localizeHref } from '$lib/paraglide/runtime'
+  import { locales, localizeHref } from '$lib/paraglide/runtime'
   import { config } from '$lib/stores/config'
 
   import type { PageProps } from './$types'
@@ -21,8 +22,34 @@
 
   const locale = getLocale()
 
-  const docsHome = $derived.by(() => {
-    return localizeHref('/docs', { locale: $locale })
+  const breadcrumbs = $derived.by(() => {
+    const allBreadcrumbs = page.url.pathname
+      .split('/')
+      .filter(Boolean)
+      .map((segment) => {
+        return {
+          segment,
+          href: `/${segment}`,
+          label: segment[0]?.toUpperCase() + segment.slice(1),
+        }
+      })
+      .reduce(
+        (previous, current) => {
+          if (previous.length) {
+            current.href = `${previous.at(-1)?.href}${current.href}`
+          }
+
+          return [...previous, current]
+        },
+        [] as Array<{ href: string; label: string; segment: string }>,
+      )
+      .slice(0, -1)
+
+    if (locales.includes(allBreadcrumbs[0]?.segment as any)) {
+      allBreadcrumbs.splice(0, 1)
+    }
+
+    return allBreadcrumbs
   })
 </script>
 
@@ -30,7 +57,14 @@
   <div class="mx-auto w-full min-w-0">
     <div class="breadcrumbs text-sm">
       <ul>
-        <li><a href={docsHome}>Docs</a></li>
+        {#each breadcrumbs as breadcrumb (breadcrumb.href)}
+          {@const href = localizeHref(breadcrumb.href, { locale: $locale })}
+
+          <li>
+            <a {href}>{breadcrumb.label}</a>
+          </li>
+        {/each}
+
         <li>{doc?.title}</li>
       </ul>
     </div>

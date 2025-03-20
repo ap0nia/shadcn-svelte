@@ -79,7 +79,6 @@ Copy and paste the component source files linked at the top of this page into yo
 
 <Select.Root type="single">
   <Select.Trigger class="w-[180px]"></Select.Trigger>
-
   <Select.Content>
     <Select.Item value="light">Light</Select.Item>
     <Select.Item value="dark">Dark</Select.Item>
