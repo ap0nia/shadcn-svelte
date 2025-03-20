@@ -57,62 +57,74 @@
 </script>
 
 <main class="flex h-full w-full gap-8">
-  <div class="mx-auto w-full min-w-0 space-y-8">
-    <div class="breadcrumbs text-sm">
-      <ul>
-        {#each breadcrumbs as breadcrumb (breadcrumb.href)}
-          {@const href = localizeHref(breadcrumb.href, { locale: $locale })}
+  <div class="flex w-full min-w-0 flex-col gap-8">
+    <div>
+      <div class="breadcrumbs text-sm">
+        <ul>
+          {#each breadcrumbs as breadcrumb (breadcrumb.href)}
+            {@const href = localizeHref(breadcrumb.href, { locale: $locale })}
 
-          <li>
-            <a {href}>{breadcrumb.label}</a>
-          </li>
-        {/each}
+            <li>
+              <a {href}>{breadcrumb.label}</a>
+            </li>
+          {/each}
 
-        <li>{doc?.title}</li>
-      </ul>
-    </div>
+          <li>{doc?.title}</li>
+        </ul>
+      </div>
 
-    <div class="space-y-2">
-      <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
-        {doc?.title}
-      </h1>
+      <div class="space-y-2">
+        <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
+          {doc?.title}
+        </h1>
 
-      {#if doc?.description}
-        <p class="text-base-content/70 text-lg text-balance">
-          {doc.description}
-        </p>
-      {/if}
-    </div>
-
-    {#if apiLink || componentSource || docLink}
-      <div class="flex items-center space-x-2 pt-4">
-        {#if docLink}
-          <a href={docLink} target="_blank" rel="noreferrer" class="badge badge-secondary badge-sm">
-            <span>Docs</span>
-            <span class="icon-[mdi--external-link]"></span>
-          </a>
-        {/if}
-
-        {#if apiLink}
-          <a href={apiLink} target="_blank" rel="noreferrer" class="badge badge-secondary badge-sm">
-            <span>API Reference</span>
-            <span class="icon-[mdi--external-link]"></span>
-          </a>
-        {/if}
-
-        {#if componentSource}
-          <a
-            href={componentSource}
-            target="_blank"
-            rel="noreferrer"
-            class="badge badge-secondary badge-sm"
-          >
-            <span>Component Source</span>
-            <span class="icon-[mdi--code-tags]"></span>
-          </a>
+        {#if doc?.description}
+          <p class="text-base-content/70 text-lg text-balance">
+            {doc.description}
+          </p>
         {/if}
       </div>
-    {/if}
+
+      {#if apiLink || componentSource || docLink}
+        <div class="flex items-center space-x-2 pt-4">
+          {#if docLink}
+            <a
+              href={docLink}
+              target="_blank"
+              rel="noreferrer"
+              class="badge badge-secondary badge-sm"
+            >
+              <span>Docs</span>
+              <span class="icon-[mdi--external-link]"></span>
+            </a>
+          {/if}
+
+          {#if apiLink}
+            <a
+              href={apiLink}
+              target="_blank"
+              rel="noreferrer"
+              class="badge badge-secondary badge-sm"
+            >
+              <span>API Reference</span>
+              <span class="icon-[mdi--external-link]"></span>
+            </a>
+          {/if}
+
+          {#if componentSource}
+            <a
+              href={componentSource}
+              target="_blank"
+              rel="noreferrer"
+              class="badge badge-secondary badge-sm"
+            >
+              <span>Component Source</span>
+              <span class="icon-[mdi--code-tags]"></span>
+            </a>
+          {/if}
+        </div>
+      {/if}
+    </div>
 
     <div
       id="markdown"
@@ -126,15 +138,13 @@
     <Pager />
   </div>
 
-  <div class="relative hidden w-3xs shrink-0 py-16 text-sm xl:block">
-    <div class="sticky top-12 h-[calc(100vh-3.5rem)]">
-      <ScrollArea class="h-full">
-        {#key page.url.pathname}
-          <TableOfContents />
-        {/key}
+  <div class="relative sticky top-20 hidden h-[calc(100vh-8rem)] w-3xs shrink-0 text-sm xl:block">
+    <ScrollArea class="h-full">
+      {#key page.url.pathname}
+        <TableOfContents />
+      {/key}
 
-        <!-- <Carbon /> -->
-      </ScrollArea>
-    </div>
+      <!-- <Carbon /> -->
+    </ScrollArea>
   </div>
 </main>

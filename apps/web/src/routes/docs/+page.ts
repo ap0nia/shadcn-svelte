@@ -10,6 +10,7 @@ export const load: PageLoad = async () => {
   }
 
   return {
+    slug: '',
     component: doc.default,
     metadata: doc.metadata,
     title: doc.metadata.title,
