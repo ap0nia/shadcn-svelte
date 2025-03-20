@@ -1,7 +1,9 @@
 <script lang="ts">
   import { page } from '$app/state'
+  import TableOfContents from '$lib/components/docs/table-of-contents.svelte'
   import { getLocale } from '$lib/i18n'
   import { locales, localizeHref } from '$lib/paraglide/runtime'
+  import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
   import { config } from '$lib/stores/config'
 
   import type { PageProps } from './$types'
@@ -53,8 +55,8 @@
   })
 </script>
 
-<main class="h-full w-full space-y-8">
-  <div class="mx-auto w-full min-w-0">
+<main class="flex h-full w-full gap-8">
+  <div class="mx-auto w-full min-w-0 space-y-8">
     <div class="breadcrumbs text-sm">
       <ul>
         {#each breadcrumbs as breadcrumb (breadcrumb.href)}
@@ -110,11 +112,26 @@
         {/if}
       </div>
     {/if}
+
+    <div
+      id="markdown"
+      class="vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none max-w-none grow"
+    >
+      {#if typeof Markdown === 'function'}
+        <Markdown />
+      {/if}
+    </div>
   </div>
 
-  <div class="prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0">
-    {#if typeof Markdown === 'function'}
-      <Markdown />
-    {/if}
+  <div class="hidden w-3xs shrink-0 text-sm xl:block relative py-16">
+    <div class="sticky top-12 h-[calc(100vh-3.5rem)]">
+      <ScrollArea class="h-full">
+        {#key page.url.pathname}
+          <TableOfContents />
+        {/key}
+
+        <!-- <Carbon /> -->
+      </ScrollArea>
+    </div>
   </div>
 </main>
