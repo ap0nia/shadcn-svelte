@@ -14,7 +14,7 @@
     "url": "https://github.com/ap0nia/messenger"
   },
   "scripts": {
-    "postinstall": "lefthook install"
+    "postinstall": "lefthook install && changeset init"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
