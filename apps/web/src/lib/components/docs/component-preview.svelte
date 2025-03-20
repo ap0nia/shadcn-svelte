@@ -67,6 +67,18 @@
   })
 </script>
 
+{#snippet Empty()}
+  <p class="text-base-content/70 grow-0 text-sm">
+    <span>Component</span>
+
+    <code class="badge badge-sm">
+      {name}
+    </code>
+
+    <span>not found in registry.</span>
+  </p>
+{/snippet}
+
 {#snippet ExampleFallback()}
   {#if component}
     {#await component()}
@@ -78,16 +90,10 @@
       {@const Component = (mod as any).default}
       <Component {messages} />
     {:catch}
-      <p class="text-base-content/70 text-sm">
-        <span>Component</span>
-
-        <code class="badge badge-sm">
-          {name}
-        </code>
-
-        <span>not found in registry.</span>
-      </p>
+      {@render Empty()}
     {/await}
+  {:else}
+    {@render Empty()}
   {/if}
 {/snippet}
 
@@ -121,52 +127,37 @@
         </div>
 
         <div
-          data-style={$config.style}
-          data-theme={localTheme}
-          lang={$locale}
-          dir={$messages.__direction() as any}
           class={cn(
+            'min-h-100',
             localMode === 'dark' ? 'dark' : 'light',
-            'rounded-md border',
-            'preview flex min-h-[350px] w-full justify-center p-10',
-            {
-              'items-center': align === 'center',
-              'items-start': align === 'start',
-              'items-end': align === 'end',
-            },
-            className,
+            'card',
+            'overflow-hidden border shadow-sm',
           )}
-          {style}
         >
-          {#if example}
-            {@render example()}
-          {:else}
-            {@render ExampleFallback()}
-          {/if}
+          <div
+            data-style={$config.style}
+            data-theme={localTheme}
+            lang={$locale}
+            dir={$messages.__direction() as any}
+            class={cn(
+              'card-body',
+              'preview flex w-full justify-center',
+              {
+                'items-center': align === 'center',
+                'items-start': align === 'start',
+                'items-end': align === 'end',
+              },
+              className,
+            )}
+            {style}
+          >
+            {#if example}
+              {@render example()}
+            {:else}
+              {@render ExampleFallback()}
+            {/if}
+          </div>
         </div>
-
-        <!--
-      <ThemeWrapper defaultTheme="zinc">
-        <div
-          class={cn(
-            'preview flex min-h-[350px] w-full justify-center p-10',
-            {
-              'items-center': align === 'center',
-              'items-start': align === 'start',
-              'items-end': align === 'end',
-            },
-            className,
-          )}
-          {style}
-        >
-          {#if example}
-            {@render example()}
-          {:else}
-            {@render ExampleFallback()}
-          {/if}
-        </div>
-      </ThemeWrapper>
-      -->
       </div>
     </Tabs.Content>
 
@@ -180,23 +171,46 @@
         </div>
 
         <div
-          data-style={$config.style}
-          data-theme={localTheme}
-          lang={$locale}
-          dir={$messages.__direction() as any}
-          class={localMode === 'dark' ? 'dark' : 'light'}
+          class={cn(
+            'min-h-100',
+            localMode === 'dark' ? 'dark' : 'light',
+            'card',
+            'overflow-hidden border shadow-sm',
+          )}
         >
-          {@render children?.()}
+          <div
+            data-style={$config.style}
+            data-theme={localTheme}
+            lang={$locale}
+            dir={$messages.__direction() as any}
+            class={cn(
+              'card-body',
+              'source-code',
+              'preview flex w-full justify-center',
+              {
+                'items-center': align === 'center',
+                'items-start': align === 'start',
+                'items-end': align === 'end',
+              },
+              className,
+            )}
+          >
+            {#if children}
+              {@render children()}
+            {:else}
+              <p class="text-base-content/70 grow-0 text-sm">
+                <span>Code for</span>
+
+                <code class="badge badge-sm">
+                  {name}
+                </code>
+
+                <span>component not found in registry.</span>
+              </p>
+            {/if}
+          </div>
         </div>
       </div>
-
-      <!--
-      <ThemeWrapper defaultTheme="zinc">
-        <div class="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[350px] [&_pre]:overflow-auto">
-          {@render children?.()}
-        </div>
-      </ThemeWrapper>
-      -->
     </Tabs.Content>
   </Tabs.Root>
 </div>

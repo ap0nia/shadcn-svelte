@@ -46,7 +46,7 @@
   class={cn(
     restProps.lang && `language-${restProps.lang}`,
     'vp-adaptive-theme vp-code',
-    'group relative my-4 overflow-x-auto py-4',
+    'group relative my-2 w-full overflow-x-auto py-4',
     'bg-base-300 text-base-content rounded-box',
   )}
   {...dataProps}
