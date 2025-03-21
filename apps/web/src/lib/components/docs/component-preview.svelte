@@ -22,6 +22,10 @@
 
   const newYorkExamples = import.meta.glob('/src/lib/registry/new-york/example/*.svelte')
 
+  const daisyDefaultExamples = import.meta.glob('/src/lib/registry/default/example/*.svelte')
+
+  const daisyNewYorkExamples = import.meta.glob('/src/lib/registry/new-york/example/*.svelte')
+
   let localTheme = $state($theme || null)
 
   let localMode = $state($mode || null)
@@ -31,6 +35,8 @@
   const examples = {
     default: defaultExamples,
     'new-york': newYorkExamples,
+    'daisy-default': daisyDefaultExamples,
+    'daisy-new-york': daisyNewYorkExamples,
   }
 
   let {
