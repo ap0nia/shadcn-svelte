@@ -15,6 +15,28 @@
 <main class="space-y-4 p-4">
   <h1>{$messages.hello()}</h1>
 
+  <div class="divider"></div>
+
+  <ul class="steps">
+    <li class="step">
+      <div class="h-24 w-full bg-pink-400"></div>
+    </li>
+
+    <li class="step">
+      <div class="h-24 w-full bg-blue-400"></div>
+    </li>
+  </ul>
+
+  <ul class="steps steps-vertical">
+    <li class="step">
+      <div class="h-24 w-full bg-pink-400"></div>
+    </li>
+
+    <li class="step">
+      <div class="h-24 w-full bg-pink-400"></div>
+    </li>
+  </ul>
+
   <Accordion.Root type="single" class="w-full sm:max-w-[70%]">
     <Accordion.Item value="item-1">
       <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
@@ -34,10 +56,7 @@
     </Accordion.Item>
   </Accordion.Root>
 
-  <ComponentPreview name="select-demo">
-
-
-  </ComponentPreview>
+  <ComponentPreview name="select-demo"></ComponentPreview>
 
   <div class="flex justify-center">
     <Tabs.Root value="account" class="min-w-md">

@@ -23,8 +23,8 @@ npx shadcn-svelte@next init
 
 ### Manual
 
-<!--
-<Steps>
+<ul class="steps steps-vertical">
+<li class="step">
 
 ### Update `components.json`
 
@@ -50,72 +50,81 @@ Add the `registry` to the root object, and add `hooks` and `ui` keys under `alia
 }
 ```
 
+</li>
+
+<li class="step !text-left">
+
 ### Update `tailwind.config`
 
 Add `tailwindcss-animate`.
 
-<PMInstall command="tailwindcss-animate"/>
+```bash npm2yarn
+npm install tailwindcss-animate
+```
 
 Add `tailwindcss-animate` plugin, sidebar colors, and animations config.
 
-```json {2} {15-24} {32-50} {53}
+```typescript twoslash {2} {15-24} {32-50} {53}
 import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config: Config = {
-	darkMode: ['class'],
-	content: ['./src/**/*.{html,js,svelte,ts}'],
-	safelist: ['dark'],
-	theme: {
-		container: {
-			// unchanged ...
-		},
-		extend: {
-			colors: {
-				// unchanged ...
-				sidebar: {
-					DEFAULT: "hsl(var(--sidebar-background))",
-					foreground: "hsl(var(--sidebar-foreground))",
-					primary: "hsl(var(--sidebar-primary))",
-					"primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-					accent: "hsl(var(--sidebar-accent))",
-					"accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-					border: "hsl(var(--sidebar-border))",
-					ring: "hsl(var(--sidebar-ring))",
-        		},
-			},
-			borderRadius: {
-				// unchanged ...
-			},
-			fontFamily: {
-                // unchanged ...
-			},
-			keyframes: {
-				'accordion-down': {
-					from: { height: '0' },
-					to: { height: 'var(--bits-accordion-content-height)' }
-				},
-				'accordion-up': {
-					from: { height: 'var(--bits-accordion-content-height)' },
-					to: { height: '0' }
-				},
-				'caret-blink': {
-					'0%,70%,100%': { opacity: '1' },
-					'20%,50%': { opacity: '0' }
-				}
-			},
-			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'caret-blink': 'caret-blink 1.25s ease-out infinite'
-			}
-		}
-	},
-	plugins: [tailwindcssAnimate]
+  darkMode: 'class',
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  // safelist: ['dark'],
+  theme: {
+    container: {
+      // unchanged ...
+    },
+    extend: {
+      colors: {
+        // unchanged ...
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
+      },
+      borderRadius: {
+        // unchanged ...
+      },
+      fontFamily: {
+        // unchanged ...
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--bits-accordion-content-height)' }
+        },
+        'accordion-up': {
+          from: { height: 'var(--bits-accordion-content-height)' },
+          to: { height: '0' }
+        },
+        'caret-blink': {
+          '0%,70%,100%': { opacity: '1' },
+          '20%,50%': { opacity: '0' }
+        }
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'caret-blink': 'caret-blink 1.25s ease-out infinite'
+      }
+    }
+  },
+  plugins: [tailwindcssAnimate]
 };
-
-export default config;
 ```
+
+</li>
+
+
+<li class="step !text-left">
 
 ### Update `utils`
 
@@ -132,8 +141,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-</Steps>
--->
+</li>
+</ul>
 
 ## Upgrade Components
 

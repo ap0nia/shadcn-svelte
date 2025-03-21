@@ -1,53 +1,78 @@
 <script lang="ts">
-  // import CopyButton from '$lib/components/copy-button.svelte'
+  import { formatHex, formatHsl, formatRgb } from 'culori'
+  import CopyButton from '$lib/components/copy-button.svelte'
 
-  // let hex = $state('#030711')
+  let { initial = '#030711' } = $props()
 
-  // let hsl: [number, number, number] = $state([0, 0, 0])
-  // let rgb: [number, number, number] = $state([0, 0, 0])
-
-  // $effect(() => {
-  //   if (hex && ((hex.length === 6 && hex[0] !== '#') || (hex.length === 7 && hex[0] === '#'))) {
-  //     hsl = hexToHsl(hex)
-  //     rgb = hexToRgb(hex)
-  //   }
-  // })
-
-  // const hslString = $derived(`${hsl[0]} ${hsl[1]}% ${hsl[2]}%`)
-  // const rgbString = $derived(`${rgb[0]} ${rgb[1]} ${rgb[2]}`)
+  let hex = $state(formatHex(initial))
+  let hsl = $state(formatHsl(initial))
+  let rgb = $state(formatRgb(initial))
 </script>
 
-<div
-  class="ring-offset-background focus-visible:ring-ring mt-2 flex h-[300px] items-center justify-center rounded-md border focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
->
-  <div class="mx-auto w-full max-w-sm space-y-6 py-4">
-    <div class="grid gap-2">
-      <!--
-      <Label for="hex">HEX</Label>
-      <Input name="hex" bind:value={hex} maxlength={7} />
-      -->
-    </div>
+<div class="card border shadow-sm">
+  <div class="card-body items-center">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">HEX</legend>
 
-    <div class="relative grid gap-2">
-      <!--
-      <Label for="hsl">HSL</Label>
-      <Input name="hsl" value={hslString} readonly />
-      <CopyButton
-        class="text-primary hover:bg-accent hover:text-primary absolute top-[28.5px] right-2 mb-1 size-6 [&_svg]:size-3"
-        text={hslString}
-      />
-      -->
-    </div>
+      <div class="join">
+        <input
+          type="text"
+          class="input join-item"
+          bind:value={
+            () => hex,
+            (newHex) => {
+              hex = newHex
+              rgb = formatRgb(newHex) || rgb
+              hsl = formatHsl(newHex) || hsl
+            }
+          }
+        />
 
-    <div class="relative grid gap-2">
-      <!--
-      <Label for="rgb">RGB</Label>
-      <Input name="rgb" value={rgbString} readonly />
-      <CopyButton
-        class="text-primary hover:bg-accent hover:text-primary absolute top-[28.5px] right-2 mb-1 size-6 [&_svg]:size-3"
-        text={rgbString}
-      />
-      -->
-    </div>
+        <CopyButton class="join-item h-auto" value={hex} />
+      </div>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">HSL</legend>
+
+      <div class="join">
+        <label class="input join-item">
+          <input
+            type="text"
+            bind:value={
+              () => hsl,
+              (newHsl) => {
+                hsl = newHsl
+                rgb = formatRgb(newHsl) || rgb
+                hex = formatHex(newHsl) || hex
+              }
+            }
+          />
+        </label>
+
+        <CopyButton class="join-item h-auto" value={hsl} />
+      </div>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">RGB</legend>
+
+      <div class="join">
+        <input
+          type="text"
+          class="input join-item"
+          bind:value={
+            () => rgb,
+            (newRgb) => {
+              rgb = newRgb
+              hex = formatHex(newRgb) || hex
+              hsl = formatHsl(newRgb) || hsl
+            }
+          }
+        />
+
+        <CopyButton class="join-item h-auto" value={rgb} />
+      </div>
+    </fieldset>
   </div>
 </div>

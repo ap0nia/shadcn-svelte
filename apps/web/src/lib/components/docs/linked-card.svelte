@@ -12,7 +12,7 @@
 
 <a
   href={localizedHref}
-  class={cn('btn link-hover h-auto flex-col items-center justify-center p-6 sm:p-10', className)}
+  class={cn('btn link-hover h-auto flex-col gap-0 p-10', className)}
   {...restProps}
 >
   {@render children?.()}

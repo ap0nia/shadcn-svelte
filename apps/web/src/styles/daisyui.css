@@ -109,6 +109,33 @@
   }
 }
 
+.steps.steps-vertical {
+  display: block;
+  border-left: 4px solid color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  overflow-x: visible;
+  overflow-y: visible;
+  padding-left: 0;
+
+  .step {
+    text-align: left;
+    display: block;
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .step:before {
+    display: none;
+  }
+
+  .step:after {
+    position: absolute;
+    top: 0;
+    left: -18px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .toast {
   @apply flex-row;
 }

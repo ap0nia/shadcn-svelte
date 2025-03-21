@@ -183,6 +183,21 @@ export const sidebar: SidebarNavItem[] = [
     ],
   },
   {
+    title: 'Extensions',
+    items: [
+      {
+        title: 'Shiki',
+        items: [
+          {
+            title: 'Transformers',
+            href: '/docs/extensions/shiki/transformers',
+            items: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
     title: 'Components',
     items: [
       {

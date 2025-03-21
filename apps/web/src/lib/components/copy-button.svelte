@@ -12,10 +12,13 @@
 
   let timeout = $state<ReturnType<typeof setTimeout>>()
 
-  async function copyCode() {
+  async function copyCode(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
     if (typeof navigator === 'undefined') return
 
     if (value == null) return
+
+    e.preventDefault()
+    e.stopPropagation()
 
     await navigator.clipboard.writeText(value)
 
@@ -36,12 +39,7 @@
 
 <button
   onclick={copyCode}
-  class={cn(
-    copied && 'swap-active',
-    className,
-    'btn btn-outline btn-square swap',
-    'opacity-0 transition-opacity group-hover:opacity-100',
-  )}
+  class={cn(copied && 'swap-active', className, 'btn btn-outline btn-square swap')}
   aria-label="Copy"
   {...restProps}
 >

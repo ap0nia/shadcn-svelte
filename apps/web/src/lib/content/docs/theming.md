@@ -4,9 +4,8 @@ description: Use CSS Variables to customize the look and feel of your applicatio
 ---
 
 <script>
+  import { Alert, AlertDescription } from '$lib/registry/new-york/ui/alert'
   import ColorConverter from '$lib/components/docs/color-converter.svelte'
-  // import { Callout, Steps } from '$lib/components/docs';
-  // import HexToChannels from "$lib/components/docs/hex-to-channels.svelte";
 </script>
 
 We use CSS variables for styling. This allows you to easily change the colors of components without having to update class names.
@@ -23,13 +22,13 @@ You can use this tool to convert your HEX color to HSL without the color space f
 
 We use a simple `background` and `foreground` convention for colors. The `background` variable is used for the background color of the component and the `foreground` variable is used for the text color.
 
-<!--
-<Callout>
+<Alert>
+  <AlertDescription>
 
 The `background` suffix can be omitted if the variable is used for the background color of the component.
 
-</Callout>
--->
+  </AlertDescription>
+</Alert>
 
 Given the following CSS variables:
 
@@ -44,20 +43,20 @@ The `background` color of the following component will be `hsl(var(--primary) / 
 <div class="bg-primary text-primary-foreground">Hello</div>
 ```
 
-<!--
-<Callout>
+<Alert>
+  <AlertDescription>
 
 **CSS variables must be defined without color space function**. See the [Tailwind CSS documentation](https://tailwindcss.com/docs/customizing-colors#using-css-variables) for more information.
 
-</Callout>
--->
+  </AlertDescription>
+</Alert>
 
 ## List of variables
 
 Here's the list of variables available for customization:
 
-<!-- 
-<Steps>
+<ul class="steps">
+  <li class="step">
 
 ```css title="Default background color of <body />...etc"
 --background: 0 0% 100%;
@@ -115,9 +114,8 @@ Here's the list of variables available for customization:
 --radius: 0.5rem;
 ```
 
-</Steps>
-
--->
+  </li>
+</ul>
 
 ### Adding new colors
 

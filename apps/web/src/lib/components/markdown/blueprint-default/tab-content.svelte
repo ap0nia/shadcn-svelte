@@ -11,6 +11,6 @@
   let props: Props = $props()
 </script>
 
-<Tabs.Content value={props.value}>
+<Tabs.Content value={props.value} class="[&>div[class*=language]]:my-0">
   {@render props.children?.()}
 </Tabs.Content>

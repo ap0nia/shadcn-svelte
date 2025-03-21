@@ -37,7 +37,7 @@
 <div
   bind:this={ref}
   class={cn(
-    'relative block',
+    'alert relative block',
     '[&>svg]:absolute [&>svg]:top-4 [&>svg]:left-4 [&>svg~*]:pl-7',
     className,
   )}

@@ -4,21 +4,23 @@ description: Configuration for your project.
 ---
 
 <script>
-    // import { Callout, ComponentPreview, PMExecute } from '$lib/components/docs'
-    import ComponentPreview from '$lib/components/docs/component-preview.svelte'
+  import { Alert, AlertDescription } from '$lib/registry/new-york/ui/alert'
+  import ComponentPreview from '$lib/components/docs/component-preview.svelte'
 </script>
 
 The `components.json` file holds configuration for your project.
 
 We use it to understand how your project is set up and how to generate components customized for your project.
 
-<!--
-<Callout class="mt-6">
-  Note: The <code>components.json</code> file is optional and **only required if you're
+<Alert>
+  <AlertDescription>
+
+  Note: The `components.json` file is optional and **only required if you're
   using the CLI** to add components to your project. If you're using the copy
   and paste method, you don't need this file.
-</Callout>
--->
+
+  </AlertDescription>
+</Alert>
 
 You can create a `components.json` file in your project by running the following command:
 

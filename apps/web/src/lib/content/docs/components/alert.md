@@ -18,50 +18,34 @@ links:
 ## Installation
 
 <Tabs value="cli">
+  <TabsList class="tabs-border tabs-xl border-b w-full mb-4">
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
 
-<TabsList class="tabs-border tabs-xl border-b w-full mb-4">
-<TabsTrigger value="cli">CLI</TabsTrigger>
-<TabsTrigger value="manual">Manual</TabsTrigger>
-</TabsList>
-
-<TabsContent value="cli">
+  <TabsContent value="cli">
 
 ```bash npm2yarn
 npx shadcn-svelte@next add alert
 ```
 
-</TabsContent>
+  </TabsContent>
 
-<TabsContent value="manual">
-
-<ul class="steps steps-vertical !m-0 !p-0">
-
-<li class="step step-primary !text-left">
-
-<div class="w-full">
-
-<h4>
-
+  <TabsContent value="manual">
+    <ul class="steps steps-vertical">
+<li class="step">
 Install `bits-ui`
 
-</h4>
-
 ```bash npm2yarn
 npx shadcn-svelte@next add alert
 ```
 
-</div>
-
 </li>
-
-<li class="step step-primary !text-left">
-Copy and paste the component source files linked at the top of this page into your project.
-</li>
-
-</ul>
-
-</TabsContent>
-
+      <li class="step">
+        Copy and paste the component source files linked at the top of this page into your project.
+      </li>
+    </ul>
+  </TabsContent>
 </Tabs>
 
 ## Usage

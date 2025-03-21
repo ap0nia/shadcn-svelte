@@ -57,7 +57,7 @@
   })
 </script>
 
-<Tabs.Root bind:value onValueChange={handleChange} class="min-w-md bg-base-200">
+<Tabs.Root bind:value onValueChange={handleChange} class="bg-base-200 w-full">
   <Tabs.List class="tabs-box">
     {#each triggers as trigger (trigger)}
       <Tabs.Trigger value={trigger}>{trigger}</Tabs.Trigger>

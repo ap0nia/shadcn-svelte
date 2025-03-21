@@ -72,7 +72,7 @@ function parseMetaString(meta) {
     if (isNormalKey) return [...previous, [key, value || true]]
 
     return previous
-  }, /** @type Array<Array<boolean | string>> */ ([]))
+  }, /** @type Array<Array<boolean | string>> */([]))
 
   const parsedMeta = Object.fromEntries(entries)
 
@@ -92,7 +92,7 @@ function getComponentSourceFileContent(src = '') {
     const contents = fs.readFileSync(filePath, 'utf8').replace('<!-- prettier-ignore -->\n', '')
 
     return contents
-  } catch {}
+  } catch { }
 }
 
 /**

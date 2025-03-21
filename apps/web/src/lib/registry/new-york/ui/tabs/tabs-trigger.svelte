@@ -13,7 +13,7 @@
 <TabsPrimitive.Trigger
   bind:ref
   class={cn(
-    'tab',
+    'tab gap-2',
     // 'btn btn-sm no-animation',
     // 'ring-offset-base-100 h-full min-h-0 rounded-sm shadow-none',
     // 'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',

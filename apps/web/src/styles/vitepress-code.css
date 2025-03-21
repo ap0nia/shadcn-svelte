@@ -17,8 +17,8 @@ pre.shiki {
  * https://github.com/vuejs/vitepress/blob/9d0145d32dd72bfcc6964afb7c5016668fb57a40/src/client/theme-default/styles/components/vp-doc.css#L345C1-L418C1
  */
 :root {
-  --vp-code-line-highlight-color: var(--color-info-content);
-  --vp-code-line-highlight-bg-color: var(--color-info);
+  --vp-code-line-highlight-color: var(--color-base-content);
+  --vp-code-line-highlight-bg-color: var(--color-base-300);
 
   --vp-code-line-warning-color: var(--color-warning-content);
   --vp-code-line-warning-bg-color: var(--color-warning);
