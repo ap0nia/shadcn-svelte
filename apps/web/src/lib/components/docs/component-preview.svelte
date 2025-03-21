@@ -117,100 +117,76 @@
       </Tabs.List>
     </div>
 
-    <Tabs.Content value="preview">
-      <div class="relative space-y-2 p-2">
-        <div class="flex items-center gap-2">
-          <StyleSwitcher />
-          <LanguageSelect {locale} />
-          <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
-          <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
-        </div>
+    <div class="relative space-y-2 p-2">
+      <div class="flex items-center gap-2 p-1">
+        <StyleSwitcher />
+        <LanguageSelect {locale} />
+        <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
+        <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
+      </div>
 
-        <div
+      <div
+        class={cn(
+          'flex min-h-100 flex-col',
+          localMode === 'dark' ? 'dark' : 'light',
+          'card',
+          'overflow-hidden border shadow-sm',
+        )}
+        data-style={$config.style}
+        data-theme={localTheme}
+        lang={$locale}
+        dir={$messages.__direction() as any}
+      >
+        <Tabs.Content
+          value="preview"
           class={cn(
-            'min-h-100',
-            localMode === 'dark' ? 'dark' : 'light',
-            'card',
-            'overflow-hidden border shadow-sm',
+            'card-body',
+            'preview flex h-full w-full justify-center',
+            {
+              'items-center': align === 'center',
+              'items-start': align === 'start',
+              'items-end': align === 'end',
+            },
+            className,
+          )}
+          {style}
+        >
+          {#if example}
+            {@render example()}
+          {:else}
+            {@render ExampleFallback()}
+          {/if}
+        </Tabs.Content>
+
+        <Tabs.Content
+          value="code"
+          class={cn(
+            'card-body',
+            'source-code',
+            'preview flex h-full w-full justify-center',
+            {
+              'items-center': align === 'center',
+              'items-start': align === 'start',
+              'items-end': align === 'end',
+            },
+            className,
           )}
         >
-          <div
-            data-style={$config.style}
-            data-theme={localTheme}
-            lang={$locale}
-            dir={$messages.__direction() as any}
-            class={cn(
-              'card-body',
-              'preview flex w-full justify-center',
-              {
-                'items-center': align === 'center',
-                'items-start': align === 'start',
-                'items-end': align === 'end',
-              },
-              className,
-            )}
-            {style}
-          >
-            {#if example}
-              {@render example()}
-            {:else}
-              {@render ExampleFallback()}
-            {/if}
-          </div>
-        </div>
+          {#if children}
+            {@render children()}
+          {:else}
+            <p class="text-base-content/70 grow-0 text-sm">
+              <span>Code for</span>
+
+              <code class="badge badge-sm">
+                {name}
+              </code>
+
+              <span>component not found in registry.</span>
+            </p>
+          {/if}
+        </Tabs.Content>
       </div>
-    </Tabs.Content>
-
-    <Tabs.Content value="code">
-      <div class="space-y-2 p-2">
-        <div class="flex items-center gap-2">
-          <StyleSwitcher />
-          <LanguageSelect {locale} />
-          <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
-          <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
-        </div>
-
-        <div
-          class={cn(
-            'min-h-100',
-            localMode === 'dark' ? 'dark' : 'light',
-            'card',
-            'overflow-hidden border shadow-sm',
-          )}
-        >
-          <div
-            data-style={$config.style}
-            data-theme={localTheme}
-            lang={$locale}
-            dir={$messages.__direction() as any}
-            class={cn(
-              'card-body',
-              'source-code',
-              'preview flex w-full justify-center',
-              {
-                'items-center': align === 'center',
-                'items-start': align === 'start',
-                'items-end': align === 'end',
-              },
-              className,
-            )}
-          >
-            {#if children}
-              {@render children()}
-            {:else}
-              <p class="text-base-content/70 grow-0 text-sm">
-                <span>Code for</span>
-
-                <code class="badge badge-sm">
-                  {name}
-                </code>
-
-                <span>component not found in registry.</span>
-              </p>
-            {/if}
-          </div>
-        </div>
-      </div>
-    </Tabs.Content>
+    </div>
   </Tabs.Root>
 </div>

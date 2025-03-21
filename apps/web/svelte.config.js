@@ -80,17 +80,19 @@ function parseMetaString(meta) {
 }
 
 function getComponentSourceFileContent(src = '') {
-  const resolvedSrc = src.replace('../', './')
+  try {
+    const resolvedSrc = src.replace('../', './')
 
-  if (!resolvedSrc) return
+    if (!resolvedSrc) return
 
-  const filePath = path.join(process.cwd(), resolvedSrc)
+    const filePath = path.join(process.cwd(), resolvedSrc)
 
-  // twoslash is sensitive to whitespace for its directives, so examples will
-  // typically start with a prettier-ignore directive.
-  const contents = fs.readFileSync(filePath, 'utf8').replace('<!-- prettier-ignore -->\n', '')
+    // twoslash is sensitive to whitespace for its directives, so examples will
+    // typically start with a prettier-ignore directive.
+    const contents = fs.readFileSync(filePath, 'utf8').replace('<!-- prettier-ignore -->\n', '')
 
-  return contents
+    return contents
+  } catch {}
 }
 
 /**
@@ -99,6 +101,7 @@ function getComponentSourceFileContent(src = '') {
 function rehypeComponentExample() {
   return (tree) => {
     const nameRegex = /name="([^"]+)"/
+
     visit(tree, 'raw', (node, index, parent) => {
       if (!index) return
 
@@ -118,7 +121,7 @@ function rehypeComponentExample() {
 
           const sourceCode = getComponentSourceFileContent(src)
 
-          if (!sourceCode) return
+          if (!sourceCode) continue
 
           /**
            * @type import('hast').RootContent
