@@ -35,7 +35,8 @@ npx shadcn-svelte@next add accordion
 
   <TabsContent value="manual">
     <ul class="steps steps-vertical">
-      <li class="step">
+
+<li class="step">
 
 Install `bits-ui`
 
@@ -43,8 +44,7 @@ Install `bits-ui`
 npx shadcn-svelte@next add accordion
 ```
 
-      </li>
-
+</li>
       <li class="step">
         Copy and paste the component source files linked at the top of this page into your project.
       </li>

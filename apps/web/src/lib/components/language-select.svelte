@@ -4,11 +4,7 @@
   import { locales, type Locale } from '$lib/paraglide/runtime'
   import { cn } from '$lib/utils/cn'
 
-  let {
-    class: className = '',
-    locale = getLocale(),
-    messages = getMessages(locale),
-  } = $props()
+  let { class: className = '', locale = getLocale(), messages = getMessages(locale) } = $props()
 
   async function handleSelectedChange(selected?: string) {
     if (selected == null) return
@@ -24,12 +20,14 @@ A select menu that navigates to different language settings.
 
 <div data-tip={$messages.selectLanguage()} class={cn('tooltip tooltip-bottom', className)}>
   <Select.Root type="single" value={$locale} onValueChange={handleSelectedChange}>
-    <Select.Trigger class="w-28">
+    <Select.Trigger class={cn(false && 'w-28')}>
+      <!--
       <span class="hidden md:inline">
         {$messages.__name() || $messages.selectLanguage()}
       </span>
+      -->
 
-      <span class="icon-[mdi--language] inline md:hidden"></span>
+      <span class={cn('icon-[mdi--language]', false && 'inline md:hidden')}></span>
     </Select.Trigger>
 
     <Select.Content class="max-h-96" sideOffset={10}>

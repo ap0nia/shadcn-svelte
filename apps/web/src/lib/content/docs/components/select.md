@@ -38,6 +38,7 @@ npx shadcn-svelte@next add select
 
   <TabsContent value="manual">
     <ul class="steps steps-vertical">
+
 <li class="step">
 
 Install `bits-ui`
@@ -47,12 +48,11 @@ npx shadcn-svelte@next add select
 ```
 
 </li>
-
-<li class="step">
-  Copy and paste the component source files linked at the top of this page into your project.
-</li>
-</ul>
-</TabsContent>
+      <li class="step">
+        Copy and paste the component source files linked at the top of this page into your project.
+      </li>
+    </ul>
+  </TabsContent>
 </Tabs>
 
 ## Usage

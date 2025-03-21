@@ -34,6 +34,7 @@ npx shadcn-svelte@next add alert
   <TabsContent value="manual">
     <ul class="steps steps-vertical">
 <li class="step">
+
 Install `bits-ui`
 
 ```bash npm2yarn

@@ -8,7 +8,7 @@
   import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { setLocale, setMessages } from '$lib/i18n'
   import { getLocale } from '$lib/paraglide/runtime'
-  import { config } from '$lib/stores/config'
+  import { config, styles } from '$lib/stores/config'
   import { cn } from '$lib/utils/cn'
 
   import StyleSwitcher from './style-switcher.svelte'
@@ -128,10 +128,10 @@
 
       <div
         class={cn(
-          'flex min-h-100 flex-col',
+          'flex min-h-100 flex-col p-2',
           localMode === 'dark' ? 'dark' : 'light',
           'card',
-          'overflow-hidden border shadow-sm',
+          'preview-container overflow-hidden border shadow-sm',
         )}
         data-style={resolvedStyle}
         data-theme={localTheme}
@@ -174,19 +174,45 @@
         >
           {#if children}
             {@render children()}
-          {:else}
-            <p class="text-base-content/70 grow-0 text-sm">
+          {/if}
+
+          <!-- The child code blocks are added at compile time. -->
+          <!-- It may have either code block rendered, with a data-style property. -->
+          <!-- Use a CSS selector to render the placeholder when the corresponding code block doesn't exist. -->
+          {#each styles as style (style.name)}
+            <p
+              class="text-base-content/70 code-placeholder hidden grow-0 text-sm"
+              data-style={style.name}
+            >
               <span>Code for</span>
 
               <code class="badge badge-sm">
                 {name}
               </code>
 
-              <span>component not found in {resolvedStyle} registry.</span>
+              <span>component not found in {style.label} registry.</span>
             </p>
-          {/if}
+          {/each}
         </Tabs.Content>
       </div>
     </div>
   </Tabs.Root>
 </div>
+
+<style lang="postcss">
+  .preview-container[data-style='default'] {
+    &:not(:has(div[data-style='default'])) {
+      .code-placeholder[data-style='default'] {
+        display: block !important;
+      }
+    }
+  }
+
+  .preview-container[data-style='new-york'] {
+    &:not(:has(div[data-style='new-york'])) {
+      .code-placeholder[data-style='new-york'] {
+        display: block !important;
+      }
+    }
+  }
+</style>
