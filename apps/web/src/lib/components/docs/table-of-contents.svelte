@@ -107,6 +107,8 @@
     }
   }
 
+  const activeItemUrl = $derived('#' + $activeItem)
+
   onMount(() => {
     getHeadingsWithHierarchy('markdown')
 
@@ -133,7 +135,7 @@
 
       <li>
         {#if item.items?.length}
-          <details open>
+          <details open class:menu-active={activeItemUrl === item.url}>
             <summary>
               <span class="icon-[mdi--folder]"></span>
               <span>{item.title}</span>
@@ -142,7 +144,7 @@
             {@render TableOfContentsItem({ items: item.items })}
           </details>
         {:else}
-          <a {href}>
+          <a {href} class:menu-active={`#${$activeItem}` === item.url}>
             {item.title}
           </a>
         {/if}

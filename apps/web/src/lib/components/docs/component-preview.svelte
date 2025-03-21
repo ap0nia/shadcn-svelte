@@ -56,13 +56,14 @@
 
   const messages = setMessages(locale)
 
+  const resolvedStyle = $derived(style || $config.style)
+
+  const componentPath = $derived.by(() => {
+    return ['', 'src', 'lib', 'registry', resolvedStyle, 'example', `${name}.svelte`].join('/')
+  })
+
   const component = $derived.by(() => {
-    const s = style || $config.style
-
-    const resolvedName = ['', 'src', 'lib', 'registry', s, 'example', `${name}.svelte`].join('/')
-
-    const example = examples[s][resolvedName]
-
+    const example = examples[resolvedStyle][componentPath]
     return example
   })
 </script>
@@ -75,7 +76,7 @@
       {name}
     </code>
 
-    <span>not found in registry.</span>
+    <span>component not found in {resolvedStyle} registry.</span>
   </p>
 {/snippet}
 
@@ -132,7 +133,7 @@
           'card',
           'overflow-hidden border shadow-sm',
         )}
-        data-style={$config.style}
+        data-style={resolvedStyle}
         data-theme={localTheme}
         lang={$locale}
         dir={$messages.__direction() as any}
@@ -149,7 +150,6 @@
             },
             className,
           )}
-          {style}
         >
           {#if example}
             {@render example()}
@@ -182,7 +182,7 @@
                 {name}
               </code>
 
-              <span>component not found in registry.</span>
+              <span>component not found in {resolvedStyle} registry.</span>
             </p>
           {/if}
         </Tabs.Content>
