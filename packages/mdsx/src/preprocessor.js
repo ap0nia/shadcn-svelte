@@ -4,6 +4,7 @@ import path from 'node:path'
 
 import { print } from 'esrap'
 import MagicString from 'magic-string'
+import { defaultHandlers } from 'mdast-util-to-hast'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
@@ -76,7 +77,9 @@ function createSvelteInstance(ast, file) {
 
   if (file.data.blueprint) {
     const importPath = getRelativeFilePath(file.path, file.data.blueprint.path)
-    const blueprintImportStatement = `\timport ${MDSX_BLUEPRINT_NAME}, * as ${MDSX_COMPONENT_NAME} from "${importPath}";`
+    const hasDefaultExport = file.data.components?.includes('default')
+    const defaultImport = hasDefaultExport ? `${MDSX_BLUEPRINT_NAME},` : ''
+    const blueprintImportStatement = `\timport ${defaultImport} * as ${MDSX_COMPONENT_NAME} from "${importPath}";`
     lines.push(blueprintImportStatement)
   }
 
@@ -121,8 +124,6 @@ function getBlueprintData(file, config) {
 
   return blueprint
 }
-
-import { defaultHandlers } from 'mdast-util-to-hast'
 
 /**
  * @param {Parameters<import('./preprocessor.js').MarkupPreprocessor>[0]} options
@@ -277,9 +278,11 @@ export async function compile(options, config) {
     s.prepend(cssContent)
   }
 
-  // Prepend template.
-  s.prepend(`<${MDSX_BLUEPRINT_NAME} {metadata}>\n`)
-  s.append(`</${MDSX_BLUEPRINT_NAME}>\n`)
+  if (data.components?.includes('default')) {
+    // Wrap script with blueprint.
+    s.prepend(`<${MDSX_BLUEPRINT_NAME} {metadata}>\n`)
+    s.append(`</${MDSX_BLUEPRINT_NAME}>\n`)
+  }
 
   // Prepend new svelte instance script.
   const svelteInstance = createSvelteInstance(parsed['instance'], file)
@@ -302,25 +305,34 @@ export async function compile(options, config) {
 }
 
 /**
+ * @type import('./preprocessor.js').createMdsxMarkupPreprocessor
+ */
+export function createMdsxMarkupPreprocessor(config = {}) {
+  const extensions = config?.extensions ?? DEFAULT_MARKDOWN_EXTENSIONS
+
+  return async (options) => {
+    if (options.filename == null) return
+
+    const fileExtension = path.extname(options.filename)
+
+    if (!extensions.includes(fileExtension)) return
+
+    const result = await compile(options, config)
+
+    return result
+  }
+}
+
+/**
  * @type import('./preprocessor.js').createMdsxPreprocessor
  */
 export function createMdsxPreprocessor(config = {}) {
-  const extensions = config?.extensions ?? DEFAULT_MARKDOWN_EXTENSIONS
-
   /**
    * @type import('svelte/compiler').PreprocessorGroup
    */
   const mdsxPreprocessor = {
     name: 'mdsx',
-    markup: async (options) => {
-      if (options.filename == null) return
-
-      const fileExtension = path.extname(options.filename)
-
-      if (!extensions.includes(fileExtension)) return
-
-      return compile(options, config)
-    },
+    markup: createMdsxMarkupPreprocessor(config),
   }
 
   return mdsxPreprocessor

@@ -67,8 +67,14 @@ export type Blueprint = {
 export type MarkupPreprocessor = NonNullable<PreprocessorGroup['markup']>
 
 /**
+ * Create markup pre-processor for MDX files.
+ */
+export function createMdsxMarkupPreprocessor(
+  config?: MdsxPreprocessorConfig,
+): PreprocessorGroup['markup']
+
+/**
  * Create pre-processor for MDX files.
  *
- * @internal
  */
 export function createMdsxPreprocessor(config?: MdsxPreprocessorConfig): PreprocessorGroup

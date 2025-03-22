@@ -1,6 +1,7 @@
 // @ts-check
 
 /// <reference types="@ap0nia/mdsx/types/hast" />
+/// <reference types="@ap0nia/mdsx/types/vfile" />
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -37,7 +38,7 @@ const relativeBlueprintPath = path.join(
   'components',
   'markdown',
   'blueprint-default',
-  'blueprint.svelte',
+  'index.ts',
 )
 
 /**
@@ -72,7 +73,7 @@ function parseMetaString(meta) {
     if (isNormalKey) return [...previous, [key, value || true]]
 
     return previous
-  }, /** @type Array<Array<boolean | string>> */([]))
+  }, /** @type Array<Array<boolean | string>> */ ([]))
 
   const parsedMeta = Object.fromEntries(entries)
 
@@ -92,14 +93,16 @@ function getComponentSourceFileContent(src = '') {
     const contents = fs.readFileSync(filePath, 'utf8').replace('<!-- prettier-ignore -->\n', '')
 
     return contents
-  } catch { }
+  } catch {
+    // noop
+  }
 }
 
 /**
  * @returns {HastTransformer} - Unified Transformer
  */
 function rehypeComponentExample() {
-  return (tree) => {
+  return (tree, file) => {
     const nameRegex = /name="([^"]+)"/
 
     visit(tree, 'raw', (node, index, parent) => {
@@ -115,48 +118,48 @@ function rehypeComponentExample() {
 
       if (!name) return
 
-      try {
-        for (const style of styles) {
-          const src = path.join('src', 'lib', 'registry', style.name, 'example', `${name}.svelte`)
+      file.data.dependencies ??= []
 
-          const sourceCode = getComponentSourceFileContent(src)
+      for (const style of styles) {
+        const src = path.join('src', 'lib', 'registry', style.name, 'example', `${name}.svelte`)
 
-          if (!sourceCode) continue
+        file.data.dependencies.push(path.resolve(__dirname, src))
 
-          /**
-           * @type import('hast').RootContent
-           */
-          const sourceCodeNode = {
-            type: 'element',
-            tagName: 'pre',
-            properties: {
-              __src__: src,
-              __style__: style.name,
-              className: ['code'],
-            },
-            children: [
-              {
-                type: 'element',
-                tagName: 'code',
-                properties: {
-                  className: [`language-svelte`],
-                },
-                children: [
-                  {
-                    type: 'text',
-                    value: sourceCode,
-                  },
-                ],
+        const sourceCode = getComponentSourceFileContent(src)
+
+        if (!sourceCode) continue
+
+        /**
+         * @type import('hast').RootContent
+         */
+        const sourceCodeNode = {
+          type: 'element',
+          tagName: 'pre',
+          properties: {
+            __src__: src,
+            __style__: style.name,
+            className: ['code'],
+          },
+          children: [
+            {
+              type: 'element',
+              tagName: 'code',
+              properties: {
+                className: [`language-svelte`],
               },
-            ],
-          }
-
-          const p = /** @type import('hast').Parent*/ (parent)
-
-          p?.children.splice(index + 1, 0, sourceCodeNode)
+              children: [
+                {
+                  type: 'text',
+                  value: sourceCode,
+                },
+              ],
+            },
+          ],
         }
-      } catch (e) {
-        console.error(e)
+
+        const p = /** @type import('hast').Parent*/ (parent)
+
+        p?.children.splice(index + 1, 0, sourceCodeNode)
       }
     })
   }

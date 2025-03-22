@@ -3,12 +3,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
+import * as acorn from 'acorn'
 import { parse, preprocess } from 'svelte/compiler'
 import { visit } from 'unist-util-visit'
+import { walk } from 'zimmerframe'
 
 import { MDSX_COMPONENT_NAME, MDSX_FLOATING_COMPONENT_NAME } from '../constants.js'
 import { escapeHtmlEntities } from '../utils/escape-html-entities.js'
-import { getNamedExports } from '../utils/get-named-exports.js'
 
 /**
  * HTML tag-names that may be a parent of code content.
@@ -73,6 +74,7 @@ export function rehypeRenderCode() {
     })
   }
 }
+
 /**
  * Handle element nodes with tag-names that are handled by the selected blueprint.
  * It will convert the original tag-name to a Svelte component call.
@@ -99,26 +101,64 @@ export function rehypeBlueprint() {
 
     const filename = path.parse(blueprint.path).base
 
-    const preprocessors = file.data.preprocessors ?? []
+    /**
+     * @type string[]
+     */
+    let namedExports = []
 
-    const { code, dependencies } = await preprocess(source, preprocessors, { filename })
+    /**
+     * @type acorn.Program
+     */
+    let program
 
-    if (dependencies) {
-      file.data.dependencies ??= []
-      file.data.dependencies.push(...dependencies)
+    if (filename.endsWith('.svelte')) {
+      const preprocessors = file.data.preprocessors ?? []
+
+      const { code, dependencies } = await preprocess(source, preprocessors, { filename })
+
+      if (dependencies) {
+        file.data.dependencies ??= []
+        file.data.dependencies.push(...dependencies)
+      }
+
+      const ast = parse(code, { filename })
+
+      const module = ast['module']
+
+      if (module == null) {
+        throw new Error(`Unable to read exports from blueprint "${blueprint.path}".`)
+      }
+
+      program = module['content']
+
+      namedExports.push('default')
+    } else {
+      program = acorn.parse(source, { ecmaVersion: 'latest', sourceType: 'module' })
     }
 
-    const ast = parse(code, { filename })
-
-    const module = ast['module']
-
-    if (module == null) {
-      throw new Error(`Unable to read exports from blueprint "${blueprint.path}".`)
+    if (!program) {
+      throw new Error(`Unable to parse blueprint "${blueprint.path}".`)
     }
 
-    const namedExports = getNamedExports(module)
+    const state = {}
 
-    if (!namedExports) return
+    /**
+     * @type any
+     */
+    const visitors = {
+      /**
+       * @param {*} node
+       */
+      ExportNamedDeclaration(node) {
+        for (const specifier of node.specifiers) {
+          namedExports.push(specifier.exported.name)
+        }
+      },
+    }
+
+    walk(program, state, visitors)
+
+    if (!namedExports?.length) return
 
     file.data.components = namedExports
 
