@@ -22,7 +22,7 @@
           class={cn('flex flex-col items-start', item.items?.length && 'pointer-events-none')}
           href={item.href}
         >
-          <div class="text-sm leading-none" class:font-medium={item.description}>
+          <div class:font-medium={item.description}>
             {item.title}
           </div>
 
