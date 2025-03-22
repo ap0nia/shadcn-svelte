@@ -15,8 +15,8 @@
 </script>
 
 {#snippet NavigationMenuSubList({ items }: SidebarNavItem)}
-  <ul class="menu min-w-3xs">
-    {#each items.slice(0, 10) as item (item.href)}
+  <ul class="menu min-w-3xs max-h-96 overflow-y-auto flex-nowrap">
+    {#each items as item (item.href)}
       <li>
         <NavigationMenu.Link
           class={cn('flex flex-col items-start', item.items?.length && 'pointer-events-none')}
