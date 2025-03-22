@@ -17,6 +17,10 @@
 
   <div class="divider"></div>
 
+  <div class="bg-primary">background primary</div>
+
+  <button class="btn btn-primary">hi</button>
+
   <ul class="steps">
     <li class="step">
       <div class="h-24 w-full bg-pink-400"></div>
