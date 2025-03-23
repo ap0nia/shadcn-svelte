@@ -4,7 +4,11 @@
   import * as Alert from '$lib/registry/new-york/ui/alert'
   import { cn } from '$lib/utils/cn'
 
-  let { children, variant, title }: GitHubAlert & { children?: Snippet } = $props()
+  let props: GitHubAlert & { children?: Snippet } = $props()
+
+  let { children, variant, title } = props
+
+  $inspect(props)
 
   const alertVariant: Record<GitHubAlertVariant, string> = {
     NOTE: '',

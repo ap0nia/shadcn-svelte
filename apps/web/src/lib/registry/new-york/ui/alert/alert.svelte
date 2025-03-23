@@ -37,7 +37,8 @@
 <div
   bind:this={ref}
   class={cn(
-    'alert relative block',
+    'alert',
+    'relative block overflow-auto',
     '[&>svg]:absolute [&>svg]:top-4 [&>svg]:left-4 [&>svg~*]:pl-7',
     className,
   )}

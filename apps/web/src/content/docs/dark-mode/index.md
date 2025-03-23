@@ -3,19 +3,28 @@ title: Dark mode
 description: Adding dark mode to your site.
 ---
 
-<script>
-  import LinkedCard from '$lib/components/docs/linked-card.svelte'
-</script>
+:::note{title=Hello}
+Hello
+:::
 
+:::details{title=deets open=true}
 
-<div class="grid sm:grid-cols-2 gap-4 mt-8 sm:gap-6 w-full">
-  <LinkedCard href="/docs/dark-mode/svelte">
-    <span class="icon-[devicon-plain--svelte] size-10"></span>
-    <p class="font-medium mt-2">Svelte</p>
-  </LinkedCard>
+```html
+<!-- Output (stripped of `style` attributes for clarity) -->
+<pre class="shiki has-diff"> <!-- Notice `has-diff` -->
+  <code>
+    <span class="line"></span>
+    <span class="line"><span>function</span><span>()</span><span></span><span>{</span></span>
+    <span class="line diff remove">  <!-- Notice `diff` and `remove` -->
+      <span></span><span>console</span><span>.</span><span>log</span><span>(</span><span>&#39;</span><span>hewwo</span><span>&#39;</span><span>) </span>
+    </span>
+    <span class="line diff add">  <!-- Notice `diff` and `add` -->
+      <span></span><span>console</span><span>.</span><span>log</span><span>(</span><span>&#39;</span><span>hello</span><span>&#39;</span><span>) </span>
+    </span>
+    <span class="line"><span></span><span>}</span></span>
+    <span class="line"><span></span></span>
+  </code>
+</pre>
+```
 
-  <LinkedCard href="/docs/dark-mode/astro">
-    <span class="icon-[devicon-plain--astro] size-10"></span>
-    <p class="font-medium mt-2">Astro</p>
-  </LinkedCard>
-</div>
+:::

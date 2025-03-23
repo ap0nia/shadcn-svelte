@@ -28,12 +28,19 @@ declare global {
       type: 'TabsContent'
     }
 
+    export interface Details extends Parent {
+      type: 'Details'
+      title?: string
+      open?: boolean
+    }
+
     export interface RootContentMap {
       tabs: Tabs
       tabsList: TabsList
       tabsTrigger: TabsTrigger
       tabsContent: TabsContent
       gitHubAlert: GitHubAlert
+      details: Details
     }
   }
 }

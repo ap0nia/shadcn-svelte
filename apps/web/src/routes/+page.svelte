@@ -2,6 +2,7 @@
   import { toast } from 'svelte-sonner'
 
   import * as Accordion from '$lib/registry/new-york/ui/accordion'
+  import * as Collapsible from '$lib/registry/new-york/ui/collapsible'
   import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { getMessages } from '$lib/i18n'
   import SvelteCounter from '$content/snippets/svelte-counter.md'
@@ -13,20 +14,38 @@
 </script>
 
 <main class="space-y-4 p-4">
+  <div tabindex="0" class="bg-base-100 border-base-300 collapse border">
+    <div class="collapse-title font-semibold">I have collapse-open class</div>
+    <div class="collapse-content text-sm">
+      Click the "Sign Up" button in the top right corner and follow the registration process.
+    </div>
+  </div>
+
+  <Collapsible.Root>
+    <Collapsible.Trigger>
+      <h4 class="text-sm font-semibold">@huntabyte starred 3 repositories</h4>
+    </Collapsible.Trigger>
+
+    <Collapsible.Content class="space-y-2" forceMount>
+      <div class="rounded-md border px-4 py-3 font-mono text-sm">@melt-ui/melt-ui</div>
+      <div class="rounded-md border px-4 py-3 font-mono text-sm">@sveltejs/svelte</div>
+    </Collapsible.Content>
+  </Collapsible.Root>
+
   <h1>{$messages.hello()}</h1>
 
   <div class="divider"></div>
 
-  <div class="grid grid-cols-3 theme-rose">
-    <div class="rounded-sm text-primary-foreground bg-primary">shad primary</div>
-    <div class="rounded-md text-secondary-foreground bg-secondary">shad secondary</div>
-    <div class="rounded-lg text-accent-foreground bg-accent">shad accent</div>
+  <div class="theme-rose grid grid-cols-3">
+    <div class="text-primary-foreground bg-primary rounded-sm">shad primary</div>
+    <div class="text-secondary-foreground bg-secondary rounded-md">shad secondary</div>
+    <div class="text-accent-foreground bg-accent rounded-lg">shad accent</div>
   </div>
 
   <div class="grid grid-cols-3">
-    <div class="rounded-sm text-primary-content bg-primary">daisy primary</div>
-    <div class="rounded-md text-secondary-content bg-secondary">daisy secondary</div>
-    <div class="rounded-lg text-accent-content bg-accent">daisy accent</div>
+    <div class="text-primary-content bg-primary rounded-sm">daisy primary</div>
+    <div class="text-secondary-content bg-secondary rounded-md">daisy secondary</div>
+    <div class="text-accent-content bg-accent rounded-lg">daisy accent</div>
   </div>
 
   <button class="btn btn-primary">hi</button>

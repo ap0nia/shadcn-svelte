@@ -5,6 +5,7 @@ import path from 'node:path'
 import { print } from 'esrap'
 import MagicString from 'magic-string'
 import { defaultHandlers } from 'mdast-util-to-hast'
+import remarkDirective from 'remark-directive'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
@@ -27,7 +28,11 @@ import {
 } from './unified/remark.js'
 import { parseFrontmatter } from './utils/parse-frontmatter.js'
 import { getRelativeFilePath } from './utils/path.js'
-import remarkDirective from 'remark-directive'
+
+/**
+ * @type Array<import('mdast').GitHubAlertVariant>
+ */
+const githubVariants = ['TIP', 'NOTE', 'WARNING', 'CAUTION', 'IMPORTANT']
 
 /**
  * @template T
@@ -169,29 +174,6 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
-    GitHubAlert(state, node, parent) {
-      const githubAlert = /** @type import('mdast').GitHubAlert */ (node)
-
-      /**
-       * @type import('hast').ElementContent
-       */
-      const element = {
-        type: 'element',
-        tagName: githubAlert.type,
-        properties: {
-          title: githubAlert.title,
-          variant: githubAlert.variant,
-        },
-        children: githubAlert.children
-          .flatMap((child) => handlers[child.type](state, child, parent))
-          .filter(notNull),
-      }
-
-      return element
-    },
-    /**
-     * @type import('mdast-util-to-hast').Handler
-     */
     Tabs(state, node, parent) {
       const tabs = /** @type import('mdast').Tabs */ (node)
 
@@ -286,21 +268,97 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
+    GitHubAlert(state, node, parent) {
+      const githubAlert = /** @type import('mdast').GitHubAlert */ (node)
+
+      const { position: _position, children: _children, data: _data, ...properties } = githubAlert
+
+      /**
+       * @type import('hast').ElementContent
+       */
+      const element = {
+        type: 'element',
+        tagName: githubAlert.type,
+        properties,
+        children: githubAlert.children
+          .flatMap((child) => handlers[child.type](state, child, parent))
+          .filter(notNull),
+      }
+
+      return element
+    },
+
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    Details(state, node, parent) {
+      const details = /** @type import('mdast').Details */ (node)
+
+      const { position: _position, children: _children, data: _data, ...properties } = details
+
+      /**
+       * @type import('hast').ElementContent
+       */
+      const element = {
+        type: 'element',
+        tagName: details.type,
+        properties,
+        children: details.children
+          .flatMap((child) => handlers[child.type](state, child, parent))
+          .filter(notNull),
+      }
+
+      return element
+    },
+
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
     containerDirective(state, node, parent) {
       const container = /** @type import('mdast-util-directive').ContainerDirective */ (node)
 
-      const variant = /** @type import('mdast').GitHubAlertVariant */ (container.name.toUpperCase())
       /**
-       * @type import('mdast').GitHubAlert
+       * @type any
        */
-      const githubAlert = {
-        type: 'GitHubAlert',
-        title: variant,
-        variant,
-        children: container.children,
+      const uppercaseName = container.name.toUpperCase()
+
+      if (githubVariants.includes(uppercaseName)) {
+        const variant = /** @type import('mdast').GitHubAlertVariant */ (uppercaseName)
+
+        /**
+         * @type import('mdast').GitHubAlert
+         */
+        const githubAlert = {
+          title: variant,
+          ...container.attributes,
+          type: 'GitHubAlert',
+          variant,
+          children: container.children,
+        }
+
+        return handlers.GitHubAlert(state, githubAlert, parent)
       }
 
-      return handlers.GitHubAlert(state, githubAlert, parent)
+      const lowercaseName = container.name.toLowerCase()
+
+      switch (lowercaseName) {
+        case 'details': {
+          /**
+           * @type import('mdast').Details
+           */
+          const details = {
+            type: 'Details',
+            ...container.attributes,
+            children: container.children,
+          }
+
+          return handlers.Details(state, details, parent)
+        }
+
+        default: {
+          return
+        }
+      }
     },
 
     /**
