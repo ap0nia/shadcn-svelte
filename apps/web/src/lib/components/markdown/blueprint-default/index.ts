@@ -34,7 +34,9 @@ export { default as ul } from './ul.svelte'
 export { default as Callout } from '$lib/components/docs/callout.svelte'
 export { default as ComponentPreview } from '$lib/components/docs/component-preview.svelte'
 export { default as LinkedCard } from '$lib/components/docs/linked-card.svelte'
+export { default as Image } from '$lib/components/image.svelte'
 export { default as Link } from '$lib/components/link.svelte'
+export { default as Step } from '$lib/components/step.svelte'
 export { default as Steps } from '$lib/components/steps.svelte'
 export {
   Accordion,
@@ -42,3 +44,5 @@ export {
   AccordionItem,
   AccordionTrigger,
 } from '$lib/registry/new-york/ui/accordion'
+export { Button } from '$lib/registry/new-york/ui/button'
+export { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/registry/new-york/ui/tabs'

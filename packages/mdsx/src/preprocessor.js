@@ -5,6 +5,7 @@ import path from 'node:path'
 import { print } from 'esrap'
 import MagicString from 'magic-string'
 import { defaultHandlers } from 'mdast-util-to-hast'
+import remarkGfm from 'remark-gfm'
 import remarkDirective from 'remark-directive'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
@@ -402,6 +403,7 @@ export async function compile(options, config) {
     .use(remarkDirective)
     .use(remarkContainers)
     .use(remarkGithubAlerts)
+    .use(remarkGfm)
     .use(remarkRehype, {
       allowDangerousHtml: true,
       handlers: /** @type import('mdast-util-to-hast').Handlers */ (handlers),

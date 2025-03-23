@@ -6,6 +6,6 @@
   let { class: className, children, ...restProps }: HTMLAttributes<HTMLUListElement> = $props()
 </script>
 
-<ul class={cn('my-4 ml-6 list-disc', className)} {...restProps}>
+<ul class={cn('my-4 ml-6 list-disc pl-0', className)} {...restProps}>
   {@render children?.()}
 </ul>
