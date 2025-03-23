@@ -58,7 +58,7 @@
 </script>
 
 <div
-  class="container mx-auto flex-1 items-start gap-8 p-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)]"
+  class="border-base-300 container mx-auto flex-1 items-start gap-8 border-x border-dashed p-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)]"
 >
   <aside class="fixed top-20 hidden h-[calc(100vh-8rem)] md:sticky md:block">
     <SidebarMenu />
