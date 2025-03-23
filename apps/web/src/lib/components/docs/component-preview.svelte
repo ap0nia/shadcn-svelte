@@ -13,6 +13,7 @@
 
   import LanguageSelect from '../language-select.svelte'
   import StyleSwitcher from '../style-select.svelte'
+  import ShadcnThemeSelect from '../shadcn-theme-select.svelte'
   import ThemeSelect from '../theme-select.svelte'
   import ThemeToggle from '../theme-toggle.svelte'
 
@@ -22,9 +23,9 @@
 
   const newYorkExamples = import.meta.glob('/src/lib/registry/new-york/example/*.svelte')
 
-  const daisyDefaultExamples = import.meta.glob('/src/lib/registry/default/example/*.svelte')
+  const daisyDefaultExamples = import.meta.glob('/src/lib/registry/daisy-default/example/*.svelte')
 
-  const daisyNewYorkExamples = import.meta.glob('/src/lib/registry/new-york/example/*.svelte')
+  const daisyNewYorkExamples = import.meta.glob('/src/lib/registry/daisy-new-york/example/*.svelte')
 
   let localTheme = $state($theme || null)
 
@@ -45,7 +46,7 @@
     class: className,
     example,
     children,
-    form,
+    // form,
     style,
     ...restProps
   }: Omit<PrimitiveDivAttributes, 'style' | 'form'> & {
@@ -88,6 +89,8 @@
       return localTheme
     },
   })
+
+  const isDaisy = $derived($config.style.startsWith('daisy'))
 </script>
 
 {#snippet Empty()}
@@ -143,8 +146,15 @@
     <div class="relative space-y-2 p-2">
       <div class="flex items-center gap-2 p-1">
         <StyleSwitcher />
+
         <LanguageSelect {locale} />
-        <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
+
+        {#if $config.style === 'default' || $config.style === 'new-york'}
+          <ShadcnThemeSelect />
+        {:else}
+          <ThemeSelect bind:theme={localTheme} bind:mode={localMode} bind:themes local />
+        {/if}
+
         <ThemeToggle bind:mode={localMode} bind:theme={localTheme} {themes} local />
       </div>
 
@@ -152,11 +162,12 @@
         class={cn(
           'flex min-h-100 flex-col p-2',
           localMode === 'dark' ? 'dark' : 'light',
+          !isDaisy && `theme-${$config.theme}`,
           'card',
           'preview-container overflow-hidden border shadow-sm',
         )}
         data-style={resolvedStyle}
-        data-theme={localTheme}
+        data-theme={isDaisy ? localTheme : undefined}
         lang={$locale}
         dir={$messages.__direction() as any}
       >

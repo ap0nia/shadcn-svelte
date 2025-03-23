@@ -18,7 +18,7 @@
   <AccordionPrimitive.Trigger
     bind:ref
     class={cn(
-      'flex items-center justify-between px-0 py-4 font-medium transition-all hover:underline',
+      'flex min-h-0 items-center justify-between px-0 py-4 font-medium transition-all hover:underline',
       'collapse-title',
       '[&[data-state=open]>span[class*=icon]]:rotate-180',
       className,

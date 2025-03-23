@@ -16,7 +16,6 @@
 
 <!--
 @component
-
 -->
 
 <Select.Root type="single" bind:value={$config.theme}>
@@ -31,7 +30,7 @@
   <Select.Content>
     <ScrollArea class="h-64 pr-3">
       <Select.Group class="w-full">
-        {#each themes as theme}
+        {#each themes as theme (theme.name)}
           <Select.Item value={theme.name} label={theme.label}>
             <div
               class={cn(
@@ -46,7 +45,7 @@
             </div>
 
             <span class="grow">
-              {theme}
+              {theme.label}
             </span>
           </Select.Item>
         {/each}
