@@ -4,8 +4,8 @@
   import * as Accordion from '$lib/registry/new-york/ui/accordion'
   import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { getMessages } from '$lib/i18n'
-  import SvelteCounter from '$lib/markdown/svelte-counter.md'
-  import ReactCounter from '$lib/markdown/react-counter.md'
+  import SvelteCounter from '$content/snippets/svelte-counter.md'
+  import ReactCounter from '$content/snippets/react-counter.md'
 
   const messages = getMessages()
 
