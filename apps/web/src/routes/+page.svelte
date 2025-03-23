@@ -1,255 +1,57 @@
 <script lang="ts">
-  import { toast } from 'svelte-sonner'
-
-  import ReactCounter from '$content/snippets/react-counter.md'
-  import SvelteCounter from '$content/snippets/svelte-counter.md'
-  import { getMessages } from '$lib/i18n'
-  import * as Accordion from '$lib/registry/new-york/ui/accordion'
-  import * as Collapsible from '$lib/registry/new-york/ui/collapsible'
-  import * as Tabs from '$lib/registry/new-york/ui/tabs'
-
-  const messages = getMessages()
-
-  import ComponentPreview from '$lib/components/docs/component-preview.svelte'
+  import * as ShadAccordion from '$lib/registry/new-york/ui/accordion'
+  import * as DaisyAccordion from '$lib/registry/daisy-new-york/ui/accordion'
 </script>
 
-<main class="space-y-4 p-4">
-  <div class="vp-doc">
-    <h2 class="-scroll-m-36 text-[27px] font-semibold tracking-[-0.01em] first:mt-0" id="hello">
-      <a href="#hello" class="link header-anchor leading-7">
-        <span class="icon icon-link"></span>
-      </a>
-      Hello
-    </h2>
+<main class="mx-auto w-full max-w-2xl p-8">
+  <div class="theme-zinc">
+    <h1>shadcn UI</h1>
+
+    <ShadAccordion.Root type="single" class="w-full sm:max-w-[70%]">
+      <ShadAccordion.Item value="item-1">
+        <ShadAccordion.Trigger>Is it accessible?</ShadAccordion.Trigger>
+        <ShadAccordion.Content
+          >Yes. It adheres to the WAI-ARIA design pattern.</ShadAccordion.Content
+        >
+      </ShadAccordion.Item>
+      <ShadAccordion.Item value="item-2">
+        <ShadAccordion.Trigger>Is it styled?</ShadAccordion.Trigger>
+        <ShadAccordion.Content>
+          Yes. It comes with default styles that matches the other components' aesthetic.
+        </ShadAccordion.Content>
+      </ShadAccordion.Item>
+      <ShadAccordion.Item value="item-3">
+        <ShadAccordion.Trigger>Is it animated?</ShadAccordion.Trigger>
+        <ShadAccordion.Content>
+          Yes. It's animated by default, but you can disable it if you prefer.
+        </ShadAccordion.Content>
+      </ShadAccordion.Item>
+    </ShadAccordion.Root>
   </div>
-
-  <div tabindex="0" class="bg-base-100 border-base-300 collapse border">
-    <div class="collapse-title font-semibold">I have collapse-open class</div>
-    <div class="collapse-content text-sm">
-      Click the "Sign Up" button in the top right corner and follow the registration process.
-    </div>
-  </div>
-
-  <Collapsible.Root>
-    <Collapsible.Trigger>
-      <h4 class="text-sm font-semibold">@huntabyte starred 3 repositories</h4>
-    </Collapsible.Trigger>
-
-    <Collapsible.Content class="space-y-2" forceMount>
-      <div class="rounded-md border px-4 py-3 font-mono text-sm">@melt-ui/melt-ui</div>
-      <div class="rounded-md border px-4 py-3 font-mono text-sm">@sveltejs/svelte</div>
-    </Collapsible.Content>
-  </Collapsible.Root>
-
-  <h1>{$messages.hello()}</h1>
 
   <div class="divider"></div>
 
-  <div class="theme-rose grid grid-cols-3">
-    <div class="text-primary-foreground bg-primary rounded-sm">shad primary</div>
-    <div class="text-secondary-foreground bg-secondary rounded-md">shad secondary</div>
-    <div class="text-accent-foreground bg-accent rounded-lg">shad accent</div>
-  </div>
-
-  <div class="grid grid-cols-3">
-    <div class="text-primary-content bg-primary rounded-sm">daisy primary</div>
-    <div class="text-secondary-content bg-secondary rounded-md">daisy secondary</div>
-    <div class="text-accent-content bg-accent rounded-lg">daisy accent</div>
-  </div>
-
-  <button class="btn btn-primary">hi</button>
-
-  <ul class="steps">
-    <li class="step">
-      <div class="h-24 w-full bg-pink-400"></div>
-    </li>
-
-    <li class="step">
-      <div class="h-24 w-full bg-blue-400"></div>
-    </li>
-  </ul>
-
-  <ul class="steps steps-vertical">
-    <li class="step">
-      <div class="h-24 w-full bg-pink-400"></div>
-    </li>
-
-    <li class="step">
-      <div class="h-24 w-full bg-pink-400"></div>
-    </li>
-  </ul>
-
-  <Accordion.Root type="single" class="w-full sm:max-w-[70%]">
-    <Accordion.Item value="item-1">
-      <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
-      <Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>
-    </Accordion.Item>
-    <Accordion.Item value="item-2">
-      <Accordion.Trigger>Is it styled?</Accordion.Trigger>
-      <Accordion.Content>
-        Yes. It comes with default styles that matches the other components' aesthetic.
-      </Accordion.Content>
-    </Accordion.Item>
-    <Accordion.Item value="item-3">
-      <Accordion.Trigger>Is it animated?</Accordion.Trigger>
-      <Accordion.Content>
-        Yes. It's animated by default, but you can disable it if you prefer.
-      </Accordion.Content>
-    </Accordion.Item>
-  </Accordion.Root>
-
-  <ComponentPreview name="select-demo"></ComponentPreview>
-
-  <div class="flex justify-center">
-    <Tabs.Root value="account" class="min-w-md">
-      <Tabs.List class="grid w-full grid-cols-2">
-        <Tabs.Trigger value="account">Account</Tabs.Trigger>
-        <Tabs.Trigger value="password">Password</Tabs.Trigger>
-      </Tabs.List>
-
-      <Tabs.Content value="account">A</Tabs.Content>
-
-      <Tabs.Content value="password">B</Tabs.Content>
-    </Tabs.Root>
-  </div>
-
-  <!-- name of each tab group should be unique -->
-  <div class="tabs tabs-lift">
-    <label class="tab">
-      <input type="radio" name="my_tabs_4" />
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="me-2 size-4"
-        ><path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
-        /></svg
-      >
-      Live
-    </label>
-
-    <div class="tab-content bg-base-100 border-base-300 p-6">Tab content 1</div>
-
-    <label class="tab">
-      <input type="radio" name="my_tabs_4" checked />
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="me-2 size-4"
-        ><path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z"
-        /></svg
-      >
-      Laugh
-    </label>
-
-    <div class="tab-content bg-base-100 border-base-300 p-6">Tab content 2</div>
-
-    <label class="tab">
-      <input type="radio" name="my_tabs_4" />
-
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="me-2 size-4"
-        ><path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-        /></svg
-      >
-      Love
-    </label>
-
-    <div class="tab-content bg-base-100 border-base-300 p-6">Tab content 3</div>
-  </div>
-
-  <div class="flex justify-center gap-2">
-    <button
-      class="btn btn-success data-[disabled]:flex"
-      onclick={() => {
-        toast.success('Event has been created', {
-          description: 'Sunday, December 03, 2023 at 9:00 AM',
-          action: {
-            label: 'Undo',
-            onClick: () => console.info('Undo'),
-          },
-          cancel: {
-            label: 'Cancel',
-          },
-          duration: Infinity,
-        })
-      }}
-    >
-      Success
-    </button>
-
-    <button
-      class="btn btn-info"
-      onclick={() => {
-        toast.info('Event has been created', {
-          description: 'Sunday, December 03, 2023 at 9:00 AM',
-          action: {
-            label: 'Undo',
-            onClick: () => console.info('Undo'),
-          },
-          duration: Infinity,
-        })
-      }}
-    >
-      Info
-    </button>
-
-    <button
-      class="btn btn-warning"
-      onclick={() => {
-        toast.warning('Event has been created', {
-          description: 'Sunday, December 03, 2023 at 9:00 AM',
-          action: {
-            label: 'Undo',
-            onClick: () => console.info('Undo'),
-          },
-          duration: Infinity,
-        })
-      }}
-    >
-      Warning
-    </button>
-
-    <button
-      class="btn btn-error"
-      onclick={() => {
-        toast.error('Event has been created', {
-          description: 'Sunday, December 03, 2023 at 9:00 AM',
-          action: {
-            label: 'Undo',
-            onClick: () => console.info('Undo'),
-          },
-          duration: Infinity,
-        })
-      }}
-    >
-      Error
-    </button>
-  </div>
-
-  <div class="mx-auto max-w-2xl space-y-2">
-    <SvelteCounter />
-    <ReactCounter />
+  <div>
+    <h1>daisyUI</h1>
+    <DaisyAccordion.Root type="single" class="w-full sm:max-w-[70%]">
+      <DaisyAccordion.Item value="item-1">
+        <DaisyAccordion.Trigger>Is it accessible?</DaisyAccordion.Trigger>
+        <DaisyAccordion.Content
+          >Yes. It adheres to the WAI-ARIA design pattern.</DaisyAccordion.Content
+        >
+      </DaisyAccordion.Item>
+      <DaisyAccordion.Item value="item-2">
+        <DaisyAccordion.Trigger>Is it styled?</DaisyAccordion.Trigger>
+        <DaisyAccordion.Content>
+          Yes. It comes with default styles that matches the other components' aesthetic.
+        </DaisyAccordion.Content>
+      </DaisyAccordion.Item>
+      <DaisyAccordion.Item value="item-3">
+        <DaisyAccordion.Trigger>Is it animated?</DaisyAccordion.Trigger>
+        <DaisyAccordion.Content>
+          Yes. It's animated by default, but you can disable it if you prefer.
+        </DaisyAccordion.Content>
+      </DaisyAccordion.Item>
+    </DaisyAccordion.Root>
   </div>
 </main>
