@@ -87,7 +87,7 @@
           </h1>
 
           {#if doc?.description}
-            <p class="text-base-content/70 text-lg text-balance">
+            <p class="text-base-content/70 text-base text-balance">
               {doc.description}
             </p>
           {/if}
