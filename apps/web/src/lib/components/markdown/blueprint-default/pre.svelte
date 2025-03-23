@@ -38,6 +38,8 @@
   const dataProps = $derived(
     Object.fromEntries(Object.entries(restProps).filter((entry) => entry[0].startsWith('data-'))),
   )
+
+  const dedupedQuotesTitle = $derived(restProps.title?.replace(/^"(.*)"$/, '$1'))
 </script>
 
 <!-- The code inside may be subject to special white-space rules when rendering code blocks. -->
@@ -50,8 +52,7 @@
   )}
   {...dataProps}
 >
-  {#if restProps.title}
-    {@const dedupedQuotesTitle = restProps.title.replace(/^"(.*)"$/, '$1')}
+  {#if dedupedQuotesTitle}
     <div class="bg-base-300 px-4 py-2">
       <span>{dedupedQuotesTitle}</span>
     </div>
@@ -81,7 +82,7 @@
       </button>
     </div>
 
-    <div class="overflow-x-auto py-4 bg-base-300">
+    <div class="overflow-x-auto py-4">
       <pre {...restProps} bind:this={ref}>{@render children?.()}</pre>
     </div>
   </div>
