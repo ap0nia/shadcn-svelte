@@ -11,7 +11,7 @@
 
 <footer class="flex flex-col items-center justify-between gap-4 px-4 pb-4 md:flex-row">
   <div class="flex flex-col items-center gap-4 md:flex-row">
-    <span class="icon-[mdi--apple-keyboard-command] shrink-0 size-6"></span>
+    <span class="icon-[mdi--apple-keyboard-command] size-6 shrink-0"></span>
 
     <p class="text-center text-sm leading-loose md:text-left">
       {$messages.builtBy()}
@@ -48,6 +48,6 @@
   <div class="flex items-center gap-2">
     <ThemeToggle class="tooltip-top" />
     <ThemeSelect class="tooltip-top" />
-    <LanguageSelect class="tooltip-top" />
+    <LanguageSelect />
   </div>
 </footer>

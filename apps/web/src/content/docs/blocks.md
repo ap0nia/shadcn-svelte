@@ -56,7 +56,7 @@ apps
                 └── dashboard-01
 ```
 
-<Callout className="mt-6">
+<Callout class="mt-6">
 
 **Note:** The build script will take care of building the block for the `default` style.
 
@@ -78,7 +78,7 @@ dashboard-01
     └── format-date.ts
 ```
 
-<Callout className="mt-6">
+<Callout class="mt-6">
 
 **Note:** You can start with one file and add more files later.
 
@@ -143,7 +143,7 @@ Make sure you add a name, description, type, registryDependencies, dependencies,
 pnpm registry:build
 ```
 
-<Callout className="mt-6">
+<Callout class="mt-6">
 
 **Note:** you do not need to run this script for every change. You only need to run it when you update the block definition.
 
@@ -158,14 +158,14 @@ Once the build script is finished, you can view your block at `http://localhost:
   width="1432"
   height="960"
   alt="Block preview"
-  className="border dark:hidden shadow-sm rounded-lg overflow-hidden mt-6 w-full"
+  class="border dark:hidden shadow-sm rounded-lg overflow-hidden mt-6 w-full"
 />
 <Image
   src="/images/block-preview-dark.png"
   width="1432"
   height="960"
   alt="Block preview"
-  className="border hidden dark:block shadow-sm rounded-lg overflow-hidden mt-6 w-full"
+  class="border hidden dark:block shadow-sm rounded-lg overflow-hidden mt-6 w-full"
 />
 
 ### Build your block
@@ -194,7 +194,7 @@ pnpm registry:build
 pnpm registry:capture
 ```
 
-<Callout className="mt-6">
+<Callout class="mt-6">
 
 **Note:** If you've run the capture script before, you might need to delete the existing screenshots (both light and dark) at `apps/www/public/r/styles/new-york` and run the script again.
 

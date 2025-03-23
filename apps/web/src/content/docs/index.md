@@ -31,7 +31,7 @@ shadcn/ui hands you the actual component code. You have full control to customiz
 _In a typical library, if you need to change a button’s behavior, you have to override styles or wrap the component. With shadcn/ui, you simply edit the button code directly._
 
 <Accordion collapsible>
-  <AccordionItem value="faq-1" className="border-none">
+  <AccordionItem value="faq-1" class="border-none">
     <AccordionTrigger>
       How do I pull upstream updates in an Open Code approach?
     </AccordionTrigger>
@@ -41,7 +41,7 @@ _In a typical library, if you need to change a button’s behavior, you have to 
         of your app can receive fixes by updating your dependencies, for
         instance, radix-ui or input-otp.
       </p>
-      <p className="mt-4">
+      <p class="mt-4">
         The topmost layer, i.e., the one closest to your design system, is not
         coupled with the implementation of the library. It stays open for
         modification.

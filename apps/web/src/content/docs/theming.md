@@ -21,7 +21,7 @@ You can use this tool to convert your HEX color to HSL without the color space f
 
 We use a simple `background` and `foreground` convention for colors. The `background` variable is used for the background color of the component and the `foreground` variable is used for the text color.
 
-<Callout className="mt-4">
+<Callout class="mt-4">
 
 The `background` suffix can be omitted if the variable is used for the background color of the component.
 
@@ -40,7 +40,7 @@ The `background` color of the following component will be `hsl(var(--primary) / 
 <div class="bg-primary text-primary-foreground">Hello</div>
 ```
 
-<Callout className="mt-4">
+<Callout class="mt-4">
 
 **CSS variables must be defined without color space function**. See the [Tailwind CSS documentation](https://tailwindcss.com/docs/customizing-colors#using-css-variables) for more information.
 
@@ -185,7 +185,7 @@ To use CSS variables for theming set `tailwind.cssVariables` to `true` in your `
 ## Utility classes
 
 ```tsx /bg-zinc-950/ /text-zinc-50/ /dark:bg-white/ /dark:text-zinc-950/
-<div className="bg-zinc-950 dark:bg-white" />
+<div class="bg-zinc-950 dark:bg-white" />
 ```
 
 To use utility classes for theming set `tailwind.cssVariables` to `false` in your `components.json` file.
@@ -215,7 +215,7 @@ To use utility classes for theming set `tailwind.cssVariables` to `false` in you
 
 We use a simple `background` and `foreground` convention for colors. The `background` variable is used for the background color of the component and the `foreground` variable is used for the text color.
 
-<Callout className="mt-4">
+<Callout class="mt-4">
 
 The `background` suffix is omitted when the variable is used for the background color of the component.
 
