@@ -58,7 +58,7 @@ console.log('goodbye')
 - `// [!code --]` outputs: `<span class="line diff remove">`
 - The outer `<pre>` tag is modified: `<pre class="has-diff">`
 
-::: details HTML Output
+:::details{title="HTML Output"}
 
 ```html
 <!-- Output (stripped of `style` attributes for clarity) -->
