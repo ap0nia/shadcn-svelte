@@ -15,7 +15,7 @@
 </script>
 
 {#snippet NavigationMenuSubList({ items }: NavItem)}
-  <ul class="menu min-w-3xs max-h-96 overflow-y-auto flex-nowrap">
+  <ul class="menu max-h-96 min-w-3xs flex-nowrap overflow-y-auto">
     {#each items ?? [] as item (item.href)}
       <li>
         <NavigationMenu.Link
@@ -96,12 +96,9 @@
   </div>
 
   <Sheet.Content side="left" class="space-y-2">
-    <div>
-      <a href="/" class="btn btn-ghost h-auto min-h-0 p-1">
-        <img src="/images/elysia.gif" alt="Logo" width="96" height="96" />
-      </a>
-    </div>
-
+    <a href="/" class="btn btn-ghost h-auto min-h-0 p-1">
+      <img src="/images/elysia.gif" alt="Logo" width="96" height="96" />
+    </a>
     <SidebarMenu />
   </Sheet.Content>
 </Sheet.Root>
