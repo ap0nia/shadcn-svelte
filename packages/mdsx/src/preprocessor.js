@@ -89,6 +89,9 @@ function createSvelteInstance(ast, file) {
 
   const lines = ['<script>', code]
 
+  // TODO: add an option to append arbitrary content to the generated Svelte file.
+  lines.push('import "virtual:group-icons.css";')
+
   if (file.data.blueprint) {
     const importPath = getRelativeFilePath(file.path, file.data.blueprint.path)
     const hasDefaultExport = file.data.components?.includes('default')

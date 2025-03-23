@@ -1,6 +1,10 @@
 <script lang="ts">
   import '../app.css'
-  import 'virtual:group-icons.css'
+
+  // Can't import this at the root since it needs to re-run per instance of usage
+  // in order to update the virtual file...
+  // Make sure this is imported manually when it is needed, e.g. in markdown blueprints.
+  // import 'virtual:group-icons.css'
 
   import { useProsemirrorAdapterProvider } from '@prosemirror-adapter/svelte'
 
