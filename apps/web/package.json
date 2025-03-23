@@ -37,6 +37,7 @@
     "@shikijs/transformers": "^3.2.1",
     "@shikijs/twoslash": "^3.2.1",
     "@shikijs/vitepress-twoslash": "^3.2.1",
+    "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/kit": "^2.20.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.0.14",

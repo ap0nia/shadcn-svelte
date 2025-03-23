@@ -27,6 +27,7 @@ import {
   // transformerMetaWordHighlight,
 } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/twoslash'
+import adapter from '@sveltejs/adapter-static'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -58,6 +59,14 @@ export const styles = [
   {
     name: 'new-york',
     label: 'New York',
+  },
+  {
+    name: 'daisy-default',
+    label: 'daisyUI Default',
+  },
+  {
+    name: 'daisy-new-york',
+    label: 'daisyUI New York',
   },
 ]
 
@@ -151,8 +160,6 @@ function rehypeComponentExample() {
     const nameRegex = /name="([^"]+)"/
 
     visit(tree, 'raw', (node, index, parent) => {
-      if (!index) return
-
       const raw = /** @type import('hast').Raw */ (node)
 
       if (!raw?.value?.startsWith('<ComponentPreview')) return
@@ -267,6 +274,7 @@ function rehypePreData() {
 const config = {
   extensions: ['.svelte', '.md'],
   kit: {
+    adapter: adapter(),
     alias: {
       $content: '/src/content',
     },
