@@ -3,6 +3,7 @@
  * which is stored in a {@link Processor}
  */
 import 'remark'
+import '@ap0nia/mdsx/types/mdast'
 
 /**
  * @see https://svelte.dev/docs/kit/types#app.d.ts

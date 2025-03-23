@@ -40,6 +40,7 @@
     "mdast-util-to-markdown": "^2.1.2",
     "npm-to-yarn": "^3.0.1",
     "rehype-stringify": "^10.0.1",
+    "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.1",

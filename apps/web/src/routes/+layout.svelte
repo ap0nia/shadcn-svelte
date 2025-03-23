@@ -1,5 +1,6 @@
 <script lang="ts">
   import '../app.css'
+  import 'virtual:group-icons.css'
 
   import { useProsemirrorAdapterProvider } from '@prosemirror-adapter/svelte'
 

@@ -19,9 +19,15 @@ import {
   MDSX_FLOATING_COMPONENT_NAME,
 } from './constants.js'
 import { rehypeBlueprint, rehypeGetFloating, rehypeRenderCode } from './unified/rehype.js'
-import { remarkCleanSvelte, remarkNpmToYarn } from './unified/remark.js'
+import {
+  remarkCleanSvelte,
+  remarkContainers,
+  remarkGithubAlerts,
+  remarkNpmToYarn,
+} from './unified/remark.js'
 import { parseFrontmatter } from './utils/parse-frontmatter.js'
 import { getRelativeFilePath } from './utils/path.js'
+import remarkDirective from 'remark-directive'
 
 /**
  * @template T
@@ -158,52 +164,157 @@ export async function compile(options, config) {
 
   const blueprint = getBlueprintData(file, config)
 
-  /**
-   * @type import('mdast-util-to-hast').Handlers
-   */
   const handlers = {
-    Tabs: (state, node, parent) => {
+    ...defaultHandlers,
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    GitHubAlert(state, node, parent) {
+      const githubAlert = /** @type import('mdast').GitHubAlert */ (node)
+
+      /**
+       * @type import('hast').ElementContent
+       */
+      const element = {
+        type: 'element',
+        tagName: githubAlert.type,
+        properties: {
+          title: githubAlert.title,
+          variant: githubAlert.variant,
+        },
+        children: githubAlert.children
+          .flatMap((child) => handlers[child.type](state, child, parent))
+          .filter(notNull),
+      }
+
+      return element
+    },
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    Tabs(state, node, parent) {
       const tabs = /** @type import('mdast').Tabs */ (node)
 
-      const children = tabs.children.map((tab) => {
-        const children = tab.children
-          .flatMap((child) => {
-            if (child.type == 'Tabs' || child.type === 'TabContent') return
-
-            const handler = defaultHandlers[child.type]
-
-            return handler(state, /** @type any */ (child), parent)
-          })
-          .filter(notNull)
-
-        /**
-         * @type import ('hast').ElementContent
-         */
-        const element = {
-          type: 'element',
-          tagName: 'TabContent',
-          properties: {
-            value: tab.value,
-          },
-          children,
-        }
-        return element
-      })
-
-      const triggers = tabs.children.map((tab) => tab.value)
-
-      return [
-        {
-          type: 'element',
-          tagName: 'Tabs',
-          properties: {
-            triggers,
-            sync: tabs.sync,
-            groupId: tabs.groupId,
-          },
-          children,
+      /**
+       * @type import('hast').ElementContent
+       */
+      const element = {
+        type: 'element',
+        tagName: tabs.type,
+        properties: {
+          sync: tabs.sync,
+          groupId: tabs.groupId,
+          value: tabs.value,
         },
-      ]
+        children: tabs.children
+          .flatMap((child) => handlers[child.type](state, child, parent))
+          .filter(notNull),
+      }
+
+      return element
+    },
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    TabsList(state, node, parent) {
+      const tabsList = /** @type import('mdast').TabsList */ (node)
+
+      /**
+       * @type import('hast').ElementContent
+       */
+      const element = {
+        type: 'element',
+        tagName: tabsList.type,
+        properties: {},
+        children: tabsList.children
+          .flatMap((child) => handlers[child.type](state, child, parent))
+          .filter(notNull),
+      }
+
+      return element
+    },
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    TabsTrigger(state, node, parent) {
+      const tabsTrigger = /** @type import('mdast').TabsTrigger */ (node)
+
+      /**
+       * @type import('hast').ElementContent
+       */
+      const element = {
+        type: 'element',
+        tagName: tabsTrigger.type,
+        properties: {
+          value: tabsTrigger.value,
+          'data-title': tabsTrigger.value,
+
+          // When this file is being processed, the vitepress plugin will parse for
+          // an icon regex match.
+          renderVitepressPluginGroupIcons: `data-title="${tabsTrigger.value}"`,
+        },
+        children: tabsTrigger.children
+          .flatMap((child) => handlers[child.type](state, child, parent))
+          .filter(notNull),
+      }
+
+      return element
+    },
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    TabsContent(state, node, parent) {
+      const tabsContent = /** @type import('mdast').TabsContent */ (node)
+
+      /**
+       * @type import('hast').ElementContent
+       */
+      const element = {
+        type: 'element',
+        tagName: tabsContent.type,
+        properties: {
+          value: tabsContent.value,
+        },
+        children: tabsContent.children
+          .flatMap((child) => handlers[child.type](state, child, parent))
+          .filter(notNull),
+      }
+
+      return element
+    },
+
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    containerDirective(state, node, parent) {
+      const container = /** @type import('mdast-util-directive').ContainerDirective */ (node)
+
+      const variant = /** @type import('mdast').GitHubAlertVariant */ (container.name.toUpperCase())
+      /**
+       * @type import('mdast').GitHubAlert
+       */
+      const githubAlert = {
+        type: 'GitHubAlert',
+        title: variant,
+        variant,
+        children: container.children,
+      }
+
+      return handlers.GitHubAlert(state, githubAlert, parent)
+    },
+
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    leafDirective(_state, _node, _parent) {
+      return
+    },
+
+    /**
+     * @type import('mdast-util-to-hast').Handler
+     */
+    textDirective(_state, _node, _parent) {
+      return
     },
   }
 
@@ -215,7 +326,13 @@ export async function compile(options, config) {
     .use(remarkParse)
     .use(remarkCleanSvelte)
     .use(remarkNpmToYarn)
-    .use(remarkRehype, { allowDangerousHtml: true, handlers })
+    .use(remarkDirective)
+    .use(remarkContainers)
+    .use(remarkGithubAlerts)
+    .use(remarkRehype, {
+      allowDangerousHtml: true,
+      handlers: /** @type import('mdast-util-to-hast').Handlers */ (handlers),
+    })
 
   // User can add or override the processor as desired.
 
@@ -255,7 +372,7 @@ export async function compile(options, config) {
     const compiled = {
       code: s.toString(),
       map: s.generateMap({ source }),
-      dependencies: data.dependencies,
+      dependencies: Array.from(new Set(data.dependencies)),
     }
 
     return compiled
@@ -298,7 +415,7 @@ export async function compile(options, config) {
   const compiled = {
     code: s.toString(),
     map: s.generateMap({ source }),
-    dependencies: data.dependencies,
+    dependencies: Array.from(new Set(data.dependencies)),
   }
 
   return compiled

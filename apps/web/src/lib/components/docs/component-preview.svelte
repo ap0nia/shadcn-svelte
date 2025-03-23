@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { WithElementRef } from 'bits-ui'
   import { mode, theme } from 'mode-watcher'
-  import type { Snippet } from 'svelte'
+  import { setContext, type Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import { writable } from 'svelte/store'
 
@@ -11,7 +11,7 @@
   import { config, styles } from '$lib/stores/config'
   import { cn } from '$lib/utils/cn'
 
-  import StyleSwitcher from './style-switcher.svelte'
+  import StyleSwitcher from '../style-select.svelte'
   import ThemeSelect from '../theme-select.svelte'
   import ThemeToggle from '../theme-toggle.svelte'
   import LanguageSelect from '../language-select.svelte'
@@ -71,6 +71,22 @@
   const component = $derived.by(() => {
     const example = examples[resolvedStyle][componentPath]
     return example
+  })
+
+  /**
+   * Experimental context that will synchronize the floating ui's portaled-contents
+   * with the current mode and theme of the target container.
+   * However, the twoslash CSS variables are already resolved, and do not react to
+   * higher priority CSS variable declarations based on the theme.
+   */
+  setContext('FLOATING', {
+    locale: $locale,
+    get mode() {
+      return localMode
+    },
+    get theme() {
+      return localTheme
+    },
   })
 </script>
 
@@ -218,6 +234,56 @@
     &:not(:has(div[data-style='new-york'])) {
       .code-placeholder[data-style='new-york'] {
         display: block !important;
+      }
+    }
+  }
+
+  .preview-container[data-style='daisy-default'] {
+    &:not(:has(div[data-style='daisy-default'])) {
+      .code-placeholder[data-style='daisy-default'] {
+        display: block !important;
+      }
+    }
+  }
+
+  .preview-container[data-style='daisy-new-york'] {
+    &:not(:has(div[data-style='daisy-new-york'])) {
+      .code-placeholder[data-style='daisy-new-york'] {
+        display: block !important;
+      }
+    }
+  }
+
+  :global {
+    [data-style='new-york'] {
+      [data-style='default'],
+      [data-style='daisy-default'],
+      [data-style='daisy-new-york'] {
+        display: none;
+      }
+    }
+
+    [data-style='default'] {
+      [data-style='new-york'],
+      [data-style='daisy-default'],
+      [data-style='daisy-new-york'] {
+        display: none;
+      }
+    }
+
+    [data-style='daisy-default'] {
+      [data-style='default'],
+      [data-style='new-york'],
+      [data-style='daisy-new-york'] {
+        display: none;
+      }
+    }
+
+    [data-style='daisy-new-york'] {
+      [data-style='default'],
+      [data-style='new-york'],
+      [data-style='daisy-default'] {
+        display: none;
       }
     }
   }

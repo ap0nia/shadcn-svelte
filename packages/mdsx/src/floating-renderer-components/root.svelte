@@ -11,10 +11,12 @@
     useRole,
   } from '@skeletonlabs/floating-ui-svelte'
   import { Portal } from 'bits-ui'
-  import { type Snippet } from 'svelte'
+  import { /* getContext, */ type Snippet } from 'svelte'
   import { fade } from 'svelte/transition'
 
-  type $$Props = {
+  // const context: any = getContext('FLOATING')
+
+  type Props = {
     skipTransition?: boolean
     classes?: Record<string, boolean>
     children?: Snippet
@@ -34,13 +36,12 @@
     open: initialOpen,
     'popper-class': popperClass,
     theme,
-  }: $$Props = $props()
+  }: Props = $props()
 
-  // State
   let open = $state(initialOpen)
-  let arrowElement: HTMLElement | null = $state(null)
 
-  // Use Floating
+  let arrowElement: HTMLElement = $state()
+
   const floating = useFloating({
     placement: 'bottom-start',
     get open() {
@@ -54,7 +55,7 @@
         }),
         shift(),
         arrow({
-          element: arrowElement as HTMLElement,
+          element: arrowElement,
         }),
         size({
           apply({ middlewareData, availableWidth, availableHeight }) {
@@ -68,17 +69,19 @@
   })
 
   const role = useRole(floating.context, { role: 'tooltip' })
-  const hover = useHover(floating.context, { move: false, delay: { open: 0, close: 50 } })
-  const dismiss = useDismiss(floating.context)
-  const interactions = useInteractions([role, hover, dismiss])
-  const shown = $derived(floating.open)
-  const result = $derived(floating.middlewareData)
-  const themeClasses = $derived.by(() => {
-    if (theme == null) {
-      return []
-    }
 
-    return theme.split(' ' ).map((name) => `v-popper--theme-${name}`)
+  const hover = useHover(floating.context, { move: false, delay: { open: 0, close: 50 } })
+
+  const dismiss = useDismiss(floating.context)
+
+  const interactions = useInteractions([role, hover, dismiss])
+
+  const shown = $derived(floating.open)
+
+  const result = $derived(floating.middlewareData)
+
+  const themeClasses = $derived.by(() => {
+    return theme?.split(' ').map((name) => `v-popper--theme-${name}`) ?? []
   })
 
   async function onOpenChange(value: boolean) {
@@ -88,7 +91,7 @@
 
 <!-- DO NOT FORMAT THIS FILE! -->
 <!-- Since this may appear within a code block, the whitespace is significant. -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
 <div
   bind:this={floating.elements.reference}
   {...interactions.getReferenceProps()}
@@ -106,7 +109,6 @@
     class:v-popper__popper--hide-from={classes?.['hideFrom']}
     class:v-popper__popper--hide-to={classes?.['hideTo']}
     class:v-popper__popper--skip-transition={skipTransition}
-    class:v-popper__popper--arrow-overflow={result && result.arrow?.overflow}
     class:v-popper__popper--no-positioning={!result}
     class:v-popper--shown={floating.open}
     bind:this={floating.elements.floating}

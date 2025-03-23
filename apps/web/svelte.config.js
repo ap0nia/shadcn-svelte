@@ -61,6 +61,26 @@ export const styles = [
 
 /**
  * @param {string} meta
+ * @see https://github.com/rehype-pretty/rehype-pretty-code/blob/eba61cbe7cb22a230702ff1e20b4483b917ae220/packages/core/src/utils.ts#L56C1-L89C2
+ */
+export function parseBlockMetaString(meta) {
+  const titleMatch = meta.match(/title="([^"]*)"/)
+  const title = titleMatch?.[1] ?? null
+  meta = meta.replace(titleMatch?.[0] ?? '', '')
+
+  const captionMatch = meta.match(/caption="([^"]*)"/)
+  const caption = captionMatch?.[1] ?? null
+  meta = meta.replace(captionMatch?.[0] ?? '', '')
+
+  return {
+    title,
+    caption,
+    meta,
+  }
+}
+
+/**
+ * @param {string} meta
  */
 function parseMetaString(meta) {
   const sections = meta.split(' ')
@@ -77,7 +97,9 @@ function parseMetaString(meta) {
 
   const parsedMeta = Object.fromEntries(entries)
 
-  return parsedMeta
+  const rehypePrettyCodeParsedMeta = parseBlockMetaString(meta)
+
+  return { ...parsedMeta, ...rehypePrettyCodeParsedMeta }
 }
 
 function getComponentSourceFileContent(src = '') {

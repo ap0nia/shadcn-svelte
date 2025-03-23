@@ -1,19 +1,11 @@
 <script lang="ts">
   import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import type { Snippet } from 'svelte'
+  import type { Tabs as MdastTabs } from 'mdast'
 
-  type Props = {
-    triggers: string
-    sync?: boolean
-    groupId?: string
-    children?: Snippet
-  }
+  let props: MdastTabs & { children?: Snippet } = $props()
 
-  let props: Props = $props()
-
-  const triggers: string[] = props.triggers.split(' ')
-
-  let value = $state(triggers[0])
+  let value = $state(props.value)
 
   function handleChange(newValue: string) {
     if (typeof window === 'undefined' || !props.sync || !props.groupId) {
@@ -58,11 +50,5 @@
 </script>
 
 <Tabs.Root bind:value onValueChange={handleChange} class="bg-base-200 w-full">
-  <Tabs.List class="tabs-box">
-    {#each triggers as trigger (trigger)}
-      <Tabs.Trigger value={trigger}>{trigger}</Tabs.Trigger>
-    {/each}
-  </Tabs.List>
-
   {@render props.children?.()}
 </Tabs.Root>

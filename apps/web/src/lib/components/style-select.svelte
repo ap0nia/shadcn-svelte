@@ -13,9 +13,8 @@
 </script>
 
 <Select.Root type="single" bind:value={$config.style}>
-  <Select.Trigger {...props}>
-    <span>Style:</span>
-    <span>{styleLabel}</span>
+  <Select.Trigger {...props} class="w-32">
+    <span class="truncate">{styleLabel}</span>
   </Select.Trigger>
 
   <Select.Content>

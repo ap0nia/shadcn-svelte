@@ -17,7 +17,17 @@
 
   <div class="divider"></div>
 
-  <div class="bg-primary">background primary</div>
+  <div class="grid grid-cols-3 theme-rose">
+    <div class="rounded-sm text-primary-foreground bg-primary">shad primary</div>
+    <div class="rounded-md text-secondary-foreground bg-secondary">shad secondary</div>
+    <div class="rounded-lg text-accent-foreground bg-accent">shad accent</div>
+  </div>
+
+  <div class="grid grid-cols-3">
+    <div class="rounded-sm text-primary-content bg-primary">daisy primary</div>
+    <div class="rounded-md text-secondary-content bg-secondary">daisy secondary</div>
+    <div class="rounded-lg text-accent-content bg-accent">daisy accent</div>
+  </div>
 
   <button class="btn btn-primary">hi</button>
 

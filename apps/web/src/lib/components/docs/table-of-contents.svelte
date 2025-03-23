@@ -135,7 +135,7 @@
 
       <li>
         {#if item.items?.length}
-          <details open class:menu-active={activeItemUrl === item.url}>
+          <details open class:menu-focus={activeItemUrl === item.url}>
             <summary>
               <span class="icon-[mdi--folder]"></span>
               <span>{item.title}</span>
@@ -144,7 +144,7 @@
             {@render TableOfContentsItem({ items: item.items })}
           </details>
         {:else}
-          <a {href} class:menu-active={`#${$activeItem}` === item.url}>
+          <a {href} class:menu-focus={`#${$activeItem}` === item.url}>
             {item.title}
           </a>
         {/if}

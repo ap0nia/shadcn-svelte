@@ -9,33 +9,38 @@
 @import './styles/twoslash.css';
 @import './styles/vitepress-code.css';
 
+:root {
+  --radius-sm-shadcn: calc(var(--radius) - 4px);
+  --radius-md-shadcn: calc(var(--radius) - 2px);
+  --radius-md-shadcn: var(--radius);
+  --radius-lg-shadcn: calc(var(--radius) + 4px);
+}
+
 /**
  * Remove conflicting theme variables.
  * https://daisyui.com/docs/utilities/#theme-css-variables
  */
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /*
+  --radius-sm: var(--radius-sm-shadcn, var(--radius-sm));
+  --radius-md: var(--radius-md-shadcn, var(--radius-md));
+  --radius-lg: var(--radius-lg-shadcn, var(--radius-lg));
+  --radius-xl: var(--radius-xl-shadcn, var(--radius-xl));
+  */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  /*
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  */
+  --color-primary: var(--primary, var(--color-primary));
+  --color-primary-foreground: var(--primary-foreground, var(--color-primary-content));
+  --color-secondary: var(--secondary, var(--color-secondary));
+  --color-secondary-foreground: var(--secondary-foreground, var(--color-secondary-content));
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  /*
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  */
+  --color-accent: var(--accent, var(--color-accent));
+  --color-accent-foreground: var(--accent-foreground, var(--color-accent-content));
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);

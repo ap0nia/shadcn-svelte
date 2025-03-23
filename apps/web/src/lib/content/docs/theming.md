@@ -55,7 +55,7 @@ The `background` color of the following component will be `hsl(var(--primary) / 
 
 Here's the list of variables available for customization:
 
-<ul class="steps">
+<ul class="steps steps-vertical">
   <li class="step">
 
 ```css title="Default background color of <body />...etc"
