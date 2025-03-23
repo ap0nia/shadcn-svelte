@@ -8,8 +8,6 @@
 
   let { children, variant, title } = props
 
-  $inspect(props)
-
   const alertVariant: Record<GitHubAlertVariant, string> = {
     NOTE: '',
     TIP: 'alert-info',

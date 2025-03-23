@@ -54,7 +54,7 @@ npx shadcn-svelte@next add accordion
 
 ## Usage
 
-```svelte
+```svelte title=component.svelte
 <script lang="ts">
   import * as Accordion from '$lib/registry/new-york/ui/accordion'
 </script>

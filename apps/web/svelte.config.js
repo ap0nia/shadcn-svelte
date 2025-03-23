@@ -7,6 +7,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import url from 'node:url'
 
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 import ts from 'typescript'
 import { visit } from 'unist-util-visit'
 
@@ -99,7 +101,28 @@ function parseMetaString(meta) {
 
   const rehypePrettyCodeParsedMeta = parseBlockMetaString(meta)
 
-  return { ...parsedMeta, ...rehypePrettyCodeParsedMeta }
+  const resolvedMeta = {
+    ...parsedMeta,
+    ...rehypePrettyCodeParsedMeta,
+    /**
+     * @link {parsedMeta} can read title= values without being enclosed in double quotes.
+     * rehypePrettyCode does not. Allow either one.
+     *
+     * @example
+     *
+     * ```js title=hello.js
+     * ```
+     *
+     * @example
+     *
+     * ```js title="hello.js"
+     * ```
+     */
+    title: rehypePrettyCodeParsedMeta.title || parsedMeta.title,
+    caption: rehypePrettyCodeParsedMeta.caption || parsedMeta.caption,
+  }
+
+  return resolvedMeta
 }
 
 function getComponentSourceFileContent(src = '') {
@@ -259,6 +282,8 @@ const config = {
         return processor
           .use(rehypeComponentExample)
           .use(rehypePreData)
+          .use(rehypeSlug)
+          .use(rehypeAutolinkHeadings, { properties: { class: 'header-anchor' } })
           .use(shikiRehype, {
             addLanguageClass: true,
             themes: {
@@ -281,6 +306,11 @@ const config = {
                 pre(hast) {
                   hast.properties['lang'] = this.options.lang
                   hast.properties['meta'] = this.options.meta?.__raw
+
+                  const title = this.options.meta?.title || this.options.lang
+
+                  // The value to be visible on the rendered markdown somewhere so it loads the icon.
+                  hast.properties['vitepress-plugin-group-icons'] = `data-title="${title}"`
 
                   if (this.options.meta?.['__src__']) {
                     hast.properties['data-src'] = this.options.meta?.['__src__']

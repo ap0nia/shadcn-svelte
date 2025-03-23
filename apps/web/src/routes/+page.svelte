@@ -14,6 +14,15 @@
 </script>
 
 <main class="space-y-4 p-4">
+  <div class="vp-doc">
+    <h2 class="-scroll-m-36 text-[27px] font-semibold tracking-[-0.01em] first:mt-0" id="hello">
+      <a href="#hello" class="link header-anchor leading-7">
+        <span class="icon icon-link"></span>
+      </a>
+      Hello
+    </h2>
+  </div>
+
   <div tabindex="0" class="bg-base-100 border-base-300 collapse border">
     <div class="collapse-title font-semibold">I have collapse-open class</div>
     <div class="collapse-content text-sm">

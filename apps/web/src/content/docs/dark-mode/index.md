@@ -3,11 +3,14 @@ title: Dark mode
 description: Adding dark mode to your site.
 ---
 
+## Hello
+
 :::note{title=Hello}
 Hello
 :::
 
-:::details{title=deets open=true}
+
+:::details{title=my-details open=true}
 
 ```html
 <!-- Output (stripped of `style` attributes for clarity) -->

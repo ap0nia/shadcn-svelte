@@ -4,9 +4,10 @@
 
   type Props = HTMLAttributes<HTMLElement> & {
     value?: string
+    ref?: HTMLElement
   }
 
-  let { children, class: className, value, ...restProps }: Props = $props()
+  let { children, class: className, ref, value, ...restProps }: Props = $props()
 
   let copied = $state(false)
 
@@ -15,12 +16,14 @@
   async function copyCode(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
     if (typeof navigator === 'undefined') return
 
-    if (value == null) return
+    const text = value || ref?.textContent
+
+    if (text == null) return
 
     e.preventDefault()
     e.stopPropagation()
 
-    await navigator.clipboard.writeText(value)
+    await navigator.clipboard.writeText(text)
 
     copied = true
 
@@ -39,7 +42,7 @@
 
 <button
   onclick={copyCode}
-  class={cn(copied && 'swap-active', className, 'btn btn-outline btn-square swap')}
+  class={cn(copied && 'swap-active', className, 'btn btn-soft btn-square swap')}
   aria-label="Copy"
   {...restProps}
 >

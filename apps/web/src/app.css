@@ -7,6 +7,7 @@
 @import './styles/daisyui.css';
 @import './styles/themes.css';
 @import './styles/twoslash.css';
+@import './styles/vitepress.css';
 @import './styles/vitepress-code.css';
 
 :root {

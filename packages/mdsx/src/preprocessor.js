@@ -233,7 +233,7 @@ export async function compile(options, config) {
 
           // When this file is being processed, the vitepress plugin will parse for
           // an icon regex match.
-          renderVitepressPluginGroupIcons: `data-title="${tabsTrigger.value}"`,
+          'vitepress-plugin-group-icons': `data-title="${tabsTrigger.value}"`,
         },
         children: tabsTrigger.children
           .flatMap((child) => handlers[child.type](state, child, parent))
