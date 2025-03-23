@@ -7,6 +7,7 @@
   import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
   import { config } from '$lib/stores/config'
 
+  import SidebarMenu from '../../sidebar-menu.svelte'
   import type { PageProps } from './$types'
 
   let { data }: PageProps = $props()
@@ -56,95 +57,103 @@
   })
 </script>
 
-<main class="flex h-full w-full gap-8">
-  <div class="flex w-full min-w-0 flex-col gap-8">
-    <div>
-      <div class="breadcrumbs text-sm">
-        <ul>
-          {#each breadcrumbs as breadcrumb (breadcrumb.href)}
-            {@const href = localizeHref(breadcrumb.href, { locale: $locale })}
+<div
+  class="container mx-auto flex-1 items-start gap-8 p-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)]"
+>
+  <aside class="fixed top-20 hidden h-[calc(100vh-8rem)] md:sticky md:block">
+    <SidebarMenu />
+  </aside>
 
-            <li>
-              <a {href}>{breadcrumb.label}</a>
-            </li>
-          {/each}
+  <main class="flex h-full w-full gap-8">
+    <div class="flex w-full min-w-0 flex-col gap-8">
+      <div>
+        <div class="breadcrumbs text-sm">
+          <ul>
+            {#each breadcrumbs as breadcrumb (breadcrumb.href)}
+              {@const href = localizeHref(breadcrumb.href, { locale: $locale })}
 
-          <li>{doc?.title}</li>
-        </ul>
-      </div>
+              <li>
+                <a {href}>{breadcrumb.label}</a>
+              </li>
+            {/each}
 
-      <div class="space-y-2">
-        <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
-          {doc?.title}
-        </h1>
+            <li>{doc?.title}</li>
+          </ul>
+        </div>
 
-        {#if doc?.description}
-          <p class="text-base-content/70 text-lg text-balance">
-            {doc.description}
-          </p>
+        <div class="space-y-2">
+          <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
+            {doc?.title}
+          </h1>
+
+          {#if doc?.description}
+            <p class="text-base-content/70 text-lg text-balance">
+              {doc.description}
+            </p>
+          {/if}
+        </div>
+
+        {#if apiLink || componentSource || docLink}
+          <div class="flex items-center space-x-2 pt-4">
+            {#if docLink}
+              <a
+                href={docLink}
+                target="_blank"
+                rel="noreferrer"
+                class="badge badge-secondary badge-sm"
+              >
+                <span>Docs</span>
+                <span class="icon-[mdi--external-link]"></span>
+              </a>
+            {/if}
+
+            {#if apiLink}
+              <a
+                href={apiLink}
+                target="_blank"
+                rel="noreferrer"
+                class="badge badge-secondary badge-sm"
+              >
+                <span>API Reference</span>
+                <span class="icon-[mdi--external-link]"></span>
+              </a>
+            {/if}
+
+            {#if componentSource}
+              <a
+                href={componentSource}
+                target="_blank"
+                rel="noreferrer"
+                class="badge badge-secondary badge-sm"
+              >
+                <span>Component Source</span>
+                <span class="icon-[mdi--code-tags]"></span>
+              </a>
+            {/if}
+          </div>
         {/if}
       </div>
 
-      {#if apiLink || componentSource || docLink}
-        <div class="flex items-center space-x-2 pt-4">
-          {#if docLink}
-            <a
-              href={docLink}
-              target="_blank"
-              rel="noreferrer"
-              class="badge badge-secondary badge-sm"
-            >
-              <span>Docs</span>
-              <span class="icon-[mdi--external-link]"></span>
-            </a>
-          {/if}
+      <div
+        id="markdown"
+        class="vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none max-w-none"
+      >
+        {#if typeof Markdown === 'function'}
+          <Markdown />
+        {/if}
+      </div>
 
-          {#if apiLink}
-            <a
-              href={apiLink}
-              target="_blank"
-              rel="noreferrer"
-              class="badge badge-secondary badge-sm"
-            >
-              <span>API Reference</span>
-              <span class="icon-[mdi--external-link]"></span>
-            </a>
-          {/if}
-
-          {#if componentSource}
-            <a
-              href={componentSource}
-              target="_blank"
-              rel="noreferrer"
-              class="badge badge-secondary badge-sm"
-            >
-              <span>Component Source</span>
-              <span class="icon-[mdi--code-tags]"></span>
-            </a>
-          {/if}
-        </div>
-      {/if}
+      <Pager />
     </div>
 
-    <div
-      id="markdown"
-      class="vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none max-w-none"
-    >
-      {#if typeof Markdown === 'function'}
-        <Markdown />
-      {/if}
+    <div class="relative sticky top-20 hidden h-[calc(100vh-8rem)] w-3xs shrink-0 text-sm xl:block">
+      <ScrollArea class="h-full">
+        {#key page.url.pathname}
+          <TableOfContents />
+        {/key}
+
+        <!-- <Carbon /> -->
+      </ScrollArea>
     </div>
-
-    <Pager />
-  </div>
-
-  <div class="relative sticky top-20 hidden h-[calc(100vh-8rem)] w-3xs shrink-0 text-sm xl:block">
-    <ScrollArea class="h-full">
-      {#key page.url.pathname}
-        <TableOfContents />
-      {/key}
-
-      <!-- <Carbon /> -->
-    </ScrollArea>
-  </div>
-</main>
+  </main>
+</div>

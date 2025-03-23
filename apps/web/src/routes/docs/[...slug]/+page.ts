@@ -1,12 +1,13 @@
 import type { EntryGenerator, PageLoad } from './$types'
 
-const modules = import.meta.glob('/src/lib/content/**/*.md')
+const modules = import.meta.glob('/src/content/**/*.md')
 
 export const load: PageLoad = async (event) => {
   const slug = event.params.slug || 'index'
 
   if (slug.startsWith('changelog')) {
     const exports = await import('/CHANGELOG.md')
+
     const component = exports.default
 
     const metadata = exports.metadata
@@ -24,7 +25,7 @@ export const load: PageLoad = async (event) => {
   const slugMatches = [slug, slug + '/index']
 
   const markdownModuleKey = Object.keys(modules).find((key) => {
-    const moduleSlug = key.replace('/src/lib/content/docs/', '').replace('.md', '')
+    const moduleSlug = key.replace('/src/content/docs/', '').replace('.md', '')
     return slugMatches.includes(moduleSlug)
   })
 
