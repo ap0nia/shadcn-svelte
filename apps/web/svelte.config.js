@@ -243,6 +243,11 @@ function rehypePreData() {
  */
 const config = {
   extensions: ['.svelte', '.md'],
+  kit: {
+    alias: {
+      $content: '/src/content',
+    },
+  },
   preprocess: [
     createMdsxPreprocessor({
       blueprints: {
