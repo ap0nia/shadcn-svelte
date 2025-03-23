@@ -189,7 +189,7 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
-    Tabs(state, node, parent) {
+    tabs(state, node, parent) {
       const tabs = /** @type import('mdast').Tabs */ (node)
 
       /**
@@ -213,7 +213,7 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
-    TabsList(state, node, parent) {
+    tabsList(state, node, parent) {
       const tabsList = /** @type import('mdast').TabsList */ (node)
 
       /**
@@ -233,7 +233,7 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
-    TabsTrigger(state, node, parent) {
+    tabsTrigger(state, node, parent) {
       const tabsTrigger = /** @type import('mdast').TabsTrigger */ (node)
 
       /**
@@ -260,7 +260,7 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
-    TabsContent(state, node, parent) {
+    tabsContent(state, node, parent) {
       const tabsContent = /** @type import('mdast').TabsContent */ (node)
 
       /**
@@ -283,7 +283,7 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
-    GitHubAlert(state, node, parent) {
+    gitHubAlert(state, node, parent) {
       const githubAlert = /** @type import('mdast').GitHubAlert */ (node)
 
       const { position: _position, children: _children, data: _data, ...properties } = githubAlert
@@ -306,7 +306,7 @@ export async function compile(options, config) {
     /**
      * @type import('mdast-util-to-hast').Handler
      */
-    Details(state, node, parent) {
+    details(state, node, parent) {
       const details = /** @type import('mdast').Details */ (node)
 
       const { position: _position, children: _children, data: _data, ...properties } = details
@@ -346,12 +346,12 @@ export async function compile(options, config) {
         const githubAlert = {
           title: variant,
           ...container.attributes,
-          type: 'GitHubAlert',
+          type: 'gitHubAlert',
           variant,
           children: container.children,
         }
 
-        return handlers.GitHubAlert(state, githubAlert, parent)
+        return handlers.gitHubAlert(state, githubAlert, parent)
       }
 
       const lowercaseName = container.name.toLowerCase()
@@ -362,12 +362,12 @@ export async function compile(options, config) {
            * @type import('mdast').Details
            */
           const details = {
-            type: 'Details',
+            type: 'details',
             ...container.attributes,
             children: container.children,
           }
 
-          return handlers.Details(state, details, parent)
+          return handlers.details(state, details, parent)
         }
 
         default: {

@@ -36,7 +36,7 @@
   </ul>
 {/snippet}
 
-<ScrollArea class="h-full">
+<ScrollArea class="h-full pr-2">
   {#if docsConfig.sidebar.length}
     <ul class="w-full">
       {#each docsConfig.sidebar as item, index (index)}

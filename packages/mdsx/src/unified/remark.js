@@ -121,7 +121,7 @@ export function remarkNpmToYarn(options = {}) {
          * @type import('mdast').TabsContent
          */
         const tabContent = {
-          type: 'TabsContent',
+          type: 'tabsContent',
           value: conversion[0],
           children: [
             {
@@ -143,7 +143,7 @@ export function remarkNpmToYarn(options = {}) {
          * @type import('mdast').TabsTrigger
          */
         const trigger = {
-          type: 'TabsTrigger',
+          type: 'tabsTrigger',
           value,
           children: [
             {
@@ -160,14 +160,14 @@ export function remarkNpmToYarn(options = {}) {
        * @type import('mdast').TabsList
        */
       const tabsList = {
-        type: 'TabsList',
+        type: 'tabsList',
         children: tabsListChildren,
       }
 
       const children = [tabsList, ...tabsContentChildren]
 
       ancestor.children[index] = {
-        type: 'Tabs',
+        type: 'tabs',
         sync,
         groupId: 'npm2yarn',
         children,
@@ -259,7 +259,7 @@ export function remarkGithubAlerts() {
        * @type import('mdast').GitHubAlert
        */
       const githubAlert = {
-        type: 'GitHubAlert',
+        type: 'gitHubAlert',
         variant,
         title,
         children: blockquote.children.slice(1),

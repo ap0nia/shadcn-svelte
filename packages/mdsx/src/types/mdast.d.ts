@@ -1,7 +1,7 @@
 declare global {
   declare module 'mdast' {
     export interface Tabs {
-      type: 'Tabs'
+      type: 'tabs'
       children: (TabsList | TabsContent)[]
       sync?: boolean
       groupId?: string
@@ -11,25 +11,25 @@ declare global {
     export type GitHubAlertVariant = 'TIP' | 'NOTE' | 'IMPORTANT' | 'WARNING' | 'CAUTION'
 
     export interface GitHubAlert extends Parent {
-      type: 'GitHubAlert'
+      type: 'gitHubAlert'
       title: string
       variant: GitHubAlertVariant
     }
 
     export interface TabsList extends Parent {
-      type: 'TabsList'
+      type: 'tabsList'
     }
 
     export interface TabsTrigger extends Literal, Parent {
-      type: 'TabsTrigger'
+      type: 'tabsTrigger'
     }
 
     export interface TabsContent extends Literal, Parent {
-      type: 'TabsContent'
+      type: 'tabsContent'
     }
 
     export interface Details extends Parent {
-      type: 'Details'
+      type: 'details'
       title?: string
       open?: boolean
     }
