@@ -7,7 +7,7 @@
 </script>
 
 <Tabs.Root value="cli">
-  <Tabs.List>
+  <Tabs.List class="tabs-border border-b">
     <Tabs.Trigger value="cli">CLI</Tabs.Trigger>
     <Tabs.Trigger value="manual">Manual</Tabs.Trigger>
   </Tabs.List>
@@ -16,7 +16,10 @@
     {@render cli?.()}
   </Tabs.Content>
 
-  <Tabs.Content value="manual">
+  <Tabs.Content
+    value="manual"
+    class="[&_h3.font-heading]:text-base [&_h3.font-heading]:font-semibold"
+  >
     {@render manual?.()}
   </Tabs.Content>
 </Tabs.Root>

@@ -9,7 +9,7 @@
 <TabsPrimitive.List
   bind:ref
   class={cn(
-    'tabs tabs-border border-b',
+    'tabs',
     // 'bg-base-200 text-base-content/90',
     // 'inline-flex h-9 items-center justify-center gap-0.5 rounded-md p-1',
     className,

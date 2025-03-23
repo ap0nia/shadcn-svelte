@@ -33,6 +33,7 @@ export { default as ul } from './ul.svelte'
 // Custom components that can be used directly and aren't handled by remark.
 export { default as Callout } from '$lib/components/docs/callout.svelte'
 export { default as ComponentPreview } from '$lib/components/docs/component-preview.svelte'
+export { default as InstallTabs } from '$lib/components/docs/install-tabs.svelte'
 export { default as LinkedCard } from '$lib/components/docs/linked-card.svelte'
 export { default as Image } from '$lib/components/image.svelte'
 export { default as Link } from '$lib/components/link.svelte'
