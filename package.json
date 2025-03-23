@@ -1,5 +1,5 @@
 {
-  "name": "messenger",
+  "name": "shadcn-svelte",
   "type": "module",
   "private": true,
   "workspaces": [
@@ -11,7 +11,7 @@
     "url": "https://github.com/ap0nia"
   },
   "repository": {
-    "url": "https://github.com/ap0nia/messenger"
+    "url": "https://github.com/ap0nia/shadcn-svelte"
   },
   "scripts": {
     "postinstall": "lefthook install && changeset init"
