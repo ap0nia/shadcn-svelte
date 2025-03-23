@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { GitHubAlert, GitHubAlertVariant } from 'mdast'
   import type { Snippet } from 'svelte'
+
   import * as Alert from '$lib/registry/new-york/ui/alert'
   import { cn } from '$lib/utils/cn'
 

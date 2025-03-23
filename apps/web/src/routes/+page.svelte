@@ -1,12 +1,12 @@
 <script lang="ts">
   import { toast } from 'svelte-sonner'
 
+  import ReactCounter from '$content/snippets/react-counter.md'
+  import SvelteCounter from '$content/snippets/svelte-counter.md'
+  import { getMessages } from '$lib/i18n'
   import * as Accordion from '$lib/registry/new-york/ui/accordion'
   import * as Collapsible from '$lib/registry/new-york/ui/collapsible'
   import * as Tabs from '$lib/registry/new-york/ui/tabs'
-  import { getMessages } from '$lib/i18n'
-  import SvelteCounter from '$content/snippets/svelte-counter.md'
-  import ReactCounter from '$content/snippets/react-counter.md'
 
   const messages = getMessages()
 

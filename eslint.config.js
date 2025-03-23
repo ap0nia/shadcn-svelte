@@ -17,7 +17,7 @@ import eslint from '@eslint/js'
 const FILE_PATTERNS = {
   JAVASCRIPT: '**/*.js',
   TYPESCRIPT: '**/*.ts',
-  SVELTE: '**/*.svelte',
+  SVELTE: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
   NODE_MODULES: '/node_modules/',
   WEB_BUILD_OUTPUT: 'apps/web/build/',
   WEB_SVELTEKIT_OUTPUT: 'apps/web/.svelte-kit/',
@@ -39,6 +39,56 @@ const importSortConfigs = tsEslint.config({
     'simple-import-sort/exports': 'error',
   },
 })
+
+const svelteConfigs = tsEslint.config(
+  eslint.configs.recommended,
+  ...tsEslint.configs.recommended,
+  svelte.configs.base,
+  ...svelte.configs.recommended,
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
+  {
+    files: FILE_PATTERNS.SVELTE,
+
+    /**
+     * @see https://typescript-eslint.io/packages/parser/
+     */
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+
+        // Add support for additional file extensions, such as .svelte
+        extraFileExtensions: ['.svelte'],
+
+        parser: tsEslint.parser,
+
+        // Specify a parser for each language, if needed:
+        // parser: {
+        //   ts: ts.parser,
+        //   js: espree,    // Use espree for .js files (add: import espree from 'espree')
+        //   typescript: ts.parser
+        // },
+
+        // We recommend importing and specifying svelte.config.js.
+        // By doing so, some rules in eslint-plugin-svelte will automatically read the configuration and adjust their behavior accordingly.
+        // While certain Svelte settings may be statically loaded from svelte.config.js even if you don’t specify it,
+        // explicitly specifying it ensures better compatibility and functionality.
+      },
+    },
+  },
+  {
+    rules: {
+      // Override or add rule settings here, such as:
+      // 'svelte/rule-name': 'error'
+    },
+  },
+)
 
 /**
  * Configuration that applies to all TypeScript files.
@@ -77,10 +127,6 @@ const typescriptConfigs = tsEslint.config(
 )
 
 /**
- */
-const svelteConfigs = tsEslint.config(svelte.configs.base, svelte.configs.recommended)
-
-/**
  * File patterns to ignore.
  */
 const ignoresConfig = tsEslint.config({
@@ -98,7 +144,6 @@ const config = tsEslint.config(
   ...tsEslint.configs.recommended,
   ...importSortConfigs,
   ...typescriptConfigs,
-  ...svelteConfigs,
   ...svelteConfigs,
   ...ignoresConfig,
 )

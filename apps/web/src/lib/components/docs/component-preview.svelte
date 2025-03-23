@@ -5,16 +5,16 @@
   import type { HTMLAttributes } from 'svelte/elements'
   import { writable } from 'svelte/store'
 
-  import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { setLocale, setMessages } from '$lib/i18n'
   import { getLocale } from '$lib/paraglide/runtime'
+  import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import { config, styles } from '$lib/stores/config'
   import { cn } from '$lib/utils/cn'
 
+  import LanguageSelect from '../language-select.svelte'
   import StyleSwitcher from '../style-select.svelte'
   import ThemeSelect from '../theme-select.svelte'
   import ThemeToggle from '../theme-toggle.svelte'
-  import LanguageSelect from '../language-select.svelte'
 
   type PrimitiveDivAttributes = WithElementRef<HTMLAttributes<HTMLDivElement>>
 

@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { themes, config } from '$lib/stores/config'
-
+  import { getMessages } from '$lib/i18n'
   import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
   import * as Select from '$lib/registry/new-york/ui/select'
-  import { getMessages } from '$lib/i18n'
+  import { config, themes } from '$lib/stores/config'
   import { cn } from '$lib/utils/cn'
 
   type Props = {

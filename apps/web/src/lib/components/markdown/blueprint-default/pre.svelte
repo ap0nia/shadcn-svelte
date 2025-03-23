@@ -1,7 +1,8 @@
 <script lang="ts">
+  import type { HTMLAttributes } from 'svelte/elements'
+
   import CopyButton from '$lib/components/copy-button.svelte'
   import { cn } from '$lib/utils/cn'
-  import type { HTMLAttributes } from 'svelte/elements'
 
   let { children, ...restProps }: HTMLAttributes<HTMLElement> = $props()
 

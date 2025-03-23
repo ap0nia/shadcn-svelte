@@ -3,8 +3,9 @@
   import type { Snippet } from 'svelte'
 
   import { cn } from '$lib/utils/cn'
-  import SheetOverlay from './sheet-overlay.svelte'
+
   import { sheetVariants, type Side } from '.'
+  import SheetOverlay from './sheet-overlay.svelte'
 
   let {
     ref = $bindable(null),

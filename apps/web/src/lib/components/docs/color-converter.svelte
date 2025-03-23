@@ -1,5 +1,6 @@
 <script lang="ts">
   import { formatHex, formatHsl, formatRgb } from 'culori'
+
   import CopyButton from '$lib/components/copy-button.svelte'
 
   let { initial = '#030711' } = $props()

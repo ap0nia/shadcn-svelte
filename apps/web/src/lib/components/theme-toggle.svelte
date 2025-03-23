@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { mode as globalMode, setTheme, theme as globalTheme, setMode } from 'mode-watcher'
+  import { mode as globalMode, setMode, setTheme, theme as globalTheme } from 'mode-watcher'
+  import type { Readable } from 'svelte/store'
 
   import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
-  import type { Readable } from 'svelte/store'
 
   type ReadableValue<T> = T extends Readable<infer U> ? U : never
 

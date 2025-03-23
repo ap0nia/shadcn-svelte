@@ -1,5 +1,6 @@
 <script lang="ts">
   import { NavigationMenu as NavigationMenuPrimitive, type WithoutChild } from 'bits-ui'
+
   import { cn } from '$lib/utils/cn'
 
   let {

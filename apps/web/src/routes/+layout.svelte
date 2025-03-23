@@ -4,8 +4,8 @@
 
   import { useProsemirrorAdapterProvider } from '@prosemirror-adapter/svelte'
 
-  import { createObservableLocale, setLocale, setMessages } from '$lib/i18n'
   import ThemeModeWatcher from '$lib/components/theme-mode-watcher.svelte'
+  import { createObservableLocale, setLocale, setMessages } from '$lib/i18n'
   import { Toaster } from '$lib/registry/new-york/ui/sonner'
 
   import Footer from './footer.svelte'

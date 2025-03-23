@@ -5,7 +5,6 @@ import Item from './accordion-item.svelte'
 import Trigger from './accordion-trigger.svelte'
 
 const Root = AccordionPrimitive.Root
-
 export {
   //
   Root as Accordion,

@@ -1,6 +1,8 @@
 <script lang="ts">
   import { ScrollArea as ScrollAreaPrimitive, type WithoutChild } from 'bits-ui'
+
   import { cn } from '$lib/utils/cn'
+
   import { Scrollbar } from '.'
 
   type ScrollAreaExtendedProps = {

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import * as Tabs from '$lib/registry/new-york/ui/tabs'
   import type { Snippet } from 'svelte'
+
+  import * as Tabs from '$lib/registry/new-york/ui/tabs'
 
   let { cli, manual }: { cli?: Snippet; manual?: Snippet } = $props()
 </script>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { ComponentProps, Snippet } from 'svelte'
+
   import * as Alert from '$lib/registry/new-york/ui/alert'
 
   let {

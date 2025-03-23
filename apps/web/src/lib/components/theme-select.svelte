@@ -1,12 +1,12 @@
 <script lang="ts">
-  import globalThemes from 'daisyui/theme/object'
   import themeOrder from 'daisyui/functions/themeOrder'
-  import { mode as globalMode, setTheme, setMode, theme as globalTheme } from 'mode-watcher'
+  import globalThemes from 'daisyui/theme/object'
+  import { mode as globalMode, setMode, setTheme, theme as globalTheme } from 'mode-watcher'
   import type { Readable } from 'svelte/store'
 
+  import { getMessages } from '$lib/i18n'
   import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
   import * as Select from '$lib/registry/new-york/ui/select'
-  import { getMessages } from '$lib/i18n'
   import { cn } from '$lib/utils/cn'
 
   type ReadableValue<T> = T extends Readable<infer U> ? U : never

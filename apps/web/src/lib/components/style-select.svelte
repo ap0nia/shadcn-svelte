@@ -2,8 +2,8 @@
   import type { WithElementRef, WithoutChildren } from 'bits-ui'
   import type { HTMLButtonAttributes } from 'svelte/elements'
 
-  import { config, styles } from '$lib/stores/config'
   import * as Select from '$lib/registry/new-york/ui/select'
+  import { config, styles } from '$lib/stores/config'
 
   type PrimitiveButtonAttributes = WithElementRef<HTMLButtonAttributes>
 

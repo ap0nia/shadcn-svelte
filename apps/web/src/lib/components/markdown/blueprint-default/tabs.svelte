@@ -1,7 +1,8 @@
 <script lang="ts">
-  import * as Tabs from '$lib/registry/new-york/ui/tabs'
-  import type { Snippet } from 'svelte'
   import type { Tabs as MdastTabs } from 'mdast'
+  import type { Snippet } from 'svelte'
+
+  import * as Tabs from '$lib/registry/new-york/ui/tabs'
 
   let props: MdastTabs & { children?: Snippet } = $props()
 

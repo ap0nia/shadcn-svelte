@@ -1,8 +1,8 @@
 <script lang="ts">
   import { page } from '$app/state'
   import { docsConfig, type NavItem } from '$lib/config/docs'
-  import { cn } from '$lib/utils/cn'
   import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
+  import { cn } from '$lib/utils/cn'
 </script>
 
 {#snippet SidebarItem({ items }: NavItem)}
@@ -25,7 +25,7 @@
             {/if}
           </a>
         {:else}
-          <span class="whitespace-nowrap pointer-events-none">{item.title}</span>
+          <span class="pointer-events-none whitespace-nowrap">{item.title}</span>
         {/if}
 
         {#if item.items?.length}

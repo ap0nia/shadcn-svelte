@@ -1,7 +1,8 @@
 <script lang="ts">
-  import * as Collapsible from '$lib/registry/new-york/ui/collapsible'
   import type { WithChildren } from 'bits-ui'
   import type { Details } from 'mdast'
+
+  import * as Collapsible from '$lib/registry/new-york/ui/collapsible'
 
   let props: WithChildren<Details> = $props()
 

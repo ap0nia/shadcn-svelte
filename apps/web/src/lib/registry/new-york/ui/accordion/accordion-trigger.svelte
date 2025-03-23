@@ -1,6 +1,8 @@
 <script lang="ts">
+  import ChevronDown from '@lucide/svelte/icons/chevron-down'
   import { Accordion as AccordionPrimitive, type WithoutChild } from 'bits-ui'
-  import { cn } from '$lib/utils/cn'
+
+  import { cn } from '$lib/utils/cn.js'
 
   let {
     ref = $bindable(null),
@@ -17,15 +19,12 @@
   <AccordionPrimitive.Trigger
     bind:ref
     class={cn(
-      'flex flex-1 cursor-pointer items-center justify-between py-4',
-      'text-sm font-medium transition-all hover:underline [&[data-state=open]>span[class^=icon]]:rotate-180',
+      'flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180',
       className,
     )}
     {...restProps}
   >
     {@render children?.()}
-    <span
-      class="icon-[mdi--chevron-down] text-base-content/70 size-4 shrink-0 transition-transform duration-200"
-    ></span>
+    <ChevronDown class="text-muted-foreground size-4 shrink-0 transition-transform duration-200" />
   </AccordionPrimitive.Trigger>
 </AccordionPrimitive.Header>

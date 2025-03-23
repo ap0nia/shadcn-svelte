@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { docsConfig, type NavItem } from '$lib/config/docs'
-  import { siteConfig } from '$lib/config/site'
   import LanguageSelect from '$lib/components/language-select.svelte'
   import ThemeSelect from '$lib/components/theme-select.svelte'
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
+  import { docsConfig, type NavItem } from '$lib/config/docs'
+  import { siteConfig } from '$lib/config/site'
   import { getLocale } from '$lib/i18n'
   import { localizeHref } from '$lib/paraglide/runtime'
   import * as NavigationMenu from '$lib/registry/new-york/ui/navigation-menu'

@@ -32,6 +32,7 @@
     "@iconify/tailwind4": "^1.0.6",
     "@inlang/cli": "^3.0.5",
     "@inlang/paraglide-js": "^2.0.0-beta.30",
+    "@lucide/svelte": "^0.483.0",
     "@shikijs/rehype": "^3.2.1",
     "@shikijs/transformers": "^3.2.1",
     "@shikijs/twoslash": "^3.2.1",

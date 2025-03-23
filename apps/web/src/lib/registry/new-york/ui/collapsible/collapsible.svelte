@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Collapsible, type CollapsibleRootProps } from 'bits-ui'
+
   import { cn } from '$lib/utils/cn'
 
   let { class: className, children, ...restProps }: CollapsibleRootProps = $props()

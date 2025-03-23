@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { getLocale, getMessages } from '$lib/i18n'
+  import { type Locale, locales } from '$lib/paraglide/runtime'
   import * as Select from '$lib/registry/new-york/ui/select'
-  import { getMessages, getLocale } from '$lib/i18n'
-  import { locales, type Locale } from '$lib/paraglide/runtime'
   import { cn } from '$lib/utils/cn'
 
   let { locale = getLocale(), messages = getMessages(locale) } = $props()
