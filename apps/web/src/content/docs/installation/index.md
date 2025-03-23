@@ -27,6 +27,8 @@ description: How to install dependencies and structure your app.
   </LinkedCard>
 </div>
 
+<div class="grid sm:grid-cols-2 gap-4 mt-8 sm:gap-6"></div>
+
 ## Imports
 
 Unlike the original [shadcn/ui](https://ui.shadcn.com) for React, where the full components can exist in a single file, components in this port are split into multiple files. This is because Svelte doesn't support defining multiple components in a single file, so utilizing the CLI to add components will be the optimal approach.

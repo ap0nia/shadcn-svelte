@@ -48,6 +48,7 @@
         },
         [] as Array<{ href: string; label: string; segment: string }>,
       )
+      .slice(0, -1)
 
     if (locales.includes(allBreadcrumbs[0]?.segment as any)) {
       allBreadcrumbs.splice(0, 1)
@@ -58,7 +59,7 @@
 </script>
 
 <div
-  class="border-base-300 container mx-auto flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"
+  class="border-base-300 container mx-auto flex-1 items-start border-x border-dashed md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"
 >
   <aside class="fixed top-20 hidden h-[calc(100vh-8rem)] md:sticky md:block">
     <SidebarMenu />

@@ -109,6 +109,7 @@
   }
 }
 
+/*
 .steps.steps-vertical {
   display: block;
   border-left: 4px solid color-mix(in oklab, var(--color-base-content) 10%, transparent);
@@ -133,6 +134,17 @@
     left: -18px;
     width: 32px;
     height: 32px;
+  }
+}
+*/
+
+@utility step {
+  @apply relative;
+  counter-increment: step;
+
+  &:before {
+    @apply badge absolute -left-[67px] size-9;
+    content: counter(step);
   }
 }
 

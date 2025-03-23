@@ -1,4 +1,8 @@
-export { default as linkedCard } from '../../docs/linked-card.svelte'
+// Components generated, handled etc. by remark need to be camelcase
+// to distinguish them from custom components that are globally available in markdown files.
+// This is because they are internally converted to scoped components.
+// e.g. <p></p> --> <MDSX.p></MDSX.p>
+
 export { default as a } from './a.svelte'
 export { default as blockquote } from './blockquote.svelte'
 export { default as code } from './code.svelte'
@@ -25,3 +29,16 @@ export { default as td } from './td.svelte'
 export { default as th } from './th.svelte'
 export { default as tr } from './tr.svelte'
 export { default as ul } from './ul.svelte'
+
+// Custom components that can be used directly and aren't handled by remark.
+export { default as Callout } from '$lib/components/docs/callout.svelte'
+export { default as ComponentPreview } from '$lib/components/docs/component-preview.svelte'
+export { default as LinkedCard } from '$lib/components/docs/linked-card.svelte'
+export { default as Link } from '$lib/components/link.svelte'
+export { default as Steps } from '$lib/components/steps.svelte'
+export {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '$lib/registry/new-york/ui/accordion'

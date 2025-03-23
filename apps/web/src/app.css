@@ -71,6 +71,7 @@
 
 @plugin 'daisyui' {
   themes: all;
+  exclude: steps step;
 }
 
 @plugin "daisyui/theme" {

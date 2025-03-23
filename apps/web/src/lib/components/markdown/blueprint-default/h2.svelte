@@ -7,7 +7,10 @@
 </script>
 
 <h2
-  class={cn('-scroll-m-36 text-[27px] font-semibold tracking-[-0.01em] first:mt-0', className)}
+  class={cn(
+    'font-heading mt-16 scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0',
+    className,
+  )}
   {...restProps}
 >
   {@render children?.()}

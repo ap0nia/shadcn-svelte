@@ -21,7 +21,7 @@
     restProps.lang && `language-${restProps.lang}`,
     'not-prose',
     'vp-adaptive-theme vp-code',
-    'group relative my-2 w-full overflow-x-auto',
+    'group relative my-4 w-full overflow-x-auto',
     'bg-base-200 text-base-content rounded-box',
   )}
   {...dataProps}

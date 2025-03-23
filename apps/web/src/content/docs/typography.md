@@ -4,88 +4,49 @@ description: Styles for headings, paragraphs, lists...etc
 component: true
 ---
 
-<script>
-  import ComponentPreview from "$lib/components/docs/component-preview.svelte"
-</script>
+<Steps>
 
-<ComponentPreview name="typography-demo">
+### Create a new monorepo project
 
-</ComponentPreview>
+To create a new monorepo project, run the `init` command. You will be prompted
+to select the type of project you are creating.
 
-## h1
+```bash
+npx shadcn@canary init
+```
 
-<ComponentPreview name="typography-h1">
+Select the `Next.js (Monorepo)` option.
 
-</ComponentPreview>
+```bash
+? Would you like to start a new project?
+    Next.js
+❯   Next.js (Monorepo)
+```
 
-## h2
+This will create a new monorepo project with two workspaces: `web` and `ui`,
+and [Turborepo](https://turbo.build/repo/docs) as the build system.
 
-<ComponentPreview name="typography-h2">
+Everything is set up for you, so you can start adding components to your project.
 
-</ComponentPreview>
+Note: The monorepo uses React 19 and Tailwind CSS v4.
 
-## h3
+### Add components to your project
 
-<ComponentPreview name="typography-h3">
+To add components to your project, run the `add` command **in the path of your app**.
 
-</ComponentPreview>
+```bash
+cd apps/web
+```
 
-## h4
+```bash
+npx shadcn@canary add [COMPONENT]
+```
 
-<ComponentPreview name="typography-h4">
+The CLI will figure out what type of component you are adding and install the
+correct files to the correct path.
 
-</ComponentPreview>
+For example, if you run `npx shadcn@canary add button`, the CLI will install the button component under `packages/ui` and update the import path for components in `apps/web`.
 
-## p
+If you run `npx shadcn@canary add login-01`, the CLI will install the `button`, `label`, `input` and `card` components under `packages/ui` and the `login-form` component under `apps/web/components`.
 
-<ComponentPreview name="typography-p">
-
-</ComponentPreview>
-
-## blockquote
-
-<ComponentPreview name="typography-blockquote">
-
-</ComponentPreview>
-
-## table
-
-<ComponentPreview name="typography-table">
-
-</ComponentPreview>
-
-## list
-
-<ComponentPreview name="typography-list">
-
-</ComponentPreview>
-
-## Inline code
-
-<ComponentPreview name="typography-inline-code">
-
-</ComponentPreview>
-
-## Lead
-
-<ComponentPreview name="typography-lead">
-
-</ComponentPreview>
-
-## Large
-
-<ComponentPreview name="typography-large">
-
-</ComponentPreview>
-
-## Small
-
-<ComponentPreview name="typography-small">
-
-</ComponentPreview>
-
-## Muted
-
-<ComponentPreview name="typography-muted">
-
-</ComponentPreview>
+</Steps>

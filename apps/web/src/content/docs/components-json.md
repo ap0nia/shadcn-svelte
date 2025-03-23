@@ -3,24 +3,17 @@ title: components.json
 description: Configuration for your project.
 ---
 
-<script>
-  import { Alert, AlertDescription } from '$lib/registry/new-york/ui/alert'
-  import ComponentPreview from '$lib/components/docs/component-preview.svelte'
-</script>
-
 The `components.json` file holds configuration for your project.
 
 We use it to understand how your project is set up and how to generate components customized for your project.
 
-<Alert>
-  <AlertDescription>
+<Callout class="mt-6">
 
-  Note: The `components.json` file is optional and **only required if you're
+  Note: The <code>components.json</code> file is optional and **only required if you're
   using the CLI** to add components to your project. If you're using the copy
   and paste method, you don't need this file.
 
-  </AlertDescription>
-</Alert>
+</Callout>
 
 You can create a `components.json` file in your project by running the following command:
 
@@ -51,6 +44,8 @@ The style for your components. **This cannot be changed after initialization.**
 ```
 
 <ComponentPreview name="card-with-form">
+
+<div></div>
 
 </ComponentPreview>
 
