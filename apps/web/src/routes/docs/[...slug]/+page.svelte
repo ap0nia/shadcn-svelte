@@ -6,6 +6,7 @@
   import { locales, localizeHref } from '$lib/paraglide/runtime'
   import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
   import { config } from '$lib/stores/config'
+  import { cn } from '$lib/utils/cn'
 
   import SidebarMenu from '../../sidebar-menu.svelte'
   import type { PageProps } from './$types'
@@ -47,7 +48,6 @@
         },
         [] as Array<{ href: string; label: string; segment: string }>,
       )
-      .slice(0, -1)
 
     if (locales.includes(allBreadcrumbs[0]?.segment as any)) {
       allBreadcrumbs.splice(0, 1)
@@ -58,14 +58,14 @@
 </script>
 
 <div
-  class="border-base-300 container mx-auto flex-1 items-start gap-8 border-x border-dashed p-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)]"
+  class="border-base-300 container mx-auto flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"
 >
   <aside class="fixed top-20 hidden h-[calc(100vh-8rem)] md:sticky md:block">
     <SidebarMenu />
   </aside>
 
-  <main class="flex h-full w-full gap-8">
-    <div class="flex w-full min-w-0 flex-col gap-8">
+  <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+    <div class="mx-auto w-full max-w-2xl min-w-0">
       <div>
         <div class="breadcrumbs text-sm">
           <ul>
@@ -136,7 +136,10 @@
 
       <div
         id="markdown"
-        class="vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none max-w-none"
+        class={cn(
+          'pt-8 pb-12',
+          'vp-doc prose prose-pre:my-0 prose-pre:bg-inherit prose-pre:py-0 prose-pre:px-0 prose-pre:rounded-none max-w-none',
+        )}
       >
         {#if typeof Markdown === 'function'}
           <Markdown />
