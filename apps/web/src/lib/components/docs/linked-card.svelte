@@ -7,7 +7,7 @@
 
   const locale = getLocale()
 
-  const localizedHref = $derived(localizeHref(href, { locale: $locale }))
+  const localizedHref = $derived(localizeHref(href || '', { locale: $locale }))
 </script>
 
 <a

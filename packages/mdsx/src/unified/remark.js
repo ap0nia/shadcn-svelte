@@ -17,7 +17,7 @@ const SVELTE_LOGIC_BLOCK = /{[#:/@]\w+.*}/
 
 /**
  */
-const ELEMENT_OR_COMPONENT = /<[A-Za-z]+[\s\S]*>/
+const ELEMENT_OR_COMPONENT = /<[A-Za-z0-9]+[\s\S]*>/
 
 /**
  * @param {string} value
@@ -70,9 +70,9 @@ export function remarkCleanSvelte() {
 
       if (firstChild.type !== 'text' && firstChild.type !== 'html') return CONTINUE
 
-      if (!isSvelteBlock(firstChild.value)) return CONTINUE
+      const value = firstChild.value
 
-      if (!isElementOrComponent(firstChild.value)) return CONTINUE
+      if (!isSvelteBlock(value) && !isElementOrComponent(value)) return CONTINUE
 
       convertParagraphToHtml(node)
 

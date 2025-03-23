@@ -1,3 +1,4 @@
+export { default as LinkedCard } from '../../docs/linked-card.svelte'
 export { default as a } from './a.svelte'
 export { default as blockquote } from './blockquote.svelte'
 export { default as code } from './code.svelte'

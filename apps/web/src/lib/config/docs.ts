@@ -13,7 +13,7 @@ export type NavItem = {
 
 export const main: NavItem[] = [
   {
-    title: 'Documentation',
+    title: 'Docs',
     href: '/docs',
   },
   {

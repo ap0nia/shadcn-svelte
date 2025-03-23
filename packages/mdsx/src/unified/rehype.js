@@ -29,7 +29,6 @@ export const CODE_ELEMENT_TAG_NAMES = ['element', 'code']
 export function rehypeGetFloating() {
   return (tree, file) => {
     const root = /** @type import('hast').Root */ (tree)
-
     visit(root, 'element', (node) => {
       if (node.tagName.includes(MDSX_FLOATING_COMPONENT_NAME)) {
         file.data['floating'] = true

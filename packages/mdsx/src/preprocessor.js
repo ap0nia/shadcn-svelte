@@ -29,6 +29,8 @@ import {
 import { parseFrontmatter } from './utils/parse-frontmatter.js'
 import { getRelativeFilePath } from './utils/path.js'
 
+const CAPITAL_REGEX = /[A-Z]/
+
 /**
  * @type Array<import('mdast').GitHubAlertVariant>
  */
@@ -91,7 +93,20 @@ function createSvelteInstance(ast, file) {
     const hasDefaultExport = file.data.components?.includes('default')
     const defaultImport = hasDefaultExport ? `${MDSX_BLUEPRINT_NAME},` : ''
     const blueprintImportStatement = `\timport ${defaultImport} * as ${MDSX_COMPONENT_NAME} from "${importPath}";`
+
     lines.push(blueprintImportStatement)
+
+    // Automatically add all capital imports to the main scope, e.g. custom components.
+    const namedImports = file.data.components
+      ?.filter((name) => name !== 'default')
+      .filter((name) => name[0] && CAPITAL_REGEX.test(name[0]))
+
+    if (namedImports?.length) {
+      const namedImportStatements = namedImports.join(', ')
+      const namedImportStatement = `\timport {${namedImportStatements}} from "${importPath}";`
+
+      lines.push(namedImportStatement)
+    }
   }
 
   if (file.data.floating) {
