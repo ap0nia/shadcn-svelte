@@ -1,13 +1,13 @@
 <script lang="ts">
   import { page } from '$app/state'
-  import config, { type SidebarNavItem } from '$lib/config/docs'
+  import { docsConfig, type NavItem } from '$lib/config/docs'
   import { cn } from '$lib/utils/cn'
   import { ScrollArea } from '$lib/registry/new-york/ui/scroll-area'
 </script>
 
-{#snippet SidebarItem({ items }: { items: SidebarNavItem[] })}
+{#snippet SidebarItem({ items }: NavItem)}
   <ul class="menu w-full">
-    {#each items as item, index (index)}
+    {#each items ?? [] as item, index (index)}
       <li class={cn(item.disabled && 'menu-disabled')}>
         {#if item.href}
           <a
@@ -28,7 +28,7 @@
           <span class="whitespace-nowrap pointer-events-none">{item.title}</span>
         {/if}
 
-        {#if item.items.length}
+        {#if item.items?.length}
           {@render SidebarItem(item)}
         {/if}
       </li>
@@ -37,9 +37,9 @@
 {/snippet}
 
 <ScrollArea class="h-full">
-  {#if config.sidebar.length}
+  {#if docsConfig.sidebar.length}
     <ul class="w-full">
-      {#each config.sidebar as item, index (index)}
+      {#each docsConfig.sidebar as item, index (index)}
         <li class={cn('pb-4')}>
           <h4 class="px-4 py-1 text-sm font-semibold">
             {item.title}
@@ -47,7 +47,7 @@
 
           {#if item?.items}
             {#if item?.items?.length}
-              {@render SidebarItem({ items: item.items })}
+              {@render SidebarItem(item)}
             {/if}
           {/if}
         </li>

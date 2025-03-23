@@ -1,5 +1,5 @@
 <script lang="ts">
-  import config, { type SidebarNavItem } from '$lib/config/docs'
+  import { docsConfig, type NavItem } from '$lib/config/docs'
   import LanguageSelect from '$lib/components/language-select.svelte'
   import ThemeSelect from '$lib/components/theme-select.svelte'
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
@@ -14,9 +14,9 @@
   const locale = getLocale()
 </script>
 
-{#snippet NavigationMenuSubList({ items }: SidebarNavItem)}
+{#snippet NavigationMenuSubList({ items }: NavItem)}
   <ul class="menu min-w-3xs max-h-96 overflow-y-auto flex-nowrap">
-    {#each items as item (item.href)}
+    {#each items ?? [] as item (item.href)}
       <li>
         <NavigationMenu.Link
           class={cn('flex flex-col items-start', item.items?.length && 'pointer-events-none')}
@@ -41,7 +41,7 @@
   </ul>
 {/snippet}
 
-{#snippet NavigationMenuItem(link: SidebarNavItem)}
+{#snippet NavigationMenuItem(link: NavItem)}
   <NavigationMenu.Item>
     {#if link.items}
       {@const href = localizeHref(link.href || '/', { locale: $locale })}
@@ -76,7 +76,7 @@
     <div class="navbar-center hidden md:flex">
       <NavigationMenu.Root class="relative z-10 w-fit">
         <NavigationMenu.List class={cn('menu menu-horizontal menu-sm')}>
-          {#each config.sidebar as link (link.title)}
+          {#each docsConfig.main as link (link.title)}
             {@render NavigationMenuItem(link)}
           {/each}
           <NavigationMenu.Indicator />

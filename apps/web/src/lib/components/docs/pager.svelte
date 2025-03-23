@@ -1,27 +1,6 @@
-<script lang="ts" module>
-  import type { Component } from 'svelte'
-
-  export type NavItem = {
-    title: string
-    href?: string
-    disabled?: boolean
-    external?: boolean
-    icon?: Component
-    label?: string
-  }
-
-  export type SidebarNavItem = NavItem & {
-    items: SidebarNavItem[]
-  }
-
-  export type NavItemWithChildren = NavItem & {
-    items: NavItemWithChildren[]
-  }
-</script>
-
 <script lang="ts">
   import { page } from '$app/state'
-  import { docsConfig } from '$lib/config/docs'
+  import { docsConfig, type NavItem } from '$lib/config/docs'
   import { getLocale } from '$lib/i18n'
   import { localizeHref } from '$lib/paraglide/runtime'
 
@@ -47,7 +26,7 @@
     }
   }
 
-  function flatten(links: NavItemWithChildren[]): NavItem[] {
+  function flatten(links: Array<NavItem>): Array<NavItem> {
     return links
       .reduce<NavItem[]>((flat, link) => {
         return flat.concat(link.items?.length ? flatten(link.items) : link)

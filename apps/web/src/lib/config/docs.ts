@@ -11,10 +11,6 @@ export type NavItem = {
   description?: string
 }
 
-export type SidebarNavItem = NavItem & {
-  items: SidebarNavItem[]
-}
-
 export const main: NavItem[] = [
   {
     title: 'Documentation',
@@ -119,7 +115,7 @@ export const main: NavItem[] = [
   // },
 ]
 
-export const sidebar: SidebarNavItem[] = [
+export const sidebar: NavItem[] = [
   {
     title: 'Getting Started',
     items: [
