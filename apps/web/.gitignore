@@ -9,5 +9,8 @@
 ## SvelteKit temporary build output.
 /.svelte-kit/
 
+## Vercel build output.
+/.vercel/
+
 ## Temporary, bundled Vite configuration modules that fail to be deleted automatically.
 vite.config.js.timestamp-*

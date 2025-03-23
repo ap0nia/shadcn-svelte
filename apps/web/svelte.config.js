@@ -27,7 +27,8 @@ import {
   // transformerMetaWordHighlight,
 } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/twoslash'
-import adapter from '@sveltejs/adapter-static'
+// import adapter from '@sveltejs/adapter-static'
+import adapter from '@sveltejs/adapter-vercel'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -277,6 +278,11 @@ const config = {
     adapter: adapter(),
     alias: {
       $content: '/src/content',
+    },
+    prerender: {
+      handleHttpError: 'warn',
+      handleMissingId: 'warn',
+      handleEntryGeneratorMismatch: 'warn',
     },
   },
   preprocess: [
