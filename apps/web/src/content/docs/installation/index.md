@@ -3,10 +3,6 @@ title: Installation
 description: How to install dependencies and structure your app.
 ---
 
-<script>
-  import LinkedCard from '$lib/components/docs/linked-card.svelte'
-</script>
-
 ## Guides
 
 <div class="grid sm:grid-cols-2 gap-4 mt-8 sm:gap-6">
