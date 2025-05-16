@@ -37,7 +37,7 @@
       </div>
 
       <div class="hover pointer-events-auto">
-        <label class="btn btn-circle btn-xs swap">
+        <label class="btn btn-circle btn-xs swap has-checked:btn-active">
           <input name="wrap" type="checkbox" />
           <span class="swap-on icon-[mdi--wrap]"></span>
           <span class="swap-off icon-[mdi--wrap-disabled]"></span>
@@ -59,7 +59,7 @@
         class="peer/actions pointer-events-none absolute top-0 left-0 flex w-full justify-end p-2 opacity-0 transition-opacity peer-hover:opacity-100 hover:opacity-100"
       >
         <div class="hover pointer-events-auto">
-          <label class="btn btn-circle swap">
+          <label class="btn btn-circle swap has-checked:btn-active">
             <input name="wrap" type="checkbox" />
             <span class="swap-on icon-[mdi--wrap]"></span>
             <span class="swap-off icon-[mdi--wrap-disabled]"></span>

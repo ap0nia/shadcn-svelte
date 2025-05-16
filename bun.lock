@@ -50,7 +50,7 @@
         "@iconify/tailwind4": "^1.0.6",
         "@inlang/cli": "^3.0.5",
         "@inlang/paraglide-js": "^2.0.0-beta.30",
-        "@lucide/svelte": "^0.483.0",
+        "@lucide/svelte": "^0.511.0",
         "@shikijs/rehype": "^3.2.1",
         "@shikijs/transformers": "^3.2.1",
         "@shikijs/twoslash": "^3.2.1",
@@ -409,7 +409,7 @@
 
     "@lix-js/server-api-schema": ["@lix-js/server-api-schema@0.1.1", "", {}, "sha512-W1Z7KKOxAQ4Dag9V2wrDevHPh5rPk+icBUsxNfNCNB2tlPrKpba99562vcTCPoT03KXpihEbWutZNujCRtMA+g=="],
 
-    "@lucide/svelte": ["@lucide/svelte@0.483.0", "", { "peerDependencies": { "svelte": "^5" } }, "sha512-b3SbhMIgVJAj/rPa3go6uplTzaFkJzz91TSPO8I8gc2evtHOA2OgSmPYz0S+yEKFIWqLUZ4gika19ljV+tnmyQ=="],
+    "@lucide/svelte": ["@lucide/svelte@0.511.0", "", { "peerDependencies": { "svelte": "^5" } }, "sha512-aLCSPMUJmHlCuLXzXENXa4Z1NV2mN1iAZAFKk4bEbey+/MdsNlu+/DqwVkgW3Yvj6p8y8Vn5xZ2v9CLmPlA6Vw=="],
 
     "@manypkg/find-root": ["@manypkg/find-root@1.1.0", "", { "dependencies": { "@babel/runtime": "^7.5.5", "@types/node": "^12.7.1", "find-up": "^4.1.0", "fs-extra": "^8.1.0" } }, "sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA=="],
 
