@@ -13,7 +13,7 @@
   bind:ref
   data-slot="dropdown-menu-sub-content"
   class={cn(
-    'bg-popover text-popover-foreground',
+    'bg-base-100',
     'data-[state=open]:animate-in',
     'data-[state=closed]:animate-out',
     'data-[state=closed]:fade-out-0',

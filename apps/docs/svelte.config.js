@@ -176,7 +176,7 @@ function rehypeComponentExample() {
       for (const style of styles) {
         const src = path.join('src', 'lib', 'registry', style.name, 'example', `${name}.svelte`)
 
-        file.data.dependencies.push(path.resolve(__dirname, src))
+        // file.data.dependencies.push(path.resolve(__dirname, src))
 
         const sourceCode = getComponentSourceFileContent(src)
 
