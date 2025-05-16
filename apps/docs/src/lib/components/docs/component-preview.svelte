@@ -123,7 +123,7 @@
   {/if}
 {/snippet}
 
-<div class={cn('group relative my-4 flex flex-col space-y-2', className)} {...restProps}>
+<div class={cn('group not-prose relative my-4 flex flex-col space-y-2', className)} {...restProps}>
   <Tabs.Root value="preview" class="relative mr-auto w-full">
     <div class="flex items-center justify-between pb-3">
       <Tabs.List class="w-full justify-start rounded-none border-b bg-transparent p-0">
@@ -160,11 +160,11 @@
 
       <div
         class={cn(
-          'flex min-h-100 flex-col p-2',
+          'flex flex-col',
           localMode === 'dark' ? 'dark' : 'light',
           !isDaisy && `theme-${$config.theme}`,
-          'card',
-          'preview-container overflow-hidden border shadow-sm',
+          'card p-2',
+          'preview-container overflow-hidden',
         )}
         data-style={resolvedStyle}
         data-theme={isDaisy ? localTheme : undefined}
@@ -174,14 +174,13 @@
         <Tabs.Content
           value="preview"
           class={cn(
-            'card-body',
-            'preview flex h-full w-full justify-center',
+            'preview',
+            'rounded-box flex h-full min-h-100 w-full justify-center border p-2',
             {
               'items-center': align === 'center',
               'items-start': align === 'start',
               'items-end': align === 'end',
             },
-            className,
           )}
         >
           {#if example}
@@ -193,17 +192,11 @@
 
         <Tabs.Content
           value="code"
-          class={cn(
-            'card-body',
-            'source-code',
-            'preview flex h-full w-full justify-center',
-            {
-              'items-center': align === 'center',
-              'items-start': align === 'start',
-              'items-end': align === 'end',
-            },
-            className,
-          )}
+          class={cn('source-code', 'preview flex h-full w-full justify-center', {
+            'items-center': align === 'center',
+            'items-start': align === 'start',
+            'items-end': align === 'end',
+          })}
         >
           {#if children}
             {@render children()}
@@ -214,7 +207,7 @@
           <!-- Use a CSS selector to render the placeholder when the corresponding code block doesn't exist. -->
           {#each styles as style (style.name)}
             <p
-              class="text-base-content/70 code-placeholder hidden grow-0 text-sm"
+              class="text-base-content/70 code-placeholder hidden w-full grow-0 rounded border p-4 text-sm"
               data-style={style.name}
             >
               <span>Code for</span>

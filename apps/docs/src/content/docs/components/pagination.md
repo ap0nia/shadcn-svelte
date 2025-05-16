@@ -1,0 +1,74 @@
+---
+title: Pagination
+description: Pagination with page navigation, next and previous links.
+component: true
+links:
+  source: https://github.com/huntabyte/shadcn-svelte/tree/main/sites/docs/src/lib/registry/ui/pagination
+  doc: https://bits-ui.com/docs/components/pagination
+  api: https://bits-ui.com/docs/components/pagination#api-reference
+---
+
+<ComponentPreview name="pagination-demo" >
+
+<div></div>
+
+</ComponentPreview>
+
+## Installation
+
+<InstallTabs>
+{#snippet cli()}
+
+```bash npm2yarn
+npx shadcn-svelte@next add pagination
+```
+
+{/snippet}
+{#snippet manual()}
+<Steps>
+
+### Install `bits-ui`:
+
+```bash npm2yarn
+npm i -D bits-ui
+```
+
+### Copy and paste the component source files linked at the top of this page into your project.
+
+</Steps>
+{/snippet}
+</InstallTabs>
+
+## Usage
+
+```svelte notwoslash
+<script lang="ts">
+  import * as Pagination from '$lib/components/ui/pagination/index.js'
+</script>
+
+<Pagination.Root count={100} perPage={10}>
+  {#snippet children({ pages, currentPage })}
+    <Pagination.Content>
+      <Pagination.Item>
+        <Pagination.PrevButton />
+      </Pagination.Item>
+      {#each pages as page (page.key)}
+        {#if page.type === 'ellipsis'}
+          <Pagination.Item>
+            <Pagination.Ellipsis />
+          </Pagination.Item>
+        {:else}
+          <Pagination.Item isVisible={currentPage === page.value}>
+            <Pagination.Link {page} isActive={currentPage === page.value}>
+              {page.value}
+            </Pagination.Link>
+          </Pagination.Item>
+        {/if}
+      {/each}
+      <Pagination.Item>
+        <Pagination.NextButton />
+      </Pagination.Item>
+    </Pagination.Content>
+  {/snippet}
+</Pagination.Root>
+```
