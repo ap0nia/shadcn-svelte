@@ -27,7 +27,7 @@
     <span class="text-xs">⌘</span>J
   </kbd>
 </p>
-<Command.Dialog bind:open>
+<Command.Dialog bind:open portalProps={{ disabled: true }}>
   <Command.Input placeholder="Type a command or search..." />
   <Command.List>
     <Command.Empty>No results found.</Command.Empty>
