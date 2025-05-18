@@ -175,12 +175,12 @@
           value="preview"
           class={cn(
             'preview',
-            'rounded-box flex h-full min-h-100 w-full justify-center border p-2',
-            {
-              'items-center': align === 'center',
-              'items-start': align === 'start',
-              'items-end': align === 'end',
-            },
+            'rounded-box flex h-full min-h-100 w-full items-center justify-center border p-2',
+            // {
+            //   'items-center': align === 'center',
+            //   'items-start': align === 'start',
+            //   'items-end': align === 'end',
+            // },
           )}
         >
           {#if example}

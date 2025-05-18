@@ -36,7 +36,7 @@
         <span data-title={dedupedQuotesTitle}>{dedupedQuotesTitle}</span>
       </div>
 
-      <div class="hover pointer-events-auto">
+      <div class="hover pointer-events-auto shrink-0">
         <label class="btn btn-circle btn-xs swap has-checked:btn-active">
           <input name="wrap" type="checkbox" />
           <span class="swap-on icon-[mdi--wrap]"></span>
